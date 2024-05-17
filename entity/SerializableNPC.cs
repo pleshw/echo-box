@@ -1,23 +1,21 @@
-using System.Collections.Generic;
 using System.Numerics;
 using System.Text.Json.Serialization;
+using Dialogue;
 
 namespace Entity;
 
 public class SerializableNPC : SerializableEntity
 {
-  [JsonInclude]
   public required string NodePath;
 
-  [JsonInclude]
-  public required bool SeenByPlayer;
+  // Data that has to be cached by player save
+  // 
+  // public required bool SeenByPlayer;
 
-  [JsonInclude]
-  public required bool PlayerTalked;
+  // 
+  // public required bool PlayerTalked;
 
-  [JsonInclude]
-  public required SerializableInteraction Interaction;
+  public required SerializableDialogue Dialogue;
 
-  [JsonInclude]
   public required Vector2 CurrentTile;
 }

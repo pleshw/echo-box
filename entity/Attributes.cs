@@ -2,7 +2,7 @@ namespace Entity;
 
 public static partial class Attributes
 {
-  public class Agility : EntityAttribute
+  public class Agility : SerializableAttribute
   {
     public override int Points { get; set; } = 0;
 
@@ -11,7 +11,7 @@ public static partial class Attributes
     public override string Name { get; set; } = "Agility";
   }
 
-  public class Dexterity : EntityAttribute
+  public class Dexterity : SerializableAttribute
   {
     public override int Points { get; set; } = 0;
 
@@ -20,7 +20,7 @@ public static partial class Attributes
     public override string Name { get; set; } = "Dexterity";
   }
 
-  public class Intelligence : EntityAttribute
+  public class Intelligence : SerializableAttribute
   {
     public override int Points { get; set; } = 0;
 
@@ -29,7 +29,7 @@ public static partial class Attributes
     public override string Name { get; set; } = "Intelligence";
   }
 
-  public class Luck : EntityAttribute
+  public class Luck : SerializableAttribute
   {
     public override int Points { get; set; } = 0;
 
@@ -38,7 +38,7 @@ public static partial class Attributes
     public override string Name { get; set; } = "Luck";
   }
 
-  public class Strength : EntityAttribute
+  public class Strength : SerializableAttribute
   {
     public override int Points { get; set; } = 0;
 
@@ -47,7 +47,7 @@ public static partial class Attributes
     public override string Name { get; set; } = "Strength";
   }
 
-  public class Vitality : EntityAttribute
+  public class Vitality : SerializableAttribute
   {
     public override int Points { get; set; } = 0;
 

@@ -4,15 +4,11 @@ namespace Entity;
 
 public class SerializableEntity
 {
-  [JsonInclude]
-  public required string DisplayName { get; set; } = "";
+  public required string DisplayName { get; set; }
 
-  [JsonInclude]
-  public required int Level { get; set; } = 1;
+  public required int Level { get; set; }
 
-  [JsonInclude]
   public required SerializableAnimationBody Body { get; set; }
 
-  [JsonInclude]
-  public required EntityAttributes Attributes { get; set; } = new();
+  public required SerializableEntityAttributes Attributes { get; set; }
 }

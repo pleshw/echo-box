@@ -9,21 +9,17 @@ namespace Main;
 [RequiresDynamicCode("")]
 public static partial class FileController
 {
-  private static readonly Regex FilenameRegex = ValidateFileRegex();
+  public static string ApplicationBase => AppContext.BaseDirectory;
 
-  public static string ProjectRoot => Directory.GetCurrentDirectory();
+  public static string ProjectRoot => Path.GetFullPath(Path.Join(ApplicationBase, "..", "..", "..", "/data/"));
 
   public static void CreateFile(string folderPath, string fileName, string fileData)
   {
-    if (!IsValidFilename(fileName))
-    {
-      Console.WriteLine("Invalid filename: " + fileName);
-      return;
-    }
+    string filePath = Path.Join(folderPath, fileName);
 
     try
     {
-      File.WriteAllText(Path.Join(folderPath, fileName), fileData);
+      File.WriteAllText(filePath, fileData);
     }
     catch (Exception err)
     {
@@ -31,14 +27,11 @@ public static partial class FileController
     }
   }
 
-  public static void CreateProjectFile(string fileName, string fileData) =>
-      CreateFile(ProjectRoot, fileName, fileData);
+  public static void CreateProjectFile(string fileName, string fileData) => CreateFile(ProjectRoot, fileName, fileData);
 
-  public static void CreateProjectFile<T>(string fileName, T fileData) =>
-      CreateProjectFile(fileName, JsonSerializer.Serialize(fileData, typeof(T), JsonContext.Default));
+  public static void CreateProjectFile<T>(string fileName, T fileData) => CreateProjectFile(fileName, JsonSerializer.Serialize(fileData, typeof(T), JsonContext.Default));
 
-  public static T? GetProjectFileDeserialized<T>(string fileName) where T : class =>
-      GetFileDeserialized<T>(Path.Join(ProjectRoot, fileName));
+  public static T? GetProjectFileDeserialized<T>(string fileName) where T : class => GetFileDeserialized<T>(Path.Join(ProjectRoot, fileName));
 
   public static T? GetFileDeserialized<T>(string filePath) where T : class
   {
@@ -59,12 +52,4 @@ public static partial class FileController
       return default;
     }
   }
-
-  private static bool IsValidFilename(string fileName)
-  {
-    return FilenameRegex.IsMatch(fileName) && !fileName.Contains("..");
-  }
-
-  [GeneratedRegex(@"^[a-zA-Z0-9_\-]+$", RegexOptions.Compiled)]
-  private static partial Regex ValidateFileRegex();
 }

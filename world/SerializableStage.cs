@@ -6,10 +6,10 @@ namespace World;
 
 public record class SerializableStage
 {
-  [JsonInclude]
+
   public required bool Visited;
 
 
-  [JsonInclude]
+
   public required List<SerializableNPC> NPCs;
 }

@@ -2,14 +2,14 @@ using System.Text.Json.Serialization;
 
 namespace Entity;
 
-public abstract class EntityAttribute
+public abstract class SerializableAttribute
 {
-  [JsonInclude]
+
   public abstract int Points { get; set; }
 
-  [JsonInclude]
+
   public abstract string Name { get; set; }
 
-  [JsonInclude]
+
   public abstract string Abbreviation { get; set; }
 }

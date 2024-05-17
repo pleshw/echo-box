@@ -12,3 +12,4 @@ c:\Users\Usuário\Desktop\echo-box\obj\Debug\net8.0\refint\echo-box.dll
 c:\Users\Usuário\Desktop\echo-box\obj\Debug\net8.0\echo-box.pdb
 c:\Users\Usuário\Desktop\echo-box\obj\Debug\net8.0\echo-box.genruntimeconfig.cache
 c:\Users\Usuário\Desktop\echo-box\obj\Debug\net8.0\ref\echo-box.dll
+c:\Users\Usuário\Desktop\echo-box\obj\Debug\net8.0\echo-box.sourcelink.json

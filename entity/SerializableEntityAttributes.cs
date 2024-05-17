@@ -3,27 +3,27 @@ using static Entity.Attributes;
 
 namespace Entity;
 
-public record struct EntityAttributes
+public record struct SerializableEntityAttributes
 {
-  [JsonInclude]
+
   public Agility Agility { get; set; }
 
-  [JsonInclude]
+
   public Dexterity Dexterity { get; set; }
 
-  [JsonInclude]
+
   public Intelligence Intelligence { get; set; }
 
-  [JsonInclude]
+
   public Luck Luck { get; set; }
 
-  [JsonInclude]
+
   public Strength Strength { get; set; }
 
-  [JsonInclude]
+
   public Vitality Vitality { get; set; }
 
-  public EntityAttributes()
+  public SerializableEntityAttributes()
   {
     Agility = new();
     Dexterity = new();
@@ -34,7 +34,7 @@ public record struct EntityAttributes
   }
 
   [JsonConstructor]
-  public EntityAttributes(Agility Agility, Dexterity Dexterity, Intelligence Intelligence, Luck Luck, Strength Strength, Vitality Vitality)
+  public SerializableEntityAttributes(Agility Agility, Dexterity Dexterity, Intelligence Intelligence, Luck Luck, Strength Strength, Vitality Vitality)
   {
     this.Agility = Agility ?? new();
     this.Dexterity = Dexterity ?? new();
