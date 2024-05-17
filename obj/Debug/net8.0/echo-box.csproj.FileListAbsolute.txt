@@ -1,0 +1,14 @@
+c:\Users\Usuário\Desktop\echo-box\bin\Debug\net8.0\echo-box.exe
+c:\Users\Usuário\Desktop\echo-box\bin\Debug\net8.0\echo-box.deps.json
+c:\Users\Usuário\Desktop\echo-box\bin\Debug\net8.0\echo-box.runtimeconfig.json
+c:\Users\Usuário\Desktop\echo-box\bin\Debug\net8.0\echo-box.dll
+c:\Users\Usuário\Desktop\echo-box\bin\Debug\net8.0\echo-box.pdb
+c:\Users\Usuário\Desktop\echo-box\obj\Debug\net8.0\echo-box.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\Usuário\Desktop\echo-box\obj\Debug\net8.0\echo-box.AssemblyInfoInputs.cache
+c:\Users\Usuário\Desktop\echo-box\obj\Debug\net8.0\echo-box.AssemblyInfo.cs
+c:\Users\Usuário\Desktop\echo-box\obj\Debug\net8.0\echo-box.csproj.CoreCompileInputs.cache
+c:\Users\Usuário\Desktop\echo-box\obj\Debug\net8.0\echo-box.dll
+c:\Users\Usuário\Desktop\echo-box\obj\Debug\net8.0\refint\echo-box.dll
+c:\Users\Usuário\Desktop\echo-box\obj\Debug\net8.0\echo-box.pdb
+c:\Users\Usuário\Desktop\echo-box\obj\Debug\net8.0\echo-box.genruntimeconfig.cache
+c:\Users\Usuário\Desktop\echo-box\obj\Debug\net8.0\ref\echo-box.dll
