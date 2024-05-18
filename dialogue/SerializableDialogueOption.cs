@@ -9,5 +9,8 @@ public record class SerializableDialogueOption
   public required string ButtonText;
 
 
-  public required string DialogNode;
+  /// <summary>
+  /// if null or empty will end the dialogue
+  /// </summary>
+  public string? DialogNodePath;
 }

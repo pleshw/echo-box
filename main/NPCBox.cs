@@ -11,10 +11,11 @@ namespace Main;
 [RequiresDynamicCode("")]
 public static class NPCBox
 {
-    public static void MakeCompleteTestNPC()
+    public static void TestMakeCompleteNPC()
     {
         SerializableNPC npc = new()
         {
+            NodePath = "res://prefabs/test/npc_test.tscn",
             DisplayName = "Test complete npc",
             Level = 3,
             Body = (SerializableAnimationBody)new Dictionary<string, string>()
@@ -23,10 +24,10 @@ public static class NPCBox
                 {"Body", "res://resources/test/body/test_body.tres"}
             },
             Attributes = new SerializableEntityAttributes { Agility = new Agility() { Points = 3 } },
-            NodePath = "res://prefabs/test/npc_test.tscn",
             Dialogue = new SerializableDialogue
             {
-                NodePath = "res://data/test/dialogue/test_dialogue.json",
+                FolderPath = "res://data/dialogue/test/",
+                FileName = "test_dialogue.json",
                 Title = "Test Dialogue",
                 DefaultDialogueNodePath = "res://data/test/dialogue/nodes/test_default_dialogue.json",
                 FirstInteractionDialogueNodePath = "res://data/test/dialogue/nodes/test_first_interaction_dialogue.json"

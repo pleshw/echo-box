@@ -1,0 +1,7 @@
+{
+  "folderPath": "dialogue/test/",
+  "fileName": "test_dialogue.json",
+  "title": "NPC Dialog",
+  "defaultDialogueNodePath": "test_dialogue_default.json",
+  "firstInteractionDialogueNodePath": "test_first_interaction.json"
+}

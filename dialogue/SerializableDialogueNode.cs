@@ -6,12 +6,17 @@ namespace Dialogue;
 public record class SerializableDialogueNode
 {
 
-  public required string NodePath;
+  public required string FolderPath;
+
+  public required string FileName;
 
 
   public SerializableDialogueRestrictions? Restrictions;
 
 
+  /// <summary>
+  /// The message that is shown on dialog window
+  /// </summary>
   public required string Message;
 
 

@@ -1,9 +1,15 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 using AOT;
 
 namespace Main;
+
+public record class ProjectFileInfo<T>
+{
+  public required string FolderPath;
+  public required string FileName;
+  public required T FileData;
+}
 
 [RequiresUnreferencedCode("")]
 [RequiresDynamicCode("")]
@@ -11,14 +17,23 @@ public static partial class FileController
 {
   public static string ApplicationBase => AppContext.BaseDirectory;
 
-  public static string ProjectRoot => Path.GetFullPath(Path.Join(ApplicationBase, "..", "..", "..", "/data/"));
+  public static string ProjectRoot => Path.GetFullPath(Path.Join(ApplicationBase, "..", "..", ".."));
+
+  public static string ProjectDataFolder => Path.Join(ProjectRoot, "/data/");
 
   public static void CreateFile(string folderPath, string fileName, string fileData)
   {
+    if (!folderPath.Contains(ProjectDataFolder))
+    {
+      folderPath = Path.Join(ProjectDataFolder, folderPath);
+    }
+
     string filePath = Path.Join(folderPath, fileName);
 
     try
     {
+      Directory.CreateDirectory(folderPath);
+
       File.WriteAllText(filePath, fileData);
     }
     catch (Exception err)
@@ -27,11 +42,13 @@ public static partial class FileController
     }
   }
 
-  public static void CreateProjectFile(string fileName, string fileData) => CreateFile(ProjectRoot, fileName, fileData);
+  public static void CreateProjectFile<T>(List<ProjectFileInfo<T>> fileDataList) => fileDataList.ForEach(f => CreateFile(f.FolderPath, f.FileName, JsonSerializer.Serialize(f.FileData, typeof(T), JsonContext.Default)));
+
+  public static void CreateProjectFile(string fileName, string fileData) => CreateFile(ProjectDataFolder, fileName, fileData);
 
   public static void CreateProjectFile<T>(string fileName, T fileData) => CreateProjectFile(fileName, JsonSerializer.Serialize(fileData, typeof(T), JsonContext.Default));
 
-  public static T? GetProjectFileDeserialized<T>(string fileName) where T : class => GetFileDeserialized<T>(Path.Join(ProjectRoot, fileName));
+  public static T? GetProjectFileDeserialized<T>(string fileName) where T : class => GetFileDeserialized<T>(Path.Join(ProjectDataFolder, fileName));
 
   public static T? GetFileDeserialized<T>(string filePath) where T : class
   {

@@ -1,0 +1,20 @@
+{
+  "folderPath": "dialogue/test/node/",
+  "fileName": "test_first_interaction.json",
+  "restrictions": null,
+  "message": "Testing the default dialog of an NPC",
+  "speakersNodeNames": [
+    "NPC1",
+    "NPC2"
+  ],
+  "listenersNodeNames": [
+    "Player"
+  ],
+  "options": [
+    {
+      "buttonText": "Test completed",
+      "dialogNodePath": "test_dialogue_default.json"
+    }
+  ],
+  "questsEnabledOnComplete": []
+}

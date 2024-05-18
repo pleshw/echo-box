@@ -8,8 +8,9 @@ namespace EchoBox;
 [RequiresDynamicCode("")]
 public static class Program
 {
-  private static void Main(string[] args)
+  private static void Main(string[] _)
   {
-    NPCBox.MakeCompleteTestNPC();
+    NPCBox.TestMakeCompleteNPC();
+    DialogueBox.TestMakeCompleteDialogue();
   }
 }

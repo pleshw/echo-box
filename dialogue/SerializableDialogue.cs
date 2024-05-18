@@ -5,8 +5,9 @@ namespace Dialogue;
 
 public record class SerializableDialogue
 {
+  public required string FolderPath;
 
-  public required string NodePath;
+  public required string FileName;
 
 
   public required string Title;
