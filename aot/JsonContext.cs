@@ -24,6 +24,6 @@ JsonSerializable(typeof(SerializableInteraction)),
 JsonSerializable(typeof(Vector2)),
 JsonSerializable(typeof(SerializableNPC))]
 [JsonSerializable(typeof(string)), JsonSerializable(typeof(Dictionary<string, string>)), JsonSerializable(typeof(List<string>)), JsonSerializable(typeof(List<string[]>)), JsonSerializable(typeof(float)), JsonSerializable(typeof(List<float>)), JsonSerializable(typeof(bool)), JsonSerializable(typeof(List<bool>))]
-internal partial class JsonContext : JsonSerializerContext
+public partial class JsonContext : JsonSerializerContext
 {
 }

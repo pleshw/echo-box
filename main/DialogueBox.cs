@@ -72,7 +72,7 @@ public static class DialogueBox
     FileController.CreateProjectFile(new List<ProjectFileInfo<SerializableDialogue>>
     {
         new(){
-          FolderPath = defaultDialogueNode.FolderPath,
+          FolderPath = dialogue.FolderPath,
           FileName = dialogue.FileName,
           FileData = dialogue
         }
