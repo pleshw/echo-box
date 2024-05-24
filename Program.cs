@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Main;
+using Quest;
 
 
 namespace EchoBox;
@@ -13,5 +14,7 @@ public static class Program
     NPCManager.TestMakeCompleteNPC();
     DialogueManager.TestMakeCompleteDialogue();
     QuestManager.TestMakeCompleteQuest();
+
+    SerializableQuest? deserializedQuest = FileController.GetFileDeserialized<SerializableQuest>("C:/Users/Usuário/Desktop/echo-box/data/quest/test/test_quest.json");
   }
 }

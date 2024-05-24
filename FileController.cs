@@ -63,7 +63,8 @@ public static partial class FileController
     try
     {
       var fileContent = File.ReadAllText(filePath);
-      return JsonSerializer.Deserialize<T>(fileContent);
+      var cc = JsonSerializer.Deserialize(fileContent, typeof(T), JsonContext.Default);
+      return cc as T;
     }
     catch (Exception ex)
     {
