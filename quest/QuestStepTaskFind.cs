@@ -1,7 +1,7 @@
 namespace Quest;
 
-public class QuestStepTaskFind : ISerializableQuestStepTask
+public class QuestStepTaskFind : SerializableQuestStepTask
 {
-  public QuestStepTaskType TaskType { get; } = QuestStepTaskType.COLLECTION;
+  public override QuestStepTaskType TaskType { get; } = QuestStepTaskType.FIND;
   public required string ItemInfoFilePath;
 }

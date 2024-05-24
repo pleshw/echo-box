@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuário\\Desktop\\echo-box\\echo-box.csproj": {}
+    "c:\\Users\\Usuário\\Desktop\\echo-box\\echo-box.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuário\\Desktop\\echo-box\\echo-box.csproj": {
+    "c:\\Users\\Usuário\\Desktop\\echo-box\\echo-box.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuário\\Desktop\\echo-box\\echo-box.csproj",
+        "projectUniqueName": "c:\\Users\\Usuário\\Desktop\\echo-box\\echo-box.csproj",
         "projectName": "echo-box",
-        "projectPath": "C:\\Users\\Usuário\\Desktop\\echo-box\\echo-box.csproj",
+        "projectPath": "c:\\Users\\Usuário\\Desktop\\echo-box\\echo-box.csproj",
         "packagesPath": "C:\\Users\\Usuário\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuário\\Desktop\\echo-box\\obj\\",
+        "outputPath": "c:\\Users\\Usuário\\Desktop\\echo-box\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Usuário\\NuGet.Config",
+          "c:\\Users\\Usuário\\NuGet.Config",
           "C:\\Users\\Usuário\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [

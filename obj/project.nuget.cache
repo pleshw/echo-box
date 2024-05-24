@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8AM6EH0WPs7m8oaddmBMJMG/gOh58uLkkvM/XBDrgL/KV+rQUjfpj7J5F3nVACbVBbZcIiCXzM547h3cNAgrRw==",
+  "dgSpecHash": "1l3unI9TemzlO7W45EaBMi+rnKZ8GREueaoPt0jguL2rqUNVGf9o1mDjuowDGgcWp4l6+Rd4YGWbE7yI/IR3+w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Usuário\\Desktop\\echo-box\\echo-box.csproj",
+  "projectFilePath": "c:\\Users\\Usuário\\Desktop\\echo-box\\echo-box.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Usuário\\.nuget\\packages\\microsoft.dotnet.ilcompiler\\8.0.4\\microsoft.dotnet.ilcompiler.8.0.4.nupkg.sha512",
     "C:\\Users\\Usuário\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.4\\microsoft.net.illink.tasks.8.0.4.nupkg.sha512",

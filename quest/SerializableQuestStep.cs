@@ -17,6 +17,6 @@ public record class SerializableQuestStep
 
   public required bool IsCompleted;
 
-  [JsonConverter(typeof(JsonQuestStepConverter))]
-  public required ISerializableQuestStepTask Task;
+
+  public required SerializableQuestStepTask Task;
 }

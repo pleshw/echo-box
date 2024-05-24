@@ -42,6 +42,8 @@ public static partial class FileController
     }
   }
 
+  public static void CreateProjectFile<T>(ProjectFileInfo<T> fileData) => CreateFile(fileData.FolderPath, fileData.FileName, JsonSerializer.Serialize(fileData.FileData, typeof(T), JsonContext.Default));
+
   public static void CreateProjectFile<T>(List<ProjectFileInfo<T>> fileDataList) => fileDataList.ForEach(f => CreateFile(f.FolderPath, f.FileName, JsonSerializer.Serialize(f.FileData, typeof(T), JsonContext.Default)));
 
   public static void CreateProjectFile(string fileName, string fileData) => CreateFile(ProjectDataFolder, fileName, fileData);

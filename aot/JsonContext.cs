@@ -1,12 +1,17 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Dialogue;
 using Entity;
 using Main;
 using Quest;
+using SerializableAttribute = Entity.SerializableAttribute;
 
 namespace AOT;
 
+[RequiresUnreferencedCode("Calls AOT.JsonQuestStepConverter.JsonQuestStepConverter()")]
+[RequiresDynamicCode("Calls AOT.JsonQuestStepConverter.JsonQuestStepConverter()")]
 [JsonSourceGenerationOptions(
     WriteIndented = true,
     IncludeFields = true,
@@ -17,7 +22,7 @@ JsonSerializable(typeof(SerializableDialogueNode)),
 JsonSerializable(typeof(SerializableDialogueOption)),
 JsonSerializable(typeof(SerializableDialogueRestrictions)),
 JsonSerializable(typeof(SerializableAnimationBody)),
-JsonSerializable(typeof(Entity.SerializableAttribute)),
+JsonSerializable(typeof(SerializableAttribute)),
 JsonSerializable(typeof(SerializableEntity)),
 JsonSerializable(typeof(SerializableEntityAttributes)),
 JsonSerializable(typeof(SerializableInteraction)),

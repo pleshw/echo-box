@@ -1,7 +1,7 @@
 namespace Quest;
 
-public class QuestStepTaskReachPosition : ISerializableQuestStepTask
+public class QuestStepTaskReachPosition : SerializableQuestStepTask
 {
-  public QuestStepTaskType TaskType { get; } = QuestStepTaskType.COLLECTION;
+  public override QuestStepTaskType TaskType { get; } = QuestStepTaskType.REACH_POSITION;
   public required string DestinationInfoFilePath;
 }

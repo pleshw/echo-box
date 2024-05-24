@@ -9,7 +9,7 @@ namespace Main;
 
 [RequiresUnreferencedCode("")]
 [RequiresDynamicCode("")]
-public static class NPCBox
+public static class NPCManager
 {
     public static void TestMakeCompleteNPC()
     {

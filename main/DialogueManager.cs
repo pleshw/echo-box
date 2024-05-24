@@ -6,7 +6,7 @@ namespace Main;
 
 [RequiresUnreferencedCode("")]
 [RequiresDynamicCode("")]
-public static class DialogueBox
+public static class DialogueManager
 {
   public static void TestMakeCompleteDialogue()
   {
@@ -69,13 +69,11 @@ public static class DialogueBox
         }
     });
 
-    FileController.CreateProjectFile(new List<ProjectFileInfo<SerializableDialogue>>
+    FileController.CreateProjectFile(new ProjectFileInfo<SerializableDialogue>()
     {
-        new(){
-          FolderPath = dialogue.FolderPath,
-          FileName = dialogue.FileName,
-          FileData = dialogue
-        }
+      FolderPath = dialogue.FolderPath,
+      FileName = dialogue.FileName,
+      FileData = dialogue
     });
   }
 }

@@ -4,13 +4,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Quest;
 
+
 namespace AOT;
 
 [RequiresUnreferencedCode("")]
 [RequiresDynamicCode("")]
-public class JsonQuestStepConverter : JsonConverter<ISerializableQuestStepTask>
+public class JsonQuestStepTaskConverter : JsonConverter<SerializableQuestStepTask>
 {
-  public override ISerializableQuestStepTask Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+  public override SerializableQuestStepTask Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
   {
     // Read the JSON document
     using JsonDocument doc = JsonDocument.ParseValue(ref reader);
@@ -20,15 +21,16 @@ public class JsonQuestStepConverter : JsonConverter<ISerializableQuestStepTask>
     if (root.TryGetProperty("Type", out JsonElement typeElement))
     {
       string? type = typeElement.GetString();
+      string rootText = root.GetRawText();
 
       return type switch
       {
-        nameof(QuestStepTaskCollection) => JsonSerializer.Deserialize<QuestStepTaskCollection>(root.GetRawText(), options) ?? throw new JsonException("Failed to convert for type QuestStepTaskCollection"),
-        nameof(QuestStepTaskHunt) => JsonSerializer.Deserialize<QuestStepTaskHunt>(root.GetRawText(), options) ?? throw new JsonException("Failed to convert for type QuestStepTaskHunt"),
-        nameof(QuestStepTaskFind) => JsonSerializer.Deserialize<QuestStepTaskFind>(root.GetRawText(), options) ?? throw new JsonException("Failed to convert for type QuestStepTaskFind"),
-        nameof(QuestStepTaskEscort) => JsonSerializer.Deserialize<QuestStepTaskEscort>(root.GetRawText(), options) ?? throw new JsonException("Failed to convert for type QuestStepTaskEscort"),
-        nameof(QuestStepTaskReachPosition) => JsonSerializer.Deserialize<QuestStepTaskReachPosition>(root.GetRawText(), options) ?? throw new JsonException("Failed to convert for type QuestStepTaskReachPosition"),
-        nameof(QuestStepTaskReachNPC) => JsonSerializer.Deserialize<QuestStepTaskReachNPC>(root.GetRawText(), options) ?? throw new JsonException("Failed to convert for type QuestStepTaskReachNPC"),
+        nameof(QuestStepTaskCollection) => JsonSerializer.Deserialize<QuestStepTaskCollection>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskCollection"),
+        nameof(QuestStepTaskHunt) => JsonSerializer.Deserialize<QuestStepTaskHunt>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskHunt"),
+        nameof(QuestStepTaskFind) => JsonSerializer.Deserialize<QuestStepTaskFind>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskFind"),
+        nameof(QuestStepTaskEscort) => JsonSerializer.Deserialize<QuestStepTaskEscort>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskEscort"),
+        nameof(QuestStepTaskReachPosition) => JsonSerializer.Deserialize<QuestStepTaskReachPosition>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskReachPosition"),
+        nameof(QuestStepTaskReachNPC) => JsonSerializer.Deserialize<QuestStepTaskReachNPC>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskReachNPC"),
         null => throw new JsonException("Unknown type"),
         _ => throw new JsonException("Unknown type"),
       };
@@ -37,7 +39,7 @@ public class JsonQuestStepConverter : JsonConverter<ISerializableQuestStepTask>
     throw new JsonException("Type property not found");
   }
 
-  public override void Write(Utf8JsonWriter writer, ISerializableQuestStepTask value, JsonSerializerOptions options)
+  public override void Write(Utf8JsonWriter writer, SerializableQuestStepTask value, JsonSerializerOptions options)
   {
     // Determine the concrete type and serialize accordingly
     switch (value)

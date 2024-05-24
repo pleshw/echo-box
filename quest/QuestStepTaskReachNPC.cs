@@ -1,7 +1,7 @@
 namespace Quest;
 
-public class QuestStepTaskReachNPC : ISerializableQuestStepTask
+public class QuestStepTaskReachNPC : SerializableQuestStepTask
 {
-  public QuestStepTaskType TaskType { get; } = QuestStepTaskType.COLLECTION;
+  public override QuestStepTaskType TaskType { get; } = QuestStepTaskType.REACH_NPC;
   public required string NPCInfoFilePath;
 }

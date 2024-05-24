@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using AOT;
 
 namespace Quest;
 
@@ -13,7 +14,8 @@ public enum QuestStepTaskType
 }
 
 
-public interface ISerializableQuestStepTask
+[JsonConverter(typeof(JsonQuestStepTaskConverter))]
+public abstract class SerializableQuestStepTask
 {
-  public QuestStepTaskType TaskType { get; }
+  public abstract QuestStepTaskType TaskType { get; }
 }

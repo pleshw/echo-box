@@ -1,8 +1,8 @@
 namespace Quest;
 
-public class QuestStepTaskEscort : ISerializableQuestStepTask
+public class QuestStepTaskEscort : SerializableQuestStepTask
 {
-  public QuestStepTaskType TaskType { get; } = QuestStepTaskType.COLLECTION;
+  public override QuestStepTaskType TaskType { get; } = QuestStepTaskType.ESCORT;
   public required string DestinationInfoFilePath;
   public required string NPCInfoFilePath;
 }

@@ -1,0 +1,70 @@
+{
+  "id": "Quest Test all steps",
+  "title": "Preparing",
+  "description": "Learn all step types of quest",
+  "questSteps": [
+    {
+      "id": "Collection",
+      "title": "Collection",
+      "description": "Collection test quest.",
+      "isCompleted": false,
+      "task": {
+        "taskType": 0,
+        "amountToComplete": 10,
+        "itemInfoFilePath": "res://data/test/quest/collection/test_item.json"
+      }
+    },
+    {
+      "id": "Escort",
+      "title": "Escort",
+      "description": "Escort test quest.",
+      "isCompleted": false,
+      "task": {
+        "taskType": 3,
+        "destinationInfoFilePath": "res://data/test/quest/escort/destination.json",
+        "npcInfoFilePath": "res://data/test/quest/test_npc.json"
+      }
+    },
+    {
+      "id": "Find",
+      "title": "Find",
+      "description": "Find test quest.",
+      "isCompleted": false,
+      "task": {
+        "taskType": 2,
+        "itemInfoFilePath": "res://data/test/quest/collection/test_hidden_item.json"
+      }
+    },
+    {
+      "id": "Hunt",
+      "title": "Hunt",
+      "description": "Hunt test quest.",
+      "isCompleted": false,
+      "task": {
+        "taskType": 1,
+        "amountToComplete": 10,
+        "npcInfoFilePath": "res://data/test/quest/test_npc_enemy.json"
+      }
+    },
+    {
+      "id": "ReachNPC",
+      "title": "ReachNPC",
+      "description": "ReachNPC test quest.",
+      "isCompleted": false,
+      "task": {
+        "taskType": 5,
+        "npcInfoFilePath": "res://data/test/quest/test_npc.json"
+      }
+    },
+    {
+      "id": "ReachPosition",
+      "title": "ReachPosition",
+      "description": "ReachPosition test quest.",
+      "isCompleted": false,
+      "task": {
+        "taskType": 4,
+        "destinationInfoFilePath": "res://data/test/quest/escort/destination.json"
+      }
+    }
+  ]
+}
