@@ -1,17 +1,16 @@
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Quest;
+using Serializable;
 
 
 namespace AOT;
 
 [RequiresUnreferencedCode("")]
 [RequiresDynamicCode("")]
-public class JsonQuestStepTaskConverter : JsonConverter<SerializableQuestStepTask>
+public class JsonQuestTaskConverter : JsonConverter<SerializableQuestTask>
 {
-  public override SerializableQuestStepTask Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+  public override SerializableQuestTask Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
   {
     // Read the JSON document
     using JsonDocument doc = JsonDocument.ParseValue(ref reader);
@@ -24,14 +23,14 @@ public class JsonQuestStepTaskConverter : JsonConverter<SerializableQuestStepTas
       int? type = typeElement.GetInt32();
       string rootText = root.GetRawText();
 
-      return (QuestStepTaskType)type switch
+      return (QuestTaskType)type switch
       {
-        QuestStepTaskType.COLLECTION => JsonSerializer.Deserialize<QuestStepTaskCollection>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskCollection"),
-        QuestStepTaskType.HUNT => JsonSerializer.Deserialize<QuestStepTaskHunt>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskHunt"),
-        QuestStepTaskType.FIND => JsonSerializer.Deserialize<QuestStepTaskFind>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskFind"),
-        QuestStepTaskType.ESCORT => JsonSerializer.Deserialize<QuestStepTaskEscort>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskEscort"),
-        QuestStepTaskType.REACH_POSITION => JsonSerializer.Deserialize<QuestStepTaskReachPosition>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskReachPosition"),
-        QuestStepTaskType.REACH_NPC => JsonSerializer.Deserialize<QuestStepTaskReachNPC>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskReachNPC"),
+        QuestTaskType.COLLECTION => JsonSerializer.Deserialize<QuestTaskCollection>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskCollection"),
+        QuestTaskType.HUNT => JsonSerializer.Deserialize<QuestTaskHunt>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskHunt"),
+        QuestTaskType.FIND => JsonSerializer.Deserialize<QuestTaskFind>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskFind"),
+        QuestTaskType.ESCORT => JsonSerializer.Deserialize<QuestTaskEscort>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskEscort"),
+        QuestTaskType.REACH_POSITION => JsonSerializer.Deserialize<QuestTaskReachPosition>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskReachPosition"),
+        QuestTaskType.REACH_NPC => JsonSerializer.Deserialize<QuestTaskReachNPC>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskReachNPC"),
         _ => throw new JsonException("Unknown type"),
       };
     }
@@ -39,27 +38,27 @@ public class JsonQuestStepTaskConverter : JsonConverter<SerializableQuestStepTas
     throw new JsonException("Type property not found");
   }
 
-  public override void Write(Utf8JsonWriter writer, SerializableQuestStepTask value, JsonSerializerOptions options)
+  public override void Write(Utf8JsonWriter writer, SerializableQuestTask value, JsonSerializerOptions options)
   {
     // Determine the concrete type and serialize accordingly
     switch (value)
     {
-      case QuestStepTaskCollection a:
+      case QuestTaskCollection a:
         JsonSerializer.Serialize(writer, a, options);
         break;
-      case QuestStepTaskHunt a:
+      case QuestTaskHunt a:
         JsonSerializer.Serialize(writer, a, options);
         break;
-      case QuestStepTaskFind a:
+      case QuestTaskFind a:
         JsonSerializer.Serialize(writer, a, options);
         break;
-      case QuestStepTaskEscort a:
+      case QuestTaskEscort a:
         JsonSerializer.Serialize(writer, a, options);
         break;
-      case QuestStepTaskReachPosition a:
+      case QuestTaskReachPosition a:
         JsonSerializer.Serialize(writer, a, options);
         break;
-      case QuestStepTaskReachNPC a:
+      case QuestTaskReachNPC a:
         JsonSerializer.Serialize(writer, a, options);
         break;
       case null:

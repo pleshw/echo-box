@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using AOT;
 
-namespace Main;
+namespace Factory;
 
 public record class ProjectFileInfo<T>
 {

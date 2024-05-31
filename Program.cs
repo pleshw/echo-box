@@ -1,8 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Dialogue;
-using Entity;
-using Main;
-using Quest;
+using Serializable;
+using Factory;
+using Game;
 
 
 namespace EchoBox;
@@ -13,11 +12,11 @@ public static class Program
 {
   private static void Main(string[] _)
   {
-    NPCManager.TestMakeCompleteNPC();
-    DialogueManager.TestMakeCompleteDialogue();
-    QuestManager.TestMakeCompleteQuest();
+    NPCFactory.TestMakeCompleteNPC();
+    DialogueFactory.TestMakeCompleteDialogue();
+    QuestFactory.TestMakeCompleteQuest();
 
-    SerializableQuest? deserializedQuest = FileController.GetFileDeserialized<SerializableQuest>("C:/Users/Usuário/Desktop/echo-box/data/quest/test/test_quest.json");
+    Quest? deserializedQuest = new("C:/Users/Usuário/Desktop/echo-box/data/quest/test/test_quest.json");
 
     SerializableDialogue? deserializedDialogue = FileController.GetFileDeserialized<SerializableDialogue>("C:/Users/Usuário/Desktop/echo-box/data/dialogue/test/test_dialogue.json");
     SerializableDialogueNode? deserializedDialogueNodeDefault = FileController.GetFileDeserialized<SerializableDialogueNode>("C:/Users/Usuário/Desktop/echo-box/data/dialogue/test/node/test_dialogue_default.json");

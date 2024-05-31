@@ -2,7 +2,7 @@
   "id": "Quest Test all steps",
   "title": "Preparing",
   "description": "Learn all step types of quest",
-  "questSteps": [
+  "subQuests": [
     {
       "id": "Collection",
       "title": "Collection",

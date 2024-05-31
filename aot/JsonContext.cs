@@ -2,11 +2,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Dialogue;
-using Entity;
-using Main;
-using Quest;
-using SerializableAttribute = Entity.SerializableAttribute;
+using Factory;
+using Serializable;
+using SerializableAttribute = Serializable.SerializableAttribute;
 
 namespace AOT;
 
@@ -27,15 +25,15 @@ JsonSerializable(typeof(SerializableEntity)),
 JsonSerializable(typeof(SerializableEntityAttributes)),
 JsonSerializable(typeof(SerializableInteraction)),
 JsonSerializable(typeof(SerializableQuest)),
-JsonSerializable(typeof(SerializableQuestStep)), JsonSerializable(typeof(List<SerializableQuestStep>)),
-JsonSerializable(typeof(QuestStepTaskType)),
-JsonSerializable(typeof(SerializableQuestStepTask)), JsonSerializable(typeof(List<SerializableQuestStepTask>)),
-JsonSerializable(typeof(QuestStepTaskCollection)),
-JsonSerializable(typeof(QuestStepTaskHunt)),
-JsonSerializable(typeof(QuestStepTaskFind)),
-JsonSerializable(typeof(QuestStepTaskEscort)),
-JsonSerializable(typeof(QuestStepTaskReachPosition)),
-JsonSerializable(typeof(QuestStepTaskReachNPC)),
+JsonSerializable(typeof(SerializableSubQuest)), JsonSerializable(typeof(List<SerializableSubQuest>)),
+JsonSerializable(typeof(QuestTaskType)),
+JsonSerializable(typeof(SerializableSubQuest)), JsonSerializable(typeof(List<SerializableSubQuest>)),
+JsonSerializable(typeof(QuestTaskCollection)),
+JsonSerializable(typeof(QuestTaskHunt)),
+JsonSerializable(typeof(QuestTaskFind)),
+JsonSerializable(typeof(QuestTaskEscort)),
+JsonSerializable(typeof(QuestTaskReachPosition)),
+JsonSerializable(typeof(QuestTaskReachNPC)),
 JsonSerializable(typeof(Vector2)),
 JsonSerializable(typeof(SerializableNPC))]
 [JsonSerializable(typeof(string)), JsonSerializable(typeof(Dictionary<string, string>)), JsonSerializable(typeof(List<string>)), JsonSerializable(typeof(List<string[]>)), JsonSerializable(typeof(float)), JsonSerializable(typeof(List<float>)), JsonSerializable(typeof(bool)), JsonSerializable(typeof(List<bool>))]

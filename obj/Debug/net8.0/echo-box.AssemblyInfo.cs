@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("echo-box")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b684d26b238d6c80262c1b22d14d983cab20576f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a174d1e52ba670c7c7a66f9952948a624ce2df02")]
 [assembly: System.Reflection.AssemblyProductAttribute("echo-box")]
 [assembly: System.Reflection.AssemblyTitleAttribute("echo-box")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
