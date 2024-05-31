@@ -1,6 +1,6 @@
-namespace Serializable;
+namespace Game;
 
-public class QuestTaskEscort : SerializableQuestTask
+public class QuestTaskEscort : QuestTask
 {
   public override QuestTaskType TaskType { get; } = QuestTaskType.ESCORT;
   public required string DestinationInfoFilePath;

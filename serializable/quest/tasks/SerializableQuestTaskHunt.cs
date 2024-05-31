@@ -1,6 +1,8 @@
+using Game;
+
 namespace Serializable;
 
-public class QuestTaskHunt : SerializableQuestTask
+public class SerializableQuestTaskHunt : QuestTask
 {
   public override QuestTaskType TaskType { get; } = QuestTaskType.HUNT;
   public required int AmountToComplete;

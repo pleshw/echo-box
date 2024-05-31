@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using AOT;
 
-namespace Serializable;
+namespace Game;
 
 public enum QuestTaskType
 {
@@ -15,7 +15,7 @@ public enum QuestTaskType
 
 
 [JsonConverter(typeof(JsonQuestTaskConverter))]
-public abstract class SerializableQuestTask
+public abstract class QuestTask
 {
   public abstract QuestTaskType TaskType { get; }
 }

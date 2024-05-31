@@ -1,9 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
-using System.Text.Json;
 using System.Text.Json.Serialization;
-using Factory;
 using Serializable;
+using Game;
 using SerializableAttribute = Serializable.SerializableAttribute;
 
 namespace AOT;
@@ -26,14 +25,16 @@ JsonSerializable(typeof(SerializableEntityAttributes)),
 JsonSerializable(typeof(SerializableInteraction)),
 JsonSerializable(typeof(SerializableQuest)),
 JsonSerializable(typeof(SerializableSubQuest)), JsonSerializable(typeof(List<SerializableSubQuest>)),
+JsonSerializable(typeof(QuestTask)),
+JsonSerializable(typeof(List<QuestTask>)),
 JsonSerializable(typeof(QuestTaskType)),
 JsonSerializable(typeof(SerializableSubQuest)), JsonSerializable(typeof(List<SerializableSubQuest>)),
-JsonSerializable(typeof(QuestTaskCollection)),
-JsonSerializable(typeof(QuestTaskHunt)),
-JsonSerializable(typeof(QuestTaskFind)),
-JsonSerializable(typeof(QuestTaskEscort)),
-JsonSerializable(typeof(QuestTaskReachPosition)),
-JsonSerializable(typeof(QuestTaskReachNPC)),
+JsonSerializable(typeof(SerializableQuestTaskCollection)),
+JsonSerializable(typeof(SerializableQuestTaskHunt)),
+JsonSerializable(typeof(SerializableQuestTaskFind)),
+JsonSerializable(typeof(SerializableQuestTaskEscort)),
+JsonSerializable(typeof(SerializableQuestTaskReachPosition)),
+JsonSerializable(typeof(SerializableQuestTaskReachNPC)),
 JsonSerializable(typeof(Vector2)),
 JsonSerializable(typeof(SerializableNPC))]
 [JsonSerializable(typeof(string)), JsonSerializable(typeof(Dictionary<string, string>)), JsonSerializable(typeof(List<string>)), JsonSerializable(typeof(List<string[]>)), JsonSerializable(typeof(float)), JsonSerializable(typeof(List<float>)), JsonSerializable(typeof(bool)), JsonSerializable(typeof(List<bool>))]

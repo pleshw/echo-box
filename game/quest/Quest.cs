@@ -7,18 +7,15 @@ namespace Game;
 
 [RequiresUnreferencedCode("")]
 [RequiresDynamicCode("")]
-public class Quest(SerializableQuest original) : ISerializableQuest
+public class Quest(SerializableQuest serializableQuest) : ISerializableQuest
 {
-  public string Id { get; set; } = original.Id;
+  public string Id { get; set; } = serializableQuest.Id;
 
+  public string Title { get; set; } = serializableQuest.Title;
 
-  public string Title { get; set; } = original.Title;
+  public string Description { get; set; } = serializableQuest.Description;
 
-
-  public string Description { get; set; } = original.Description;
-
-
-  public List<SerializableSubQuest> SubQuests { get; set; } = original.SubQuests;
+  public List<SerializableSubQuest> SubQuests { get; set; } = serializableQuest.SubQuests;
 
   public Quest(string filePath) : this(FileController.GetFileDeserialized<SerializableQuest>(filePath) ?? throw new Exception($"Invalid file path for creating Quest. File path: {filePath}"))
   {

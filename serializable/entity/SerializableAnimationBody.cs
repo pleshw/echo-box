@@ -1,7 +1,3 @@
-
-using System.Text.Json.Serialization;
-
-
 namespace Serializable;
 
 public record class SerializableAnimationBody

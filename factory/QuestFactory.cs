@@ -20,8 +20,7 @@ public static class QuestFactory
         Id = "Collection",
         Title = "Collection",
         Description = "Collection test quest.",
-        IsCompleted = false,
-        Task = new QuestTaskCollection()
+        Task = new SerializableQuestTaskCollection()
         {
           AmountToComplete = 10,
           ItemInfoFilePath = "res://data/test/quest/collection/test_item.json"
@@ -31,8 +30,7 @@ public static class QuestFactory
         Id = "Escort",
         Title = "Escort",
         Description = "Escort test quest.",
-        IsCompleted = false,
-        Task = new QuestTaskEscort()
+        Task = new SerializableQuestTaskEscort()
         {
           DestinationInfoFilePath = "res://data/test/quest/escort/destination.json",
           NPCInfoFilePath = "res://data/test/quest/test_npc.json"
@@ -42,8 +40,7 @@ public static class QuestFactory
         Id = "Find",
         Title = "Find",
         Description = "Find test quest.",
-        IsCompleted = false,
-        Task = new QuestTaskFind()
+        Task = new SerializableQuestTaskFind()
         {
           ItemInfoFilePath = "res://data/test/quest/collection/test_hidden_item.json"
         }
@@ -52,8 +49,7 @@ public static class QuestFactory
         Id = "Hunt",
         Title = "Hunt",
         Description = "Hunt test quest.",
-        IsCompleted = false,
-        Task = new QuestTaskHunt()
+        Task = new SerializableQuestTaskHunt()
         {
           AmountToComplete = 10,
           NPCInfoFilePath = "res://data/test/quest/test_npc_enemy.json"
@@ -63,8 +59,7 @@ public static class QuestFactory
         Id = "ReachNPC",
         Title = "ReachNPC",
         Description = "ReachNPC test quest.",
-        IsCompleted = false,
-        Task = new QuestTaskReachNPC()
+        Task = new SerializableQuestTaskReachNPC()
         {
           NPCInfoFilePath = "res://data/test/quest/test_npc.json"
         }
@@ -73,8 +68,7 @@ public static class QuestFactory
         Id = "ReachPosition",
         Title = "ReachPosition",
         Description = "ReachPosition test quest.",
-        IsCompleted = false,
-        Task = new QuestTaskReachPosition()
+        Task = new SerializableQuestTaskReachPosition()
         {
           DestinationInfoFilePath = "res://data/test/quest/escort/destination.json"
         }

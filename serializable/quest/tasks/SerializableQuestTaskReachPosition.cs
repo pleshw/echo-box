@@ -1,6 +1,8 @@
+using Game;
+
 namespace Serializable;
 
-public class QuestTaskReachPosition : SerializableQuestTask
+public class SerializableQuestTaskReachPosition : QuestTask
 {
   public override QuestTaskType TaskType { get; } = QuestTaskType.REACH_POSITION;
   public required string DestinationInfoFilePath;
