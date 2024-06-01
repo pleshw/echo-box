@@ -1,21 +1,18 @@
-using System.Text.Json.Serialization;
-using AOT;
+using Serializable;
 
 namespace Game;
 
-public enum QuestTaskType
+public class QuestTask(Entity assignedTo, SerializableQuestTask serializableSubQuest) : ISerializableSubQuest
 {
-  COLLECTION,
-  HUNT,
-  FIND,
-  ESCORT,
-  REACH_POSITION,
-  REACH_NPC
-}
+  public Entity AssignedTo = assignedTo;
+
+  public string Id { get; set; } = serializableSubQuest.Id;
 
 
-[JsonConverter(typeof(JsonQuestTaskConverter))]
-public abstract class QuestTask
-{
-  public abstract QuestTaskType TaskType { get; }
+  public string Title { get; set; } = serializableSubQuest.Title;
+
+
+  public string Description { get; set; } = serializableSubQuest.Description;
+
+  public required SerializableQuestTaskInfo TaskInfo { get; set; }
 }

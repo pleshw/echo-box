@@ -1,6 +1,6 @@
 namespace Serializable;
 
-public record class SerializableQuest : ISerializableQuest
+public record class SerializableQuestTask : ISerializableSubQuest
 {
   public required string Id { get; set; }
 
@@ -8,6 +8,5 @@ public record class SerializableQuest : ISerializableQuest
 
   public required string Description { get; set; }
 
-  public required List<ISerializableSubQuest> SubQuests { get; set; }
+  public required SerializableQuestTaskInfo TaskInfo { get; set; }
 }
-

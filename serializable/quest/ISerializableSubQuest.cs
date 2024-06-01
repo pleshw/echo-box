@@ -1,5 +1,3 @@
-using Game;
-
 namespace Serializable;
 
 public interface ISerializableSubQuest
@@ -13,5 +11,5 @@ public interface ISerializableSubQuest
 
   public string Description { get; set; }
 
-  public QuestTask Task { get; set; }
+  public SerializableQuestTaskInfo TaskInfo { get; set; }
 }

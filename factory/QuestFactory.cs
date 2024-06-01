@@ -16,59 +16,60 @@ public static class QuestFactory
       Title = "Preparing",
       Description = "Learn all step types of quest",
       SubQuests = [
-      new SerializableSubQuest (){
+      new SerializableQuestTask (){
         Id = "Collection",
         Title = "Collection",
         Description = "Collection test quest.",
-        Task = new SerializableQuestTaskCollection()
+        TaskInfo = new SerializableQuestTaskCollection()
         {
           AmountToComplete = 10,
           ItemInfoFilePath = "res://data/test/quest/collection/test_item.json"
         }
       },
-      new SerializableSubQuest (){
+      new SerializableQuestTask (){
         Id = "Escort",
         Title = "Escort",
         Description = "Escort test quest.",
-        Task = new SerializableQuestTaskEscort()
+        TaskInfo = new SerializableQuestTaskEscort()
         {
           DestinationInfoFilePath = "res://data/test/quest/escort/destination.json",
-          NPCInfoFilePath = "res://data/test/quest/test_npc.json"
+          EntityInfoFilePath = "res://data/test/quest/test_npc.json"
         }
       },
-      new SerializableSubQuest (){
+      new SerializableQuestTask (){
         Id = "Find",
         Title = "Find",
         Description = "Find test quest.",
-        Task = new SerializableQuestTaskFind()
+        TaskInfo = new SerializableQuestTaskFind()
         {
           ItemInfoFilePath = "res://data/test/quest/collection/test_hidden_item.json"
         }
       },
-      new SerializableSubQuest (){
+      new SerializableQuestTask (){
         Id = "Hunt",
         Title = "Hunt",
         Description = "Hunt test quest.",
-        Task = new SerializableQuestTaskHunt()
+        TaskInfo = new SerializableQuestTaskHunt()
         {
           AmountToComplete = 10,
-          NPCInfoFilePath = "res://data/test/quest/test_npc_enemy.json"
+          EntityInfoFilePath = "res://data/test/quest/test_npc_enemy.json"
         }
       },
-      new SerializableSubQuest (){
+      new SerializableQuestTask (){
         Id = "ReachNPC",
         Title = "ReachNPC",
         Description = "ReachNPC test quest.",
-        Task = new SerializableQuestTaskReachNPC()
+        TaskInfo = new SerializableQuestTaskReachEntity()
         {
-          NPCInfoFilePath = "res://data/test/quest/test_npc.json"
+          EntityInfoFilePath = "res://data/test/quest/test_npc.json",
+          DialogueIdCompleteQuest = "Complete quest ReachNPC"
         }
       },
-      new SerializableSubQuest (){
+      new SerializableQuestTask (){
         Id = "ReachPosition",
         Title = "ReachPosition",
         Description = "ReachPosition test quest.",
-        Task = new SerializableQuestTaskReachPosition()
+        TaskInfo = new SerializableQuestTaskReachPosition()
         {
           DestinationInfoFilePath = "res://data/test/quest/escort/destination.json"
         }

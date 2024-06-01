@@ -1,8 +1,27 @@
+using Serializable;
+
 namespace Game;
 
-public class QuestTaskCollection : QuestTask
+public class QuestTaskCollection(Entity assignedTo) : QuestTaskInfo(assignedTo)
 {
   public override QuestTaskType TaskType { get; } = QuestTaskType.COLLECTION;
-  public required int AmountToComplete;
-  public required string ItemInfoFilePath;
+
+  public int AmountToComplete;
+
+  public ItemInfo ItemInfo;
+
+  public override bool IsReadyToComplete
+  {
+    get
+    {
+      return AmountGathered >= AmountToComplete;
+    }
+  }
+
+  public int AmountGathered { get; }
+
+  public override void Complete()
+  {
+
+  }
 }

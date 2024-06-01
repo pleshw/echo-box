@@ -1,9 +1,8 @@
-using Game;
-
 namespace Serializable;
 
-public class SerializableQuestTaskFind : QuestTask
+public class SerializableQuestTaskFind : SerializableQuestTaskInfo
 {
   public override QuestTaskType TaskType { get; } = QuestTaskType.FIND;
+
   public required string ItemInfoFilePath;
 }

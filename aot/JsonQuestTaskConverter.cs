@@ -2,16 +2,15 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Serializable;
-using Game;
 
 
 namespace AOT;
 
 [RequiresUnreferencedCode("")]
 [RequiresDynamicCode("")]
-public class JsonQuestTaskConverter : JsonConverter<QuestTask>
+public class JsonQuestTaskInfoConverter : JsonConverter<SerializableQuestTaskInfo>
 {
-  public override QuestTask Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+  public override SerializableQuestTaskInfo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
   {
     // Read the JSON document
     using JsonDocument doc = JsonDocument.ParseValue(ref reader);
@@ -31,7 +30,7 @@ public class JsonQuestTaskConverter : JsonConverter<QuestTask>
         QuestTaskType.FIND => JsonSerializer.Deserialize<SerializableQuestTaskFind>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskFind"),
         QuestTaskType.ESCORT => JsonSerializer.Deserialize<SerializableQuestTaskEscort>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskEscort"),
         QuestTaskType.REACH_POSITION => JsonSerializer.Deserialize<SerializableQuestTaskReachPosition>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskReachPosition"),
-        QuestTaskType.REACH_NPC => JsonSerializer.Deserialize<SerializableQuestTaskReachNPC>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskReachNPC"),
+        QuestTaskType.REACH_NPC => JsonSerializer.Deserialize<SerializableQuestTaskReachEntity>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskReachNPC"),
         _ => throw new JsonException("Unknown type"),
       };
     }
@@ -39,7 +38,7 @@ public class JsonQuestTaskConverter : JsonConverter<QuestTask>
     throw new JsonException("Type property not found");
   }
 
-  public override void Write(Utf8JsonWriter writer, QuestTask value, JsonSerializerOptions options)
+  public override void Write(Utf8JsonWriter writer, SerializableQuestTaskInfo value, JsonSerializerOptions options)
   {
     // Determine the concrete type and serialize accordingly
     switch (value)
@@ -59,7 +58,7 @@ public class JsonQuestTaskConverter : JsonConverter<QuestTask>
       case SerializableQuestTaskReachPosition a:
         JsonSerializer.Serialize(writer, a, options);
         break;
-      case SerializableQuestTaskReachNPC a:
+      case SerializableQuestTaskReachEntity a:
         JsonSerializer.Serialize(writer, a, options);
         break;
       case null:

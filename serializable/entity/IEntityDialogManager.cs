@@ -1,6 +1,6 @@
 namespace Serializable;
 
-public interface INPCDialogManager
+public interface IEntityDialogManager
 {
   public SerializableDialogue DialogTree { get; set; }
 
