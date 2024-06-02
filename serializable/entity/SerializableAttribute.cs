@@ -1,13 +1,13 @@
 namespace Serializable;
 
-public abstract class SerializableAttribute
+public interface ISerializableAttribute
 {
 
-  public abstract int Points { get; set; }
+  public int Points { get; set; }
 
 
-  public abstract string Name { get; set; }
+  public string Name { get; set; }
 
 
-  public abstract string Abbreviation { get; set; }
+  public string Abbreviation { get; set; }
 }

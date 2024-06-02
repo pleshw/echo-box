@@ -6,9 +6,7 @@ using System.Numerics;
 namespace Factory;
 
 
-[RequiresUnreferencedCode("")]
-[RequiresDynamicCode("")]
-public static class NPCFactory
+public static class EntityFactory
 {
     public static void TestMakeCompleteNPC()
     {

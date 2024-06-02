@@ -1,6 +1,4 @@
-using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
-using AOT;
 
 namespace Factory;
 
@@ -11,8 +9,6 @@ public record class ProjectFileInfo<T>
   public required T FileData;
 }
 
-[RequiresUnreferencedCode("")]
-[RequiresDynamicCode("")]
 public static partial class FileController
 {
   public static string ApplicationBase => AppContext.BaseDirectory;
@@ -42,13 +38,13 @@ public static partial class FileController
     }
   }
 
-  public static void CreateProjectFile<T>(ProjectFileInfo<T> fileData) => CreateFile(fileData.FolderPath, fileData.FileName, JsonSerializer.Serialize(fileData.FileData, typeof(T), JsonContext.Default));
+  public static void CreateProjectFile<T>(ProjectFileInfo<T> fileData) => CreateFile(fileData.FolderPath, fileData.FileName, JsonSerializer.Serialize(fileData.FileData, typeof(T)));
 
-  public static void CreateProjectFile<T>(List<ProjectFileInfo<T>> fileDataList) => fileDataList.ForEach(f => CreateFile(f.FolderPath, f.FileName, JsonSerializer.Serialize(f.FileData, typeof(T), JsonContext.Default)));
+  public static void CreateProjectFile<T>(List<ProjectFileInfo<T>> fileDataList) => fileDataList.ForEach(f => CreateFile(f.FolderPath, f.FileName, JsonSerializer.Serialize(f.FileData, typeof(T))));
 
   public static void CreateProjectFile(string fileName, string fileData) => CreateFile(ProjectDataFolder, fileName, fileData);
 
-  public static void CreateProjectFile<T>(string fileName, T fileData) => CreateProjectFile(fileName, JsonSerializer.Serialize(fileData, typeof(T), JsonContext.Default));
+  public static void CreateProjectFile<T>(string fileName, T fileData) => CreateProjectFile(fileName, JsonSerializer.Serialize(fileData, typeof(T)));
 
   public static T? GetProjectFileDeserialized<T>(string fileName) where T : class => GetFileDeserialized<T>(Path.Join(ProjectDataFolder, fileName));
 
@@ -63,7 +59,7 @@ public static partial class FileController
     try
     {
       var fileContent = File.ReadAllText(filePath);
-      var cc = JsonSerializer.Deserialize(fileContent, typeof(T), JsonContext.Default);
+      var cc = JsonSerializer.Deserialize(fileContent, typeof(T));
       return cc as T;
     }
     catch (Exception ex)

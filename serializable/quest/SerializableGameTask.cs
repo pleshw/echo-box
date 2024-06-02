@@ -1,6 +1,8 @@
+using Game;
+
 namespace Serializable;
 
-public record class SerializableQuestTask : ISerializableSubQuest
+public record class SerializableGameTask : ITaskComponent
 {
   public required string Id { get; set; }
 
@@ -8,5 +10,5 @@ public record class SerializableQuestTask : ISerializableSubQuest
 
   public required string Description { get; set; }
 
-  public required SerializableQuestTaskInfo TaskInfo { get; set; }
+  public required TaskType TaskType { get; set; }
 }

@@ -2,57 +2,57 @@ namespace Serializable;
 
 public static partial class Attributes
 {
-  public class Agility : SerializableAttribute
+  public class Agility : ISerializableAttribute
   {
-    public override int Points { get; set; } = 0;
+    public int Points { get; set; } = 0;
 
-    public override string Abbreviation { get; set; } = "agi";
+    public string Abbreviation { get; set; } = "agi";
 
-    public override string Name { get; set; } = "Agility";
+    public string Name { get; set; } = "Agility";
   }
 
-  public class Dexterity : SerializableAttribute
+  public class Dexterity : ISerializableAttribute
   {
-    public override int Points { get; set; } = 0;
+    public int Points { get; set; } = 0;
 
-    public override string Abbreviation { get; set; } = "dex";
+    public string Abbreviation { get; set; } = "dex";
 
-    public override string Name { get; set; } = "Dexterity";
+    public string Name { get; set; } = "Dexterity";
   }
 
-  public class Intelligence : SerializableAttribute
+  public class Intelligence : ISerializableAttribute
   {
-    public override int Points { get; set; } = 0;
+    public int Points { get; set; } = 0;
 
-    public override string Abbreviation { get; set; } = "int";
+    public string Abbreviation { get; set; } = "int";
 
-    public override string Name { get; set; } = "Intelligence";
+    public string Name { get; set; } = "Intelligence";
   }
 
-  public class Luck : SerializableAttribute
+  public class Luck : ISerializableAttribute
   {
-    public override int Points { get; set; } = 0;
+    public int Points { get; set; } = 0;
 
-    public override string Abbreviation { get; set; } = "luk";
+    public string Abbreviation { get; set; } = "luk";
 
-    public override string Name { get; set; } = "Luck";
+    public string Name { get; set; } = "Luck";
   }
 
-  public class Strength : SerializableAttribute
+  public class Strength : ISerializableAttribute
   {
-    public override int Points { get; set; } = 0;
+    public int Points { get; set; } = 0;
 
-    public override string Abbreviation { get; set; } = "str";
+    public string Abbreviation { get; set; } = "str";
 
-    public override string Name { get; set; } = "Strength";
+    public string Name { get; set; } = "Strength";
   }
 
-  public class Vitality : SerializableAttribute
+  public class Vitality : ISerializableAttribute
   {
-    public override int Points { get; set; } = 0;
+    public int Points { get; set; } = 0;
 
-    public override string Abbreviation { get; set; } = "vit";
+    public string Abbreviation { get; set; } = "vit";
 
-    public override string Name { get; set; } = "Vitality";
+    public string Name { get; set; } = "Vitality";
   }
 }

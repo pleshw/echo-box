@@ -12,7 +12,7 @@ public static class Program
 {
   private static void Main(string[] _)
   {
-    NPCFactory.TestMakeCompleteNPC();
+    EntityFactory.TestMakeCompleteNPC();
     DialogueFactory.TestMakeCompleteDialogue();
     QuestFactory.TestMakeCompleteQuest();
 

@@ -4,12 +4,9 @@ using Serializable;
 
 namespace Game;
 
-
-[RequiresUnreferencedCode("")]
-[RequiresDynamicCode("")]
-public class Quest(Entity assignedTo, SerializableQuest serializableQuest) : ISerializableQuest, ICompletable
+public class Quest(GameEntity assignedTo, SerializableQuest serializableQuest) : IQuestComponent, ICompletableComponent
 {
-  public Entity AssignedTo = assignedTo;
+  public GameEntity AssignedTo = assignedTo;
 
   public string Id { get; set; } = serializableQuest.Id;
 
@@ -17,17 +14,17 @@ public class Quest(Entity assignedTo, SerializableQuest serializableQuest) : ISe
 
   public string Description { get; set; } = serializableQuest.Description;
 
-  public List<ISerializableSubQuest> SubQuests { get; set; } = serializableQuest.SubQuests;
+  public List<ITaskComponent> Tasks { get; set; } = serializableQuest.Tasks;
 
   public bool IsReadyToComplete
   {
     get
     {
-      return SubQuests.OfType<QuestTask>().All(s => ((QuestTaskInfo)s.TaskInfo).IsReadyToComplete);
+      return Tasks.OfType<IAssignedTaskComponent>().All(s => s.IsReadyToComplete);
     }
   }
 
-  public Quest(Entity assignedTo, string filePath) : this(assignedTo, FileController.GetFileDeserialized<SerializableQuest>(filePath) ?? throw new Exception($"Invalid file path for creating Quest. File path: {filePath}"))
+  public Quest(GameEntity assignedTo, string filePath) : this(assignedTo, FileController.GetFileDeserialized<SerializableQuest>(filePath) ?? throw new Exception($"Invalid file path for creating Quest. File path: {filePath}"))
   {
 
   }

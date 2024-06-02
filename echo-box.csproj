@@ -3,10 +3,6 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
-    <JsonSerializerIsReflectionEnabledByDefault>false</JsonSerializerIsReflectionEnabledByDefault>
-    <EnableDynamicLoading>true</EnableDynamicLoading>
-    <PublishAOT>true</PublishAOT>
-    <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>echo_box</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
