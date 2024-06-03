@@ -1,19 +1,31 @@
-using Game;
+using System.Numerics;
 
 namespace Game;
 
 public class PlayerEntity : GameEntity
 {
-  public PlayerEntity(string id) : base(id)
+  public PlayerEntity(Guid id) : base(id)
   {
+    AddComponent(new DisplayNameComponent
+    {
+      DisplayName = "Alice"
+    });
+
+    AddComponent(new PositionComponent
+    {
+      Position = Vector2.Zero
+    });
+
+    AddComponent(new InventoryComponent
+    {
+      Owner = this,
+      MaxSize = 10
+    });
   }
 
-  public PlayerEntity(string id, List<IComponent> components) : base(id, components)
+  public PlayerEntity(Guid id, List<IComponent> components) : base(id, components)
   {
-  }
 
-  public PlayerEntity(string id, GameEntity entityToCopy) : base(id, entityToCopy)
-  {
   }
 
   public override List<Type> RequiredComponents => [typeof(IPositionComponent), typeof(IDisplayNameComponent), typeof(IInventoryComponent)];

@@ -1,5 +1,4 @@
-using System.Diagnostics.CodeAnalysis;
-using Factory;
+using Tests;
 using Serializable;
 
 namespace Game;
@@ -8,7 +7,7 @@ public class Quest(GameEntity assignedTo, SerializableQuest serializableQuest) :
 {
   public GameEntity AssignedTo = assignedTo;
 
-  public string Id { get; set; } = serializableQuest.Id;
+  public Guid Id { get; set; } = serializableQuest.Id;
 
   public string Title { get; set; } = serializableQuest.Title;
 

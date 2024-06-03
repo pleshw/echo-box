@@ -13,8 +13,9 @@ public enum TaskType
 [Flags]
 public enum ItemTypes
 {
-  CONSUMABLE,
-  ARMOR,
-  WEAPON,
-  ACCESSORY
+  NONE = 0,
+  CONSUMABLE = 1 << 1,
+  ARMOR = 1 << 2,
+  WEAPON = 1 << 3,
+  ACCESSORY = 1 << 4
 }

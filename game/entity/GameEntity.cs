@@ -1,24 +1,21 @@
-using System.ComponentModel;
-using Game;
-
 namespace Game;
 
-public abstract class GameEntity : ISharedNameComponent
+public abstract class GameEntity : IIdComponent
 {
-  public string SharedName { get; set; }
+  public Guid Id { get; set; }
 
   public abstract List<Type> RequiredComponents { get; }
 
   private readonly Dictionary<Type, IComponent> _components = [];
 
-  public GameEntity(string id)
+  public GameEntity(Guid id)
   {
-    SharedName = id;
+    Id = id;
   }
 
-  public GameEntity(string id, List<IComponent> components)
+  public GameEntity(Guid id, List<IComponent> components)
   {
-    SharedName = id;
+    Id = id;
 
     foreach (var component in components)
     {
@@ -51,7 +48,7 @@ public abstract class GameEntity : ISharedNameComponent
   {
     if (!_components.TryGetValue(typeof(T), out IComponent? component))
     {
-      throw new Exception($"Component {typeof(T)} does not exist in this entity. Entity Id: {SharedName}");
+      throw new Exception($"Component {typeof(T)} does not exist in this entity. Entity Id: {Id}");
     }
 
     return (T)component;

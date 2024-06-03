@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Serializable;
-using Factory;
+using Tests;
 using Game;
 
 
@@ -12,9 +12,9 @@ public static class Program
 {
   private static void Main(string[] _)
   {
-    EntityFactory.TestMakeCompleteNPC();
-    DialogueFactory.TestMakeCompleteDialogue();
-    QuestFactory.TestMakeCompleteQuest();
+    EntityTests.TestMakeCompleteNPC();
+    DialogueTests.TestMakeCompleteDialogue();
+    QuestTests.TestMakeCompleteQuest();
 
     Quest? deserializedQuest = new("C:/Users/Usuário/Desktop/echo-box/data/quest/test/test_quest.json");
 

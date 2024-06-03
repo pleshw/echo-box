@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace Factory;
+namespace Tests;
 
 public record class ProjectFileInfo<T>
 {

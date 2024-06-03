@@ -3,13 +3,13 @@ using Game;
 
 namespace Serializable;
 
-public class SerializableAssignedEscortTask : IAssignedEscortTaskComponent
+public record class SerializableAssignedEscortTask : IAssignedEscortTaskComponent
 {
   public TaskType TaskType { get; } = TaskType.ESCORT;
 
   public required GameEntity Companion { get; set; }
 
-  public required string Id { get; set; }
+  public required Guid Id { get; set; }
 
   public required string Title { get; set; }
 

@@ -4,7 +4,7 @@ namespace Serializable;
 
 public record class SerializableGameTask : ITaskComponent
 {
-  public required string Id { get; set; }
+  public required Guid Id { get; set; }
 
   public required string Title { get; set; }
 

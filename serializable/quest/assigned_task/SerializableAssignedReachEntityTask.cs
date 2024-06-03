@@ -2,7 +2,7 @@ using Game;
 
 namespace Serializable;
 
-public class SerializableAssignedReachEntityTask : IAssignedReachEntityTaskComponent
+public record class SerializableAssignedReachEntityTask : IAssignedReachEntityTaskComponent
 {
   public required GameEntity TargetEntity { get; set; }
 
@@ -10,7 +10,7 @@ public class SerializableAssignedReachEntityTask : IAssignedReachEntityTaskCompo
 
   public TaskType TaskType { get; } = TaskType.REACH_ENTITY;
 
-  public required string Id { get; set; }
+  public required Guid Id { get; set; }
 
   public required string Title { get; set; }
 

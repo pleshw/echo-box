@@ -2,13 +2,13 @@ using Game;
 
 namespace Serializable;
 
-public class SerializableAssignedHuntTask : IAssignedHuntTaskComponent
+public record class SerializableAssignedHuntTask : IAssignedHuntTaskComponent
 {
   public TaskType TaskType { get; } = TaskType.HUNT;
 
   public required GameEntity TargetEntity { get; set; }
 
-  public required string Id { get; set; }
+  public required Guid Id { get; set; }
 
   public required string Title { get; set; }
 

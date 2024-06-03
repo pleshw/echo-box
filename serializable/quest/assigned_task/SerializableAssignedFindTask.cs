@@ -2,13 +2,13 @@ using Game;
 
 namespace Serializable;
 
-public class SerializableAssignedFindTask : IAssignedFindTaskComponent
+public record class SerializableAssignedFindTask : IAssignedFindTaskComponent
 {
   public TaskType TaskType { get; } = TaskType.FIND;
 
   public required IItemComponent TargetItem { get; set; }
 
-  public required string Id { get; set; }
+  public required Guid Id { get; set; }
 
   public required string Title { get; set; }
 

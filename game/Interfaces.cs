@@ -1,5 +1,4 @@
 using System.Numerics;
-using Game;
 using Serializable;
 
 namespace Game;
@@ -52,7 +51,7 @@ public interface IAmountKilledComponent : IComponent
 
 public interface IItemComponent : IComponent, IDisplayNameComponent, ISharedNameComponent, IDescriptionComponent, IDisplayImageComponent
 {
-  ItemTypes ItemTypes { get; set; }
+  ItemTypes ItemType { get; set; }
 }
 
 public interface IQuestComponent : IComponent, IIdComponent, ITitleComponent, IDescriptionComponent
@@ -244,7 +243,7 @@ public interface ISharedNameComponent : IComponent
 
 public interface IIdComponent : IComponent
 {
-  public string Id { get; }
+  public Guid Id { get; }
 }
 
 // Example of a component

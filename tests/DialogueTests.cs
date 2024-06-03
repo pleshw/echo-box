@@ -1,12 +1,8 @@
-using System.Diagnostics.CodeAnalysis;
 using Serializable;
 
-namespace Factory;
+namespace Tests;
 
-
-[RequiresUnreferencedCode("")]
-[RequiresDynamicCode("")]
-public static class DialogueFactory
+public static class DialogueTests
 {
   public static void TestMakeCompleteDialogue()
   {

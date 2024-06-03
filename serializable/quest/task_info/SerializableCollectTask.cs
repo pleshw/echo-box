@@ -2,11 +2,11 @@ using Game;
 
 namespace Serializable;
 
-public class SerializableCollectTask : ICollectTaskComponent
+public record class SerializableCollectTask : ICollectTaskComponent
 {
   public TaskType TaskType { get; } = TaskType.COLLECT;
 
-  public required string Id { get; set; }
+  public required Guid Id { get; set; }
 
   public required string Title { get; set; }
 

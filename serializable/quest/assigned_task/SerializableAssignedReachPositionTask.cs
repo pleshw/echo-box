@@ -3,11 +3,11 @@ using Game;
 
 namespace Serializable;
 
-public class SerializableAssignedReachPositionTask : IAssignedReachPositionTaskComponent
+public record class SerializableAssignedReachPositionTask : IAssignedReachPositionTaskComponent
 {
   public TaskType TaskType { get; } = TaskType.REACH_POSITION;
 
-  public required string Id { get; set; }
+  public required Guid Id { get; set; }
 
   public required string Title { get; set; }
 
