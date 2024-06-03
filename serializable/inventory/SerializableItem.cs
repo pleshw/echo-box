@@ -10,7 +10,7 @@ public record class SerializableItem : IItemComponent
 
   public required string DisplayName { get; set; }
 
-  public required string SharedName { get; set; }
+  public required string UniqueName { get; set; }
 
   public required string Description { get; set; }
 

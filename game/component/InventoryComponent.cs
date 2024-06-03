@@ -1,10 +1,13 @@
-using System.Numerics;
+using System.Text.Json.Serialization;
 
 namespace Game;
 
 public class InventoryComponent : IInventoryComponent
 {
-  public required IIdComponent Owner { get; set; }
-  public List<IItemSlotComponent> Items { get; set; } = [];
+  [JsonIgnore]
+  public required IUniqueNameComponent Owner { get; set; }
+
+  public required List<IItemSlotComponent> Items { get; set; }
+
   public required int MaxSize { get; set; }
 }

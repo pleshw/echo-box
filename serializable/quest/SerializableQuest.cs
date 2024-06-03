@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
 using Game;
 
 namespace Serializable;
 
+
+[JsonDerivedType(typeof(SerializableQuest), typeDiscriminator: "base")]
 public record class SerializableQuest : IQuestComponent
 {
   public required Guid Id { get; set; }

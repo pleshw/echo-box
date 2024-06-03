@@ -10,7 +10,7 @@ public static class ItemTests
     Id = Guid.NewGuid(),
     ItemType = ItemTypes.CONSUMABLE,
     DisplayName = "Test Consumable",
-    SharedName = "TestConsumable",
+    UniqueName = "TestConsumable",
 
     Description = "A Consumable for testing purposes",
     ImageFilePath = "test/image/filepath",
@@ -21,7 +21,7 @@ public static class ItemTests
     Id = Guid.NewGuid(),
     ItemType = ItemTypes.ARMOR,
     DisplayName = "Test Armor",
-    SharedName = "TestArmor",
+    UniqueName = "TestArmor",
 
     Description = "A Armor for testing purposes",
     ImageFilePath = "test/image/filepath",
@@ -32,7 +32,7 @@ public static class ItemTests
     Id = Guid.NewGuid(),
     ItemType = ItemTypes.WEAPON,
     DisplayName = "Test Weapon",
-    SharedName = "TestWeapon",
+    UniqueName = "TestWeapon",
 
     Description = "A Weapon for testing purposes",
     ImageFilePath = "test/image/filepath",
@@ -43,7 +43,7 @@ public static class ItemTests
     Id = Guid.NewGuid(),
     ItemType = ItemTypes.ACCESSORY,
     DisplayName = "Test Accessory",
-    SharedName = "TestAccessory",
+    UniqueName = "TestAccessory",
 
     Description = "A Accessory for testing purposes",
     ImageFilePath = "test/image/filepath",
@@ -54,7 +54,7 @@ public static class ItemTests
     Id = Guid.NewGuid(),
     ItemType = ItemTypes.ACCESSORY | ItemTypes.ARMOR | ItemTypes.WEAPON | ItemTypes.CONSUMABLE,
     DisplayName = "Test All Uses",
-    SharedName = "TestAllUses",
+    UniqueName = "TestAllUses",
 
     Description = "A All Uses for testing purposes",
     ImageFilePath = "test/image/filepath",

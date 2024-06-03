@@ -1,4 +1,6 @@
 using System.Numerics;
+using System.Text.Json.Serialization;
+using JSONConverters;
 using Serializable;
 
 namespace Game;
@@ -49,7 +51,7 @@ public interface IAmountKilledComponent : IComponent
   int AmountKilled { get; set; }
 }
 
-public interface IItemComponent : IComponent, IDisplayNameComponent, ISharedNameComponent, IDescriptionComponent, IDisplayImageComponent
+public interface IItemComponent : IComponent, IDisplayNameComponent, IUniqueNameComponent, IDescriptionComponent, IDisplayImageComponent
 {
   ItemTypes ItemType { get; set; }
 }
@@ -69,6 +71,7 @@ public interface IAssignedTaskComponent : IComponent, IHasStartComponent, ITaskC
   GameEntity AssignedTo { get; set; }
 }
 
+[JsonConverter(typeof(JsonTaskConverter))]
 public interface ITaskComponent : IComponent, IIdComponent, ITitleComponent, IDescriptionComponent
 {
   TaskType TaskType { get; }
@@ -178,13 +181,13 @@ public interface IItemSlotComponent : IComponent, IAmountComponent, IMaxSizeComp
   IDisplayImageComponent FrameImage { get; set; }
 }
 
-public interface IEquipSlotComponent : IComponent, ISharedNameComponent, IDescriptionComponent, IDisplayNameComponent, IItemSlotComponent
+public interface IEquipSlotComponent : IComponent, IUniqueNameComponent, IDescriptionComponent, IDisplayNameComponent, IItemSlotComponent
 {
 }
 
 public interface IInventoryComponent : IComponent, IMaxSizeComponent
 {
-  IIdComponent Owner { get; set; }
+  IUniqueNameComponent Owner { get; set; }
 
   List<IItemSlotComponent> Items { get; set; }
 }
@@ -213,7 +216,7 @@ public interface ITargetAreaComponent : IComponent, ITargetPositionComponent
 
 public interface IIdentifiableTargetComponent : IComponent
 {
-  ISharedNameComponent Target { get; set; }
+  IUniqueNameComponent Target { get; set; }
 }
 
 // Defines properties for entities that can be alive or dead
@@ -236,9 +239,9 @@ public interface IAttributeComponent : IComponent
 
 
 /// A name that can be compared. If the element is used in an item, its unique name should be 'orange', so it can be compared to other items with the same name.
-public interface ISharedNameComponent : IComponent
+public interface IUniqueNameComponent : IComponent
 {
-  public string SharedName { get; }
+  public string UniqueName { get; }
 }
 
 public interface IIdComponent : IComponent
@@ -246,7 +249,7 @@ public interface IIdComponent : IComponent
   public Guid Id { get; }
 }
 
-// Example of a component
+[JsonConverter(typeof(JsonComponentConverter))]
 public interface IComponent
 {
 }

@@ -1,4 +1,6 @@
 using System.Text.Json;
+using System.Text.Json.Serialization.Metadata;
+using JSONConverters;
 
 namespace Tests;
 
@@ -9,8 +11,16 @@ public record class ProjectFileInfo<T>
   public required T FileData;
 }
 
-public static partial class FileController
+public static class FileController
 {
+  public static readonly JsonSerializerOptions JsonSerializerOptions = new()
+  {
+    WriteIndented = true,
+    PropertyNameCaseInsensitive = true,
+    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+    Converters = { new JsonVector2Converter() }
+  };
+
   public static string ApplicationBase => AppContext.BaseDirectory;
 
   public static string ProjectRoot => Path.GetFullPath(Path.Join(ApplicationBase, "..", "..", ".."));
@@ -38,13 +48,13 @@ public static partial class FileController
     }
   }
 
-  public static void CreateProjectFile<T>(ProjectFileInfo<T> fileData) => CreateFile(fileData.FolderPath, fileData.FileName, JsonSerializer.Serialize(fileData.FileData, typeof(T)));
+  public static void CreateProjectFile<T>(ProjectFileInfo<T> fileData) => CreateFile(fileData.FolderPath, fileData.FileName, JsonSerializer.Serialize(fileData.FileData, JsonSerializerOptions));
 
-  public static void CreateProjectFile<T>(List<ProjectFileInfo<T>> fileDataList) => fileDataList.ForEach(f => CreateFile(f.FolderPath, f.FileName, JsonSerializer.Serialize(f.FileData, typeof(T))));
+  public static void CreateProjectFile<T>(List<ProjectFileInfo<T>> fileDataList) => fileDataList.ForEach(f => CreateFile(f.FolderPath, f.FileName, JsonSerializer.Serialize(f.FileData, JsonSerializerOptions)));
 
   public static void CreateProjectFile(string fileName, string fileData) => CreateFile(ProjectDataFolder, fileName, fileData);
 
-  public static void CreateProjectFile<T>(string fileName, T fileData) => CreateProjectFile(fileName, JsonSerializer.Serialize(fileData, typeof(T)));
+  public static void CreateProjectFile<T>(string fileName, T fileData) => CreateProjectFile(fileName, JsonSerializer.Serialize(fileData, JsonSerializerOptions));
 
   public static T? GetProjectFileDeserialized<T>(string fileName) where T : class => GetFileDeserialized<T>(Path.Join(ProjectDataFolder, fileName));
 

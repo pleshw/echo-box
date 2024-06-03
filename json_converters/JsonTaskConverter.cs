@@ -5,18 +5,15 @@ using Serializable;
 using Game;
 
 
-namespace AOT;
+namespace JSONConverters;
 
-[RequiresUnreferencedCode("")]
-[RequiresDynamicCode("")]
-public class JsonQuestTaskInfoConverter : JsonConverter<SerializableQuestTaskInfo>
+public class JsonTaskConverter : JsonConverter<ITaskComponent>
 {
-  public override SerializableQuestTaskInfo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+  public override ITaskComponent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
   {
     // Read the JSON document
     using JsonDocument doc = JsonDocument.ParseValue(ref reader);
     JsonElement root = doc.RootElement;
-    var debug = root.ToString();
 
     // Determine the concrete type from the JSON data
     if (root.TryGetProperty("taskType", out JsonElement typeElement))
@@ -39,7 +36,7 @@ public class JsonQuestTaskInfoConverter : JsonConverter<SerializableQuestTaskInf
     throw new JsonException("Type property not found");
   }
 
-  public override void Write(Utf8JsonWriter writer, SerializableQuestTaskInfo value, JsonSerializerOptions options)
+  public override void Write(Utf8JsonWriter writer, ITaskComponent value, JsonSerializerOptions options)
   {
     // Determine the concrete type and serialize accordingly
     switch (value)

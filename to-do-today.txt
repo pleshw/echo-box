@@ -1,4 +1,0 @@
-add serializable tasks to the quest tests
-add serializable entities to the entity tests
-add serializable dialogues to the dialogues tests 
-adjust test classes and check json generation

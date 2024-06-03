@@ -1,25 +1,43 @@
+using System.Text.Json.Serialization;
+
 namespace Game;
 
-public abstract class GameEntity : IIdComponent
+public abstract class GameEntity : IUniqueNameComponent
 {
-  public Guid Id { get; set; }
+  public string UniqueName { get; set; }
 
+  [JsonIgnore]
   public abstract List<Type> RequiredComponents { get; }
 
+  [JsonIgnore]
   private readonly Dictionary<Type, IComponent> _components = [];
 
-  public GameEntity(Guid id)
+  [JsonIgnore]
+  public List<IComponent> Components
   {
-    Id = id;
+    get
+    {
+      return [.. _components.Values];
+    }
   }
 
-  public GameEntity(Guid id, List<IComponent> components)
+  public GameEntity(string uniqueName)
   {
-    Id = id;
+    UniqueName = uniqueName;
+  }
+
+  public GameEntity(string uniqueName, List<IComponent> components)
+  {
+    UniqueName = uniqueName;
 
     foreach (var component in components)
     {
       _components[component.GetType()] = component;
+    }
+
+    if (!HasRequiredComponents)
+    {
+      throw new Exception($"Entity {uniqueName} does not have the required components.");
     }
   }
 
@@ -28,6 +46,7 @@ public abstract class GameEntity : IIdComponent
     _components[component.GetType()] = component;
   }
 
+  [JsonIgnore]
   public bool HasRequiredComponents
   {
     get
@@ -48,7 +67,7 @@ public abstract class GameEntity : IIdComponent
   {
     if (!_components.TryGetValue(typeof(T), out IComponent? component))
     {
-      throw new Exception($"Component {typeof(T)} does not exist in this entity. Entity Id: {Id}");
+      throw new Exception($"Component {typeof(T)} does not exist in this entity. Entity Id: {UniqueName}");
     }
 
     return (T)component;

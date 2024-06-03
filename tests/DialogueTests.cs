@@ -1,9 +1,20 @@
+using Game;
 using Serializable;
 
 namespace Tests;
 
 public static class DialogueTests
 {
+  public static readonly DialogueComponent DialogueComponentWithoutContinuation = new()
+  {
+    Id = Guid.NewGuid(),
+    Title = "Test Dialogue",
+    Content = "This is a test Dialogue without continuation.",
+    Next = [],
+    AlreadyCompleted = false,
+    IsReadyToComplete = true,
+  };
+
   public static void TestMakeCompleteDialogue()
   {
     SerializableDialogueNode defaultDialogueNode = new()
