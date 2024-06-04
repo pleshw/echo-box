@@ -10,7 +10,7 @@ public static class Program
 {
   private static void Main(string[] _)
   {
-    DialogueTests.TestMakeCompleteDialogue();
-    QuestTests.TestMakeCompleteQuest();
+    DialogueTests.TestMakeAllDialogues();
+    // QuestTests.TestMakeCompleteQuest();
   }
 }

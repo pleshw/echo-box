@@ -37,28 +37,39 @@ public static class DialogueTests
   };
 
 
+  public static readonly List<IDialogueComponent> AllTestDialogues = [DialogueComponentWithoutContinuation, DialogueComponentWithQuest, DialogueComponentWithContinuation];
+
   public static void TestMakeCompleteDialogue()
   {
-    FileController.CreateProjectFile(new ProjectFileInfo<DialogueComponent>()
+    FileController.CreateProjectFile(new ProjectFileInfo<IDialogueComponent>()
     {
       FolderPath = "dialogue/test/",
       FileName = DialogueComponentWithContinuation.Id.ToString() + ".json",
       FileData = DialogueComponentWithContinuation
     });
 
-    FileController.CreateProjectFile(new ProjectFileInfo<DialogueComponent>()
+    FileController.CreateProjectFile(new ProjectFileInfo<IDialogueComponent>()
     {
       FolderPath = "dialogue/test/",
       FileName = DialogueComponentWithoutContinuation.Id.ToString() + ".json",
       FileData = DialogueComponentWithoutContinuation
     });
 
-
-    FileController.CreateProjectFile(new ProjectFileInfo<QuestDialogueComponent>()
+    FileController.CreateProjectFile(new ProjectFileInfo<IDialogueComponent>()
     {
       FolderPath = "dialogue/test/",
       FileName = DialogueComponentWithQuest.Id.ToString() + ".json",
       FileData = DialogueComponentWithQuest
     });
+  }
+
+  public static void TestMakeAllDialogues()
+  {
+    AllTestDialogues.ForEach(d => FileController.CreateProjectFile(new ProjectFileInfo<IDialogueComponent>()
+    {
+      FolderPath = "dialogue/test/",
+      FileName = d.Id.ToString() + ".json",
+      FileData = d
+    }));
   }
 }
