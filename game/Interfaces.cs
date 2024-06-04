@@ -136,10 +136,14 @@ public interface IAssignedReachPositionTaskComponent : IComponent, IReachPositio
 
 }
 
-
 public interface IDialogueComponent : IComponent, ITitleComponent, ITextContentComponent, IIdComponent, IMultipleCompletableComponent, ICancelComponent
 {
-  List<IDialogueComponent> Next { get; set; }
+  List<IIdComponent> Next { get; set; }
+}
+
+public interface IQuestDialogueComponent : IComponent, IDialogueComponent
+{
+  IIdComponent Quest { get; set; }
 }
 
 public interface IRelationshipComponent : IComponent, ILevelComponent

@@ -1,3 +1,0 @@
-Create a satisfactory dialogue
-Set the dialogue tree file
-Allow dialogues to assign quests

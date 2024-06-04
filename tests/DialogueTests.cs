@@ -8,79 +8,58 @@ public static class DialogueTests
   public static readonly DialogueComponent DialogueComponentWithoutContinuation = new()
   {
     Id = Guid.NewGuid(),
-    Title = "Test Dialogue",
+    Title = "Test Dialogue Without Continuation",
     Content = "This is a test Dialogue without continuation.",
     Next = [],
     AlreadyCompleted = false,
     IsReadyToComplete = true,
   };
 
+  public static readonly QuestDialogueComponent DialogueComponentWithQuest = new()
+  {
+    Id = Guid.NewGuid(),
+    Title = "Test Dialogue With Quest",
+    Content = "This is a test Dialogue that when confirmed will init a quest to the player.",
+    Next = [DialogueComponentWithoutContinuation],
+    AlreadyCompleted = false,
+    IsReadyToComplete = true,
+    Quest = QuestTests.SerializableQuestAllTasks
+  };
+
+  public static readonly DialogueComponent DialogueComponentWithContinuation = new()
+  {
+    Id = Guid.NewGuid(),
+    Title = "Test Dialogue With Continuation",
+    Content = "This is a test Dialogue with continuation lines.",
+    Next = [DialogueComponentWithoutContinuation, DialogueComponentWithQuest],
+    AlreadyCompleted = false,
+    IsReadyToComplete = true,
+  };
+
+
   public static void TestMakeCompleteDialogue()
   {
-    SerializableDialogueNode defaultDialogueNode = new()
-    {
-      FolderPath = "dialogue/test/node/",
-      FileName = "test_dialogue_default.json",
-      Restrictions = null,
-      Message = "Testing the default dialog of an NPC",
-      SpeakersNodeNames = ["NPC1", "NPC2"],
-      ListenersNodeNames = ["Player"],
-      Options = [
-        new SerializableDialogueOption
-        {
-          ButtonText = "Test completed"
-        }
-      ],
-      QuestsEnabledOnComplete = []
-    };
 
-    SerializableDialogueNode firstInteractionDialogueNode = new()
-    {
-      FolderPath = "dialogue/test/node/",
-      FileName = "test_first_interaction.json",
-      Restrictions = null,
-      Message = "Testing the default dialog of an NPC",
-      SpeakersNodeNames = ["NPC1", "NPC2"],
-      ListenersNodeNames = ["Player"],
-      Options = [
-        new()
-        {
-          ButtonText = "Test completed",
-          DialogNodePath = defaultDialogueNode.FileName
-        }
-      ],
-      QuestsEnabledOnComplete = []
-    };
-
-
-    SerializableDialogue dialogue = new()
+    FileController.CreateProjectFile(new ProjectFileInfo<DialogueComponent>()
     {
       FolderPath = "dialogue/test/",
-      FileName = "test_dialogue.json",
-      Title = "NPC Dialog",
-      DefaultDialogueNodePath = defaultDialogueNode.FileName,
-      FirstInteractionDialogueNodePath = firstInteractionDialogueNode.FileName,
-    };
-
-    FileController.CreateProjectFile(new List<ProjectFileInfo<SerializableDialogueNode>>
-    {
-        new(){
-          FolderPath = defaultDialogueNode.FolderPath,
-          FileName = defaultDialogueNode.FileName,
-          FileData = defaultDialogueNode
-        },
-        new(){
-          FolderPath = defaultDialogueNode.FolderPath,
-          FileName = firstInteractionDialogueNode.FileName,
-          FileData = firstInteractionDialogueNode
-        }
+      FileName = DialogueComponentWithContinuation.Id.ToString() + ".json",
+      FileData = DialogueComponentWithContinuation
     });
 
-    FileController.CreateProjectFile(new ProjectFileInfo<SerializableDialogue>()
+    FileController.CreateProjectFile(new ProjectFileInfo<DialogueComponent>()
     {
-      FolderPath = dialogue.FolderPath,
-      FileName = dialogue.FileName,
-      FileData = dialogue
+      FolderPath = "dialogue/test/",
+      FileName = DialogueComponentWithoutContinuation.Id.ToString() + ".json",
+      FileData = DialogueComponentWithoutContinuation
+    });
+
+
+    FileController.CreateProjectFile(new ProjectFileInfo<QuestDialogueComponent>()
+    {
+      FolderPath = "dialogue/test/",
+      FileName = DialogueComponentWithQuest.Id.ToString() + ".json",
+      FileData = DialogueComponentWithQuest
     });
   }
 }
