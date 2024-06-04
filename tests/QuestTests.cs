@@ -74,7 +74,7 @@ public static class QuestTests
           new ProjectFileInfo<SerializableQuest>()
           {
             FolderPath = "quest/test/",
-            FileName = "test_quest.json",
+            FileName = SerializableQuestAllTasks.Id.ToString() + ".json",
             FileData = SerializableQuestAllTasks
           }
     );

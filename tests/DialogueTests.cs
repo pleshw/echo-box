@@ -19,7 +19,7 @@ public static class DialogueTests
   {
     Id = Guid.NewGuid(),
     Title = "Test Dialogue With Quest",
-    Content = "This is a test Dialogue that when confirmed will init a quest to the player.",
+    Content = "This is a test Dialogue that, when confirmed, will assign a quest to the player.",
     Next = [DialogueComponentWithoutContinuation],
     AlreadyCompleted = false,
     IsReadyToComplete = true,
@@ -39,7 +39,6 @@ public static class DialogueTests
 
   public static void TestMakeCompleteDialogue()
   {
-
     FileController.CreateProjectFile(new ProjectFileInfo<DialogueComponent>()
     {
       FolderPath = "dialogue/test/",

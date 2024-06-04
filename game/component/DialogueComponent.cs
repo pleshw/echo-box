@@ -3,7 +3,7 @@ namespace Game;
 
 public class DialogueComponent : IDialogueComponent
 {
-  public required List<IIdComponent> Next { get; set; }
+  public required List<IDialogueBriefingComponent> Next { get; set; }
   public required string Title { get; set; }
   public required string Content { get; set; }
 
