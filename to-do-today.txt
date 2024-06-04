@@ -1,0 +1,5 @@
+Generate all the game dialogues from a list.
+Generate all game quests from a list.
+Find a quest by id in a list of all game quests.
+Deserialize a dialogue and find it on the game list of all dialogues.
+If the dialogue triggers a quest instantiate it properly.
