@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Game;
@@ -13,7 +14,6 @@ public class JsonQuestDialogueConverter : JsonConverter<QuestDialogueComponent>
   {
     using JsonDocument doc = JsonDocument.ParseValue(ref reader);
     JsonElement root = doc.RootElement;
-
 
     if (!root.TryGetProperty("id", out JsonElement jsonDialogueId))
     {
@@ -43,11 +43,31 @@ public class JsonQuestDialogueConverter : JsonConverter<QuestDialogueComponent>
       };
     }
 
-    throw new JsonException("Type property not found");
+    throw new JsonException("quest property not found");
   }
 
   public override void Write(Utf8JsonWriter writer, QuestDialogueComponent value, JsonSerializerOptions options)
   {
-    JsonSerializer.Serialize(writer, value, options);
+    writer.WriteStartObject();
+
+    var propertiesNotIgnored = value.GetType()
+        .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+        .Where(prop => !Attribute.IsDefined(prop, typeof(JsonIgnoreAttribute)));
+
+    foreach (var prop in propertiesNotIgnored)
+    {
+      string propertyName = prop.Name;
+
+      // Apply naming policy if defined
+      if (options.PropertyNamingPolicy != null)
+      {
+        propertyName = options.PropertyNamingPolicy.ConvertName(propertyName);
+      }
+
+      writer.WritePropertyName(propertyName);
+      JsonSerializer.Serialize(writer, prop.GetValue(value), prop.PropertyType, options);
+    }
+
+    writer.WriteEndObject();
   }
 }

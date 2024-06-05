@@ -62,7 +62,7 @@ public static class DialogueTests
     });
   }
 
-  public static void TestMakeAllDialogues()
+  public static void TestRemakeAllDialogues()
   {
     AllTestDialogues.ForEach(d => FileController.CreateProjectFile(new ProjectFileInfo<IDialogueComponent>()
     {

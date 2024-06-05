@@ -263,7 +263,6 @@ public interface IUniqueNameComponent : IComponent
   public string UniqueName { get; }
 }
 
-[JsonConverter(typeof(JsonComponentConverter))]
 public interface IIdComponent : IComponent
 {
   public Guid Id { get; }

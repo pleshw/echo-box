@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Game;
@@ -23,13 +24,34 @@ public class JsonDialogueBriefingConverter : JsonConverter<IDialogueBriefingComp
     return new DialogueBriefingComponent
     {
       Id = dialogueId,
-      Title = root.GetProperty("title").GetString() ?? throw new JsonException($"Invalid title for dialogue {dialogueId}"),
-      Dialogue = DialogueTests.GetDialogueById(dialogueId)
+      Title = root.GetProperty("title").GetString() ?? throw new JsonException($"Invalid title for dialogue {dialogueId}")
     };
   }
 
   public override void Write(Utf8JsonWriter writer, IDialogueBriefingComponent value, JsonSerializerOptions options)
   {
-    JsonSerializer.Serialize(writer, value as DialogueBriefingComponent, options);
+    writer.WriteStartObject();
+
+    IDialogueBriefingComponent valueAsBriefing = value;
+
+    var propertiesNotIgnored = typeof(DialogueBriefingComponent)
+        .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+        .Where(prop => !Attribute.IsDefined(prop, typeof(JsonIgnoreAttribute)));
+
+    foreach (var prop in propertiesNotIgnored)
+    {
+      string propertyName = prop.Name;
+
+      // Apply naming policy if defined
+      if (options.PropertyNamingPolicy != null)
+      {
+        propertyName = options.PropertyNamingPolicy.ConvertName(propertyName);
+      }
+
+      writer.WritePropertyName(propertyName);
+      JsonSerializer.Serialize(writer, prop.GetValue(valueAsBriefing), prop.PropertyType, options);
+    }
+
+    writer.WriteEndObject();
   }
 }

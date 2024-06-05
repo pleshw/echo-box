@@ -61,7 +61,7 @@ public static class QuestTests
 
   public static readonly SerializableQuest SerializableQuestAllTasks = new()
   {
-    Id = Guid.NewGuid(),
+    Id = new Guid("ff525de8-5ea8-46e5-9518-963c74a09faf"),
     Title = "Preparing",
     Description = "Learn all step types of quest",
     Tasks = [SerializableCollectTask, SerializableEscortTask, SerializableFindTask, SerializableHuntTask, SerializableReachEntityTask, SerializableReachPositionTask]
@@ -87,7 +87,7 @@ public static class QuestTests
 
   public static readonly List<SerializableQuest> AllQuests = [SerializableQuestAllTasks, SerializableQuestCollectSomethings];
 
-  public static void TestMakeCompleteQuest()
+  public static void TestRemakeAllQuests()
   {
     FileController.CreateProjectFile(
           new ProjectFileInfo<SerializableQuest>()

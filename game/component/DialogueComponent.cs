@@ -1,13 +1,11 @@
 
 namespace Game;
 
-public class DialogueComponent() : IDialogueComponent
+public class DialogueComponent() : DialogueBriefingComponent, IDialogueComponent
 {
   public required List<IDialogueBriefingComponent> Next { get; set; }
-  public required string Title { get; set; }
-  public required string Content { get; set; }
 
-  public required Guid Id { get; set; }
+  public required string Content { get; set; }
 
   public required bool AlreadyCompleted { get; set; }
 
