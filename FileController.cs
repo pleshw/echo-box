@@ -1,5 +1,4 @@
 using System.Text.Json;
-using System.Text.Json.Serialization.Metadata;
 using JSONConverters;
 
 namespace Tests;
@@ -18,7 +17,7 @@ public static class FileController
     WriteIndented = true,
     PropertyNameCaseInsensitive = true,
     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-    Converters = { new JsonVector2Converter(), new JsonDialogueConverter() }
+    Converters = { new JsonVector2Converter(), new JsonComponentConverter(), new JsonDialogueConverter() }
   };
 
   public static string ApplicationBase => AppContext.BaseDirectory;
@@ -69,7 +68,7 @@ public static class FileController
     try
     {
       var fileContent = File.ReadAllText(filePath);
-      var cc = JsonSerializer.Deserialize(fileContent, typeof(T));
+      var cc = JsonSerializer.Deserialize(fileContent, typeof(T), JsonSerializerOptions);
       return cc as T;
     }
     catch (Exception ex)

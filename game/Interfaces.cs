@@ -136,6 +136,12 @@ public interface IAssignedReachPositionTaskComponent : IComponent, IReachPositio
 
 }
 
+public interface IMenuComponent : IComponent, IDisplayNameComponent, IUniqueNameComponent
+{
+  MenuType MenuType { get; set; }
+}
+
+[JsonConverter(typeof(JsonDialogueBriefingConverter))]
 public interface IDialogueBriefingComponent : IComponent, IIdComponent, ITitleComponent
 {
 }
@@ -143,6 +149,11 @@ public interface IDialogueBriefingComponent : IComponent, IIdComponent, ITitleCo
 public interface IDialogueComponent : IComponent, IDialogueBriefingComponent, ITextContentComponent, IMultipleCompletableComponent, ICancelComponent
 {
   List<IDialogueBriefingComponent> Next { get; set; }
+}
+
+public interface IMenuDialogueComponent : IComponent, IDialogueComponent
+{
+  IMenuComponent MenuComponent { get; set; }
 }
 
 public interface IQuestDialogueComponent : IComponent, IDialogueComponent
@@ -252,6 +263,7 @@ public interface IUniqueNameComponent : IComponent
   public string UniqueName { get; }
 }
 
+[JsonConverter(typeof(JsonComponentConverter))]
 public interface IIdComponent : IComponent
 {
   public Guid Id { get; }

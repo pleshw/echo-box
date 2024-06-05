@@ -10,6 +10,13 @@ public enum TaskType
   REACH_ENTITY
 }
 
+public enum MenuType
+{
+  SHOP,
+  CRAFT,
+  PICK_ITEM
+}
+
 [Flags]
 public enum ItemTypes
 {

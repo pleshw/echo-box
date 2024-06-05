@@ -12,7 +12,7 @@ public class JsonComponentConverter : JsonConverter<IComponent>
   public override IComponent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
   {
     using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-    if (!doc.RootElement.TryGetProperty("Type", out JsonElement typeElement))
+    if (!doc.RootElement.TryGetProperty("type", out JsonElement typeElement))
     {
       throw new JsonException("Missing type discriminator");
     }
@@ -25,7 +25,7 @@ public class JsonComponentConverter : JsonConverter<IComponent>
   public override void Write(Utf8JsonWriter writer, IComponent value, JsonSerializerOptions options)
   {
     writer.WriteStartObject();
-    writer.WriteString("Type", value.GetType().AssemblyQualifiedName);
+    writer.WriteString("type", value.GetType().AssemblyQualifiedName);
 
     var propertiesNotIgnored = value.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(prop => !Attribute.IsDefined(prop, typeof(JsonIgnoreAttribute)));
 

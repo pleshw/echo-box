@@ -1,4 +1,7 @@
 
+using System.Text.Json.Serialization;
+using JSONConverters;
+
 namespace Game;
 
 public class DialogueBriefingComponent : IDialogueBriefingComponent

@@ -60,10 +60,6 @@ public static class ItemTests
     ImageFilePath = "test/image/filepath",
   };
 
-  public static readonly List<SerializableItem> AllTestItems;
+  public static readonly List<SerializableItem> AllTestItems = [SerializableConsumableItem, SerializableArmorItem, SerializableWeaponItem, SerializableAccessoryItem, SerializableAllUsesItem];
 
-  static ItemTests()
-  {
-    AllTestItems = [SerializableConsumableItem, SerializableArmorItem, SerializableWeaponItem, SerializableAccessoryItem, SerializableAllUsesItem];
-  }
 }

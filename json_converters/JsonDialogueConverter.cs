@@ -1,5 +1,3 @@
-using System;
-using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Game;
@@ -12,24 +10,30 @@ public class JsonDialogueConverter : JsonConverter<IDialogueComponent>
   public override IDialogueComponent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
   {
     using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-    if (!doc.RootElement.TryGetProperty("Type", out JsonElement typeElement))
+    JsonElement root = doc.RootElement;
+
+    if (!root.TryGetProperty("id", out JsonElement jsonDialogueId))
     {
-      throw new JsonException("Missing type discriminator");
+      throw new JsonException("Invalid dialogue. Dialogue does not contain a valid Id.");
     }
 
-    string typeName = typeElement.GetString() ?? throw new JsonException($"Unknown type: {typeElement.GetString()}"); ;
-    Type type = Type.GetType(typeName) ?? throw new JsonException($"Unknown type: {typeName}");
-    return JsonSerializer.Deserialize(doc.RootElement.GetRawText(), type, options) as IDialogueComponent ?? throw new JsonException($"Invalid Conversion for: {typeName}"); ;
+    Guid dialogueId = jsonDialogueId.GetGuid();
+
+    return JsonSerializer.Deserialize(root.GetRawText(), typeof(IDialogueComponent), options) as IDialogueComponent ?? throw new JsonException($"Invalid Conversion for dialogue {dialogueId}.");
   }
 
   public override void Write(Utf8JsonWriter writer, IDialogueComponent value, JsonSerializerOptions options)
   {
+    /// O switch tem que ir da classe principal para a base
     switch (value)
     {
-      case DialogueComponent a:
+      case MenuDialogueComponent a:
         JsonSerializer.Serialize(writer, a, options);
         break;
       case QuestDialogueComponent a:
+        JsonSerializer.Serialize(writer, a, options);
+        break;
+      case DialogueComponent a:
         JsonSerializer.Serialize(writer, a, options);
         break;
       case null:

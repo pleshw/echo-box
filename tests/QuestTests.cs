@@ -1,4 +1,3 @@
-using Game;
 using Serializable;
 using System.Numerics;
 
@@ -68,6 +67,26 @@ public static class QuestTests
     Tasks = [SerializableCollectTask, SerializableEscortTask, SerializableFindTask, SerializableHuntTask, SerializableReachEntityTask, SerializableReachPositionTask]
   };
 
+  public static readonly SerializableQuest SerializableQuestCollectSomethings = new()
+  {
+    Id = new Guid("cf96482a-3bc8-46fa-b30f-1fc6d41aca4f"),
+    Title = "Preparing",
+    Description = "Learn all step types of quest",
+    Tasks = [
+      SerializableCollectTask,
+       new SerializableCollectTask()
+        {
+          Id = Guid.NewGuid(),
+          Title = "Test - Instantiated Task",
+          Description = "This is a Task where you have to Collect accessories.",
+          TargetItem = ItemTests.SerializableAccessoryItem,
+          Amount = 3,
+        }
+  ]
+  };
+
+  public static readonly List<SerializableQuest> AllQuests = [SerializableQuestAllTasks, SerializableQuestCollectSomethings];
+
   public static void TestMakeCompleteQuest()
   {
     FileController.CreateProjectFile(
@@ -78,5 +97,11 @@ public static class QuestTests
             FileData = SerializableQuestAllTasks
           }
     );
+  }
+
+
+  public static SerializableQuest GetQuestById(Guid questId)
+  {
+    return AllQuests.Where(q => q.Id == questId).FirstOrDefault() ?? throw new Exception($"Invalid deserialization. Quest {questId} does not exist.");
   }
 }
