@@ -30,6 +30,7 @@ public class JsonDialogueBriefingConverter : JsonConverter<IDialogueBriefingComp
     };
   }
 
+  /// Write DialogueBriefingComponent exposed properties
   public override void Write(Utf8JsonWriter writer, IDialogueBriefingComponent value, JsonSerializerOptions options)
   {
     writer.WriteStartObject();

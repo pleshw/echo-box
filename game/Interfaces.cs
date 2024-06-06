@@ -101,9 +101,9 @@ public interface IShopItemComponent : IComponent, ICanHide, IHasPrice, IItemFram
 
 
 [JsonConverter(typeof(JsonCraftItemConverter))]
-public interface ICraftItemComponent : IComponent, ICanHide, IHasPrice, IItemFrameComponent
+public interface ICraftItemComponent : IComponent, ICanHide, IHasPrice, IItemFrameComponent, IUniqueNameComponent
 {
-  List<IItemComponent> InputItemList { get; set; }
+  List<IUniqueNameComponent> InputItems { get; set; }
 }
 
 public interface IQuestComponent : IComponent, IIdComponent, ITitleComponent, IDescriptionComponent

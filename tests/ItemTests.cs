@@ -106,9 +106,10 @@ public static class ItemTests
 
   public static readonly CraftItemComponent SerializableCraftItemSlot = new()
   {
-    InputItemList = [SerializableCraftedItemComponentAccessory, SerializableCraftedItemComponentArmor, SerializableCraftedItemComponentConsumable],
+    InputItems = [SerializableCraftedItemComponentAccessory, SerializableCraftedItemComponentArmor, SerializableCraftedItemComponentConsumable],
     IsHidden = false,
     Price = 100.0f,
+    UniqueName = SerializableCraftedAccessoryItem.UniqueName + "Craft",
     Item = SerializableCraftedAccessoryItem,
     FrameImage = SerializableCraftedAccessoryItem,
     RequiredLevel = SerializableCraftedAccessoryItem.RequiredLevel,
@@ -117,4 +118,9 @@ public static class ItemTests
   public static readonly List<ItemComponent> AllTestItems = [SerializableConsumableItem, SerializableArmorItem, SerializableWeaponItem, SerializableAccessoryItem, SerializableAllUsesItem];
 
   public static readonly List<IItemFrameComponent> AllTestItemFrames = [SerializableCraftItemSlot];
+
+  public static ICraftItemComponent GetCraftItemByUniqueName(string uniqueName)
+  {
+    return AllTestItemFrames.OfType<ICraftItemComponent>().Where(d => d.UniqueName == uniqueName).FirstOrDefault() ?? throw new Exception($"Item not found. Unique Name: {uniqueName}");
+  }
 }

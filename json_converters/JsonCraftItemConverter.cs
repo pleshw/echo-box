@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Game;
+using Tests;
 
 
 namespace JSONConverters;
@@ -11,14 +12,15 @@ public class JsonCraftItemConverter : JsonConverter<ICraftItemComponent>
   public override ICraftItemComponent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
   {
     using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-    if (!doc.RootElement.TryGetProperty("type", out JsonElement typeElement))
+    JsonElement root = doc.RootElement;
+
+    if (!root.TryGetProperty("uniqueName", out JsonElement jsonUniqueName))
     {
-      throw new JsonException("Missing type discriminator");
+      throw new JsonException("Invalid item uniqueName. Item does not have a UniqueName property.");
     }
 
-    string typeName = typeElement.GetString() ?? throw new JsonException($"Unknown type: {typeElement.GetString()}"); ;
-    Type type = Type.GetType(typeName) ?? throw new JsonException($"Unknown type: {typeName}");
-    return JsonSerializer.Deserialize(doc.RootElement.GetRawText(), type, options) as ICraftItemComponent ?? throw new JsonException($"Invalid Conversion for: {typeName}"); ;
+    string uniqueName = jsonUniqueName.GetString() ?? throw new JsonException("Invalid item uniqueName. Item does not have a UniqueName property.");
+    return ItemTests.GetCraftItemByUniqueName(uniqueName);
   }
 
   public override void Write(Utf8JsonWriter writer, ICraftItemComponent value, JsonSerializerOptions options)

@@ -11,28 +11,30 @@ public class JsonDisplayImageConverter : JsonConverter<IDisplayImageComponent>
   public override IDisplayImageComponent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
   {
     using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-    if (!doc.RootElement.TryGetProperty("type", out JsonElement typeElement))
+    JsonElement root = doc.RootElement;
+
+    if (!root.TryGetProperty("displayImage", out JsonElement jsonDisplayImage))
     {
-      throw new JsonException("Missing type discriminator");
+      throw new JsonException("Invalid dialogue. Dialogue does not contain a valid Id.");
     }
 
-    string typeName = typeElement.GetString() ?? throw new JsonException($"Unknown type: {typeElement.GetString()}"); ;
-    Type type = Type.GetType(typeName) ?? throw new JsonException($"Unknown type: {typeName}");
-    return JsonSerializer.Deserialize(doc.RootElement.GetRawText(), type, options) as IDisplayImageComponent ?? throw new JsonException($"Invalid Conversion for: {typeName}"); ;
+    string displayImage = jsonDisplayImage.GetString() ?? throw new JsonException("Invalid DisplayImage type. Display Image type should be string."); ;
+
+    return new DisplayImageComponent
+    {
+      DisplayImage = displayImage
+    };
   }
 
+  /// Write only the exposed properties in the interface. So the higher level class properties dont go to json
   public override void Write(Utf8JsonWriter writer, IDisplayImageComponent value, JsonSerializerOptions options)
   {
     writer.WriteStartObject();
-    writer.WriteString("type", value.GetType().AssemblyQualifiedName);
 
-    IDisplayImageComponent valueAsBriefing = value;
+    // Get properties defined in the interface
+    var properties = typeof(IDisplayImageComponent).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
-    var propertiesNotIgnored = typeof(DisplayImageComponent)
-        .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-        .Where(prop => !Attribute.IsDefined(prop, typeof(JsonIgnoreAttribute)));
-
-    foreach (var prop in propertiesNotIgnored)
+    foreach (var prop in properties)
     {
       string propertyName = prop.Name;
 
@@ -43,7 +45,10 @@ public class JsonDisplayImageConverter : JsonConverter<IDisplayImageComponent>
       }
 
       writer.WritePropertyName(propertyName);
-      JsonSerializer.Serialize(writer, prop.GetValue(valueAsBriefing), prop.PropertyType, options);
+
+      // Serialize the property value
+      var propertyValue = prop.GetValue(value);
+      JsonSerializer.Serialize(writer, propertyValue, prop.PropertyType, options);
     }
 
     writer.WriteEndObject();
