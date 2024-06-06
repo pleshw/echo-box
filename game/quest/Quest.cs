@@ -1,9 +1,8 @@
 using Tests;
-using Serializable;
 
 namespace Game;
 
-public class Quest(GameEntity assignedTo, SerializableQuest serializableQuest) : IQuestComponent, ICompletableComponent
+public class Quest(GameEntity assignedTo, QuestComponent serializableQuest) : IQuestComponent, ICompletableComponent
 {
   public GameEntity AssignedTo = assignedTo;
 
@@ -23,7 +22,7 @@ public class Quest(GameEntity assignedTo, SerializableQuest serializableQuest) :
     }
   }
 
-  public Quest(GameEntity assignedTo, string filePath) : this(assignedTo, FileController.GetFileDeserialized<SerializableQuest>(filePath) ?? throw new Exception($"Invalid file path for creating Quest. File path: {filePath}"))
+  public Quest(GameEntity assignedTo, string filePath) : this(assignedTo, FileController.GetFileDeserialized<QuestComponent>(filePath) ?? throw new Exception($"Invalid file path for creating Quest. File path: {filePath}"))
   {
 
   }

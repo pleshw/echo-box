@@ -10,7 +10,7 @@ public static class Program
   {
     DialogueTests.TestRemakeAllDialogues();
 
-    var test = FileController.GetFileDeserialized<QuestDialogueComponent>("C:/Users/Usuário/Desktop/echo-box/data/dialogue/test/c00707b8-16d2-48af-a0a5-1d05c553a5f8.json");
+    var test = FileController.GetFileDeserialized<MenuDialogueComponent>("C:/Users/Usuário/Desktop/echo-box/data/dialogue/test/5ba44ffa-f02b-4bf3-a122-8a08ad9b8a8a.json");
 
     System.Console.WriteLine(test);
 

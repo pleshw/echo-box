@@ -12,10 +12,12 @@ public enum TaskType
 
 public enum MenuType
 {
+  NONE,
   SHOP,
   CRAFT,
   PICK_ITEM
 }
+
 
 [Flags]
 public enum ItemTypes

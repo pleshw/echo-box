@@ -15,9 +15,8 @@ public static class FileController
   public static readonly JsonSerializerOptions JsonSerializerOptions = new()
   {
     WriteIndented = true,
-    PropertyNameCaseInsensitive = true,
     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-    Converters = { new JsonVector2Converter(), new JsonComponentConverter(), new JsonDialogueConverter() }
+    Converters = { new JsonComponentConverter(), new JsonVector2Converter(), new JsonDialogueConverter() }
   };
 
   public static string ApplicationBase => AppContext.BaseDirectory;

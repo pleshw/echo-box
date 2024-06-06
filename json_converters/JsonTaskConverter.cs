@@ -1,6 +1,5 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Serializable;
 using Game;
 
 
@@ -22,12 +21,12 @@ public class JsonTaskConverter : JsonConverter<ITaskComponent>
 
       return (TaskType)type switch
       {
-        TaskType.COLLECT => JsonSerializer.Deserialize<SerializableCollectTask>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskCollection"),
-        TaskType.HUNT => JsonSerializer.Deserialize<SerializableHuntTask>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskHunt"),
-        TaskType.FIND => JsonSerializer.Deserialize<SerializableFindTask>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskFind"),
-        TaskType.ESCORT => JsonSerializer.Deserialize<SerializableEscortTask>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskEscort"),
-        TaskType.REACH_POSITION => JsonSerializer.Deserialize<SerializableReachPositionTask>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskReachPosition"),
-        TaskType.REACH_ENTITY => JsonSerializer.Deserialize<SerializableReachEntityTask>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskReachNPC"),
+        TaskType.COLLECT => JsonSerializer.Deserialize<CollectTaskComponent>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskCollection"),
+        TaskType.HUNT => JsonSerializer.Deserialize<HuntTaskComponent>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskHunt"),
+        TaskType.FIND => JsonSerializer.Deserialize<FindTaskComponent>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskFind"),
+        TaskType.ESCORT => JsonSerializer.Deserialize<EscortTaskComponent>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskEscort"),
+        TaskType.REACH_POSITION => JsonSerializer.Deserialize<ReachPositionTaskComponent>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskReachPosition"),
+        TaskType.REACH_ENTITY => JsonSerializer.Deserialize<ReachEntityTaskComponent>(rootText, options) ?? throw new JsonException("Failed to convert for type QuestStepTaskReachNPC"),
         _ => throw new JsonException("Unknown type"),
       };
     }
@@ -40,22 +39,22 @@ public class JsonTaskConverter : JsonConverter<ITaskComponent>
     // Determine the concrete type and serialize accordingly
     switch (value)
     {
-      case SerializableCollectTask a:
+      case CollectTaskComponent a:
         JsonSerializer.Serialize(writer, a, options);
         break;
-      case SerializableHuntTask a:
+      case HuntTaskComponent a:
         JsonSerializer.Serialize(writer, a, options);
         break;
-      case SerializableFindTask a:
+      case FindTaskComponent a:
         JsonSerializer.Serialize(writer, a, options);
         break;
-      case SerializableEscortTask a:
+      case EscortTaskComponent a:
         JsonSerializer.Serialize(writer, a, options);
         break;
-      case SerializableReachPositionTask a:
+      case ReachPositionTaskComponent a:
         JsonSerializer.Serialize(writer, a, options);
         break;
-      case SerializableReachEntityTask a:
+      case ReachEntityTaskComponent a:
         JsonSerializer.Serialize(writer, a, options);
         break;
       case null:

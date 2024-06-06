@@ -23,6 +23,16 @@ public class PlayerEntity : GameEntity
       Items = [],
       MaxSize = 10
     });
+
+    AddComponent(new EntityAttributesComponent
+    {
+      Agility = new() { Level = 3 },
+      Dexterity = new() { Level = 3 },
+      Intelligence = new() { Level = 3 },
+      Luck = new() { Level = 3 },
+      Strength = new() { Level = 3 },
+      Vitality = new() { Level = 3 }
+    });
   }
 
   public PlayerEntity(string uniqueName, List<IComponent> components) : base(uniqueName, components)
@@ -31,7 +41,7 @@ public class PlayerEntity : GameEntity
   }
 
   [JsonIgnore]
-  public override List<Type> RequiredComponents => [typeof(IPositionComponent), typeof(IDisplayNameComponent), typeof(IInventoryComponent)];
+  public override List<Type> RequiredComponents => [typeof(IPositionComponent), typeof(IDisplayNameComponent), typeof(IEntityAttributesComponent), typeof(IInventoryComponent)];
 
   public override IComponent Clone()
   {

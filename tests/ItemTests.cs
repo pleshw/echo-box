@@ -1,65 +1,120 @@
-using Serializable;
 using Game;
 
 namespace Tests;
 
 public static class ItemTests
 {
-  public static readonly SerializableItem SerializableConsumableItem = new()
+  public static readonly ItemComponent SerializableConsumableItem = new()
   {
     Id = Guid.NewGuid(),
     ItemType = ItemTypes.CONSUMABLE,
     DisplayName = "Test Consumable",
     UniqueName = "TestConsumable",
+    RequiredLevel = 0,
 
     Description = "A Consumable for testing purposes",
-    ImageFilePath = "test/image/filepath",
+    DisplayImage = "test/image/filepath",
   };
 
-  public static readonly SerializableItem SerializableArmorItem = new()
+  public static readonly ItemComponent SerializableArmorItem = new()
   {
     Id = Guid.NewGuid(),
     ItemType = ItemTypes.ARMOR,
     DisplayName = "Test Armor",
     UniqueName = "TestArmor",
-
+    RequiredLevel = 0,
     Description = "A Armor for testing purposes",
-    ImageFilePath = "test/image/filepath",
+    DisplayImage = "test/image/filepath",
   };
 
-  public static readonly SerializableItem SerializableWeaponItem = new()
+  public static readonly ItemComponent SerializableWeaponItem = new()
   {
     Id = Guid.NewGuid(),
     ItemType = ItemTypes.WEAPON,
     DisplayName = "Test Weapon",
     UniqueName = "TestWeapon",
-
+    RequiredLevel = 0,
     Description = "A Weapon for testing purposes",
-    ImageFilePath = "test/image/filepath",
+    DisplayImage = "test/image/filepath",
   };
 
-  public static readonly SerializableItem SerializableAccessoryItem = new()
+  public static readonly ItemComponent SerializableAccessoryItem = new()
   {
     Id = Guid.NewGuid(),
     ItemType = ItemTypes.ACCESSORY,
     DisplayName = "Test Accessory",
     UniqueName = "TestAccessory",
-
+    RequiredLevel = 0,
     Description = "A Accessory for testing purposes",
-    ImageFilePath = "test/image/filepath",
+    DisplayImage = "test/image/filepath",
   };
 
-  public static readonly SerializableItem SerializableAllUsesItem = new()
+  public static readonly ItemComponent SerializableCraftedItemComponentAccessory = new()
+  {
+    Id = Guid.NewGuid(),
+    ItemType = ItemTypes.ACCESSORY,
+    DisplayName = "Test Accessory Input",
+    UniqueName = "TestAccessoryInput",
+    RequiredLevel = 0,
+    Description = "A AccessoryInput for testing purposes",
+    DisplayImage = "test/image/filepath",
+  };
+
+  public static readonly ItemComponent SerializableCraftedItemComponentArmor = new()
+  {
+    Id = Guid.NewGuid(),
+    ItemType = ItemTypes.ARMOR,
+    DisplayName = "Test Armor Input",
+    UniqueName = "TestArmorInput",
+    RequiredLevel = 0,
+    Description = "A ArmorInput for testing purposes",
+    DisplayImage = "test/image/filepath",
+  };
+
+  public static readonly ItemComponent SerializableCraftedItemComponentConsumable = new()
+  {
+    Id = Guid.NewGuid(),
+    ItemType = ItemTypes.CONSUMABLE,
+    DisplayName = "Test Consumable Input",
+    UniqueName = "TestConsumableInput",
+    RequiredLevel = 0,
+    Description = "A ConsumableInput for testing purposes",
+    DisplayImage = "test/image/filepath",
+  };
+
+  public static readonly ItemComponent SerializableCraftedAccessoryItem = new()
+  {
+    Id = Guid.NewGuid(),
+    ItemType = ItemTypes.ACCESSORY,
+    DisplayName = "Test Crafted Accessory",
+    UniqueName = "TestCraftedAccessory",
+    RequiredLevel = 33,
+    Description = "A Accessory for crafting purposes",
+    DisplayImage = "test/image/filepath",
+  };
+
+  public static readonly ItemComponent SerializableAllUsesItem = new()
   {
     Id = Guid.NewGuid(),
     ItemType = ItemTypes.ACCESSORY | ItemTypes.ARMOR | ItemTypes.WEAPON | ItemTypes.CONSUMABLE,
     DisplayName = "Test All Uses",
     UniqueName = "TestAllUses",
-
+    RequiredLevel = 0,
     Description = "A All Uses for testing purposes",
-    ImageFilePath = "test/image/filepath",
+    DisplayImage = "test/image/filepath",
   };
 
-  public static readonly List<SerializableItem> AllTestItems = [SerializableConsumableItem, SerializableArmorItem, SerializableWeaponItem, SerializableAccessoryItem, SerializableAllUsesItem];
+  public static readonly CraftItemComponent SerializableCraftItemSlot = new()
+  {
+    InputItemList = [SerializableCraftedItemComponentAccessory, SerializableCraftedItemComponentArmor, SerializableCraftedItemComponentConsumable],
+    IsHidden = false,
+    Price = 100.0f,
+    Item = SerializableCraftedAccessoryItem,
+    FrameImage = SerializableCraftedAccessoryItem,
+    RequiredLevel = SerializableCraftedAccessoryItem.RequiredLevel,
+  };
 
+  public static readonly List<ItemComponent> AllTestItems = [SerializableConsumableItem, SerializableArmorItem, SerializableWeaponItem, SerializableAccessoryItem, SerializableAllUsesItem];
+
+  public static readonly List<IItemFrameComponent> AllTestItemFrames = [SerializableCraftItemSlot];
 }

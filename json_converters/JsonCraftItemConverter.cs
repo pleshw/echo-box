@@ -6,9 +6,9 @@ using Game;
 
 namespace JSONConverters;
 
-public class JsonComponentConverter : JsonConverter<IComponent>
+public class JsonCraftItemConverter : JsonConverter<ICraftItemComponent>
 {
-  public override IComponent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+  public override ICraftItemComponent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
   {
     using JsonDocument doc = JsonDocument.ParseValue(ref reader);
     if (!doc.RootElement.TryGetProperty("type", out JsonElement typeElement))
@@ -18,10 +18,10 @@ public class JsonComponentConverter : JsonConverter<IComponent>
 
     string typeName = typeElement.GetString() ?? throw new JsonException($"Unknown type: {typeElement.GetString()}"); ;
     Type type = Type.GetType(typeName) ?? throw new JsonException($"Unknown type: {typeName}");
-    return JsonSerializer.Deserialize(doc.RootElement.GetRawText(), type, options) as IComponent ?? throw new JsonException($"Invalid Conversion for: {typeName}"); ;
+    return JsonSerializer.Deserialize(doc.RootElement.GetRawText(), type, options) as ICraftItemComponent ?? throw new JsonException($"Invalid Conversion for: {typeName}"); ;
   }
 
-  public override void Write(Utf8JsonWriter writer, IComponent value, JsonSerializerOptions options)
+  public override void Write(Utf8JsonWriter writer, ICraftItemComponent value, JsonSerializerOptions options)
   {
     writer.WriteStartObject();
     writer.WriteString("type", value.GetType().AssemblyQualifiedName);

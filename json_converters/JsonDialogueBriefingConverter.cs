@@ -20,11 +20,13 @@ public class JsonDialogueBriefingConverter : JsonConverter<IDialogueBriefingComp
     }
 
     Guid dialogueId = jsonDialogueId.GetGuid();
+    IDialogueComponent fullDialogue = DialogueTests.AllTestDialogues.Find(d => d.Id == dialogueId) ?? throw new JsonException($"Dialogue not found. Id: {dialogueId}");
 
     return new DialogueBriefingComponent
     {
       Id = dialogueId,
-      Title = root.GetProperty("title").GetString() ?? throw new JsonException($"Invalid title for dialogue {dialogueId}")
+      Title = root.GetProperty("title").GetString() ?? throw new JsonException($"Invalid title for dialogue {dialogueId}"),
+      IsHidden = fullDialogue.IsHidden
     };
   }
 

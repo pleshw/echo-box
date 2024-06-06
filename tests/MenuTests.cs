@@ -1,11 +1,10 @@
-using Serializable;
-using System.Numerics;
+using Game;
 
 namespace Tests;
 
 public static class MenuTests
 {
-  public static readonly SerializableCollectTask SerializableCollectTask = new()
+  public static readonly CollectTaskComponent SerializableCollectTask = new()
   {
     Id = Guid.NewGuid(),
     Title = "Test - Serializable Collect Task",

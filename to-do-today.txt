@@ -1,6 +1,3 @@
-Prepare a dialogue component that opens up a menu
-Prepare a Menu component that have the menu type and id
-Prepare the menu json converter for each menu type, just like task component
 Prepare a visual dialogue component that have portrait images for listener and speaker
 Add visual dialogue component to dialogue json converter 
 Add visual dialogue quest and menu components

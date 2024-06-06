@@ -1,11 +1,11 @@
-using Serializable;
+using Game;
 using System.Numerics;
 
 namespace Tests;
 
 public static class QuestTests
 {
-  public static readonly SerializableCollectTask SerializableCollectTask = new()
+  public static readonly CollectTaskComponent SerializableCollectTask = new()
   {
     Id = Guid.NewGuid(),
     Title = "Test - Serializable Collect Task",
@@ -14,7 +14,7 @@ public static class QuestTests
     Amount = 3,
   };
 
-  public static readonly SerializableEscortTask SerializableEscortTask = new()
+  public static readonly EscortTaskComponent SerializableEscortTask = new()
   {
     Id = Guid.NewGuid(),
     Title = "Test - Serializable Escort Task",
@@ -24,7 +24,7 @@ public static class QuestTests
     Companion = EntityTests.CompanionActor
   };
 
-  public static readonly SerializableFindTask SerializableFindTask = new()
+  public static readonly FindTaskComponent SerializableFindTask = new()
   {
     Id = Guid.NewGuid(),
     Title = "Test - Serializable Find Task",
@@ -32,7 +32,7 @@ public static class QuestTests
     TargetItem = ItemTests.SerializableAllUsesItem
   };
 
-  public static readonly SerializableHuntTask SerializableHuntTask = new()
+  public static readonly HuntTaskComponent SerializableHuntTask = new()
   {
     Id = Guid.NewGuid(),
     Title = "Test - Serializable Hunt Task",
@@ -41,7 +41,7 @@ public static class QuestTests
     Amount = 3
   };
 
-  public static readonly SerializableReachEntityTask SerializableReachEntityTask = new()
+  public static readonly ReachEntityTaskComponent SerializableReachEntityTask = new()
   {
     Id = Guid.NewGuid(),
     Title = "Test - Serializable Reach Entity Task",
@@ -50,7 +50,7 @@ public static class QuestTests
     TargetDialogue = DialogueTests.DialogueComponentWithoutContinuation
   };
 
-  public static readonly SerializableReachPositionTask SerializableReachPositionTask = new()
+  public static readonly ReachPositionTaskComponent SerializableReachPositionTask = new()
   {
     Id = Guid.NewGuid(),
     Title = "Test - Serializable Reach Position Task",
@@ -59,7 +59,7 @@ public static class QuestTests
     Size = (Vector2.One * 30) with { X = 3 },
   };
 
-  public static readonly SerializableQuest SerializableQuestAllTasks = new()
+  public static readonly QuestComponent SerializableQuestAllTasks = new()
   {
     Id = new Guid("ff525de8-5ea8-46e5-9518-963c74a09faf"),
     Title = "Preparing",
@@ -67,14 +67,14 @@ public static class QuestTests
     Tasks = [SerializableCollectTask, SerializableEscortTask, SerializableFindTask, SerializableHuntTask, SerializableReachEntityTask, SerializableReachPositionTask]
   };
 
-  public static readonly SerializableQuest SerializableQuestCollectSomethings = new()
+  public static readonly QuestComponent SerializableQuestCollectSomethings = new()
   {
     Id = new Guid("cf96482a-3bc8-46fa-b30f-1fc6d41aca4f"),
     Title = "Preparing",
     Description = "Learn all step types of quest",
     Tasks = [
       SerializableCollectTask,
-       new SerializableCollectTask()
+       new CollectTaskComponent()
         {
           Id = Guid.NewGuid(),
           Title = "Test - Instantiated Task",
@@ -85,12 +85,12 @@ public static class QuestTests
   ]
   };
 
-  public static readonly List<SerializableQuest> AllQuests = [SerializableQuestAllTasks, SerializableQuestCollectSomethings];
+  public static readonly List<QuestComponent> AllQuests = [SerializableQuestAllTasks, SerializableQuestCollectSomethings];
 
   public static void TestRemakeAllQuests()
   {
     FileController.CreateProjectFile(
-          new ProjectFileInfo<SerializableQuest>()
+          new ProjectFileInfo<QuestComponent>()
           {
             FolderPath = "quest/test/",
             FileName = SerializableQuestAllTasks.Id.ToString() + ".json",
@@ -100,7 +100,7 @@ public static class QuestTests
   }
 
 
-  public static SerializableQuest GetQuestById(Guid questId)
+  public static QuestComponent GetQuestById(Guid questId)
   {
     return AllQuests.Where(q => q.Id == questId).FirstOrDefault() ?? throw new Exception($"Invalid deserialization. Quest {questId} does not exist.");
   }
