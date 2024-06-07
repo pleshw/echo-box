@@ -23,6 +23,18 @@ public class NonPlayableEntity : GameEntity
       Items = [],
       MaxSize = 10
     });
+
+    AddComponent(new AliveComponent
+    {
+      IsAlive = true
+    });
+
+    AddComponent(new RelationshipComponent
+    {
+      CompletedDialogs = [],
+      NotSeenDialogs = [],
+      Level = 0,
+    });
   }
 
   public NonPlayableEntity(string uniqueName, List<IComponent> components) : base(uniqueName, components)

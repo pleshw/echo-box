@@ -1,0 +1,15 @@
+Run the GameController to get the lists of all the entities, quests, dialogues etc 
+
+Test Relationship serialization
+Create a ILevelComponent Relationship and test serialization
+Test ILevelComponent Relationship serialization
+
+Validate Entity Serialization
+Create new Controller classes to make real Quests and dialogues(Each one have to be its own story and have effect in the world)
+  Create a controller class for in game Quests
+  Create a controller class for player game Entity
+  Create an base class derived from GameEntity for NPCs that have a base dialogue(get by id) that can change
+  Instantiate and test an NPC that changes the base dialogue based on game conditions
+  Test NPCs serialization
+  Create a controller class to instantiate a new NPC by id  
+  Create the first game NPC(Jullia) and set the base initial dialogue and custom initial dialogues based on conditions

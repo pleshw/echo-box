@@ -2,15 +2,9 @@ using System.Numerics;
 
 namespace Game;
 
-public record class ReachPositionTaskComponent : IReachPositionTaskComponent
+public record class ReachPositionTaskComponent : TaskComponent, IReachPositionTaskComponent
 {
-  public TaskType TaskType { get; } = TaskType.REACH_POSITION;
-
-  public required Guid Id { get; set; }
-
-  public required string Title { get; set; }
-
-  public required string Description { get; set; }
+  public override TaskType TaskType { get; } = TaskType.REACH_POSITION;
 
   public required Vector2 Size { get; set; }
 

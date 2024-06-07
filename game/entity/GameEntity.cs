@@ -46,6 +46,11 @@ public abstract class GameEntity : IUniqueNameComponent
     _components[component.GetType()] = component;
   }
 
+  public void AddComponent<T>(T component) where T : IComponent
+  {
+    _components[component.GetType()] = component;
+  }
+
   [JsonIgnore]
   public bool HasRequiredComponents
   {

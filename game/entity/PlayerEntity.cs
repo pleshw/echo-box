@@ -33,6 +33,18 @@ public class PlayerEntity : GameEntity
       Strength = new() { Level = 3 },
       Vitality = new() { Level = 3 }
     });
+
+    AddComponent(new AliveComponent
+    {
+      IsAlive = true
+    });
+
+    AddComponent(new RelationshipComponent
+    {
+      CompletedDialogs = [],
+      NotSeenDialogs = [],
+      Level = 0,
+    });
   }
 
   public PlayerEntity(string uniqueName, List<IComponent> components) : base(uniqueName, components)
@@ -41,7 +53,13 @@ public class PlayerEntity : GameEntity
   }
 
   [JsonIgnore]
-  public override List<Type> RequiredComponents => [typeof(IPositionComponent), typeof(IDisplayNameComponent), typeof(IEntityAttributesComponent), typeof(IInventoryComponent)];
+  public override List<Type> RequiredComponents => [
+    typeof(IPositionComponent),
+    typeof(IDisplayNameComponent),
+    typeof(IAliveComponent),
+    typeof(IEntityAttributesComponent),
+    typeof(IInventoryComponent)
+  ];
 
   public override IComponent Clone()
   {

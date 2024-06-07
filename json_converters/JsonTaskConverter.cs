@@ -57,6 +57,9 @@ public class JsonTaskConverter : JsonConverter<ITaskComponent>
       case ReachEntityTaskComponent a:
         JsonSerializer.Serialize(writer, a, options);
         break;
+      case TaskComponent a:
+        JsonSerializer.Serialize(writer, a, options);
+        break;
       case null:
         throw new JsonException("Value is null");
       default:

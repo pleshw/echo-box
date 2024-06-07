@@ -7,24 +7,22 @@ using Tests;
 
 namespace JSONConverters;
 
-public class JsonQuestDialogueConverter : JsonConverter<QuestDialogueComponent>
+public class JsonAssignedQuestConverter : JsonConverter<AssignedQuestComponent>
 {
-  public override QuestDialogueComponent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+  public override AssignedQuestComponent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
   {
     using JsonDocument doc = JsonDocument.ParseValue(ref reader);
-    JsonElement root = doc.RootElement;
-
-    if (!root.TryGetProperty("id", out JsonElement jsonDialogueId))
+    if (!doc.RootElement.TryGetProperty("type", out JsonElement typeElement))
     {
-      throw new JsonException("Invalid dialogue. Dialogue does not contain a valid Id.");
+      throw new JsonException("Missing type discriminator");
     }
 
-    Guid dialogueId = jsonDialogueId.GetGuid();
-
-    return (QuestDialogueComponent)DialogueTests.GetDialogueById(dialogueId);
+    string typeName = typeElement.GetString() ?? throw new JsonException($"Unknown type: {typeElement.GetString()}"); ;
+    Type type = Type.GetType(typeName) ?? throw new JsonException($"Unknown type: {typeName}");
+    return JsonSerializer.Deserialize(doc.RootElement.GetRawText(), type, options) as AssignedQuestComponent ?? throw new JsonException($"Invalid Conversion for: {typeName}"); ;
   }
 
-  public override void Write(Utf8JsonWriter writer, QuestDialogueComponent value, JsonSerializerOptions options)
+  public override void Write(Utf8JsonWriter writer, AssignedQuestComponent value, JsonSerializerOptions options)
   {
     writer.WriteStartObject();
     writer.WriteString("type", value.GetType().AssemblyQualifiedName);

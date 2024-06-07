@@ -1,25 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 
 namespace Game;
 
-public record class AssignedReachPositionTaskComponent : IAssignedReachPositionTaskComponent
+public record class AssignedReachPositionTaskComponent : ReachPositionTaskComponent, IAssignedReachPositionTaskComponent
 {
-  public TaskType TaskType { get; } = TaskType.REACH_POSITION;
-
-  public required Guid Id { get; set; }
-
-  public required string Title { get; set; }
-
-  public required string Description { get; set; }
-
-  public required Vector2 Size { get; set; }
-
-  public required Vector2 TargetPosition { get; set; }
-
-  public required GameEntity AssignedTo { get; set; }
-
-  public required DateTime StartedAt { get; set; }
-
   public bool IsReadyToComplete
   {
     get
@@ -27,6 +12,20 @@ public record class AssignedReachPositionTaskComponent : IAssignedReachPositionT
       bool isAssignedInsideTheArea = true;
       return isAssignedInsideTheArea;
     }
+  }
+
+  public required IUniqueNameComponent AssignedTo { get; set; }
+
+  public required DateTime StartedAt { get; set; }
+
+  [SetsRequiredMembers]
+  public AssignedReachPositionTaskComponent(ReachPositionTaskComponent t, IUniqueNameComponent assignedTo, DateTime startedAt)
+  {
+    Id = t.Id;
+    Title = t.Title;
+    Description = t.Description;
+    AssignedTo = assignedTo;
+    StartedAt = startedAt;
   }
 
   public void Complete()

@@ -1,29 +1,16 @@
+using System.Diagnostics.CodeAnalysis;
+using Tests;
+
 namespace Game;
 
-public record class AssignedReachEntityTaskComponent : IAssignedReachEntityTaskComponent
+public record class AssignedReachEntityTaskComponent : ReachEntityTaskComponent, IAssignedReachEntityTaskComponent
 {
-  public required GameEntity TargetEntity { get; set; }
-
-  public required IDialogueComponent TargetDialogue { get; set; }
-
-  public TaskType TaskType { get; } = TaskType.REACH_ENTITY;
-
-  public required Guid Id { get; set; }
-
-  public required string Title { get; set; }
-
-  public required string Description { get; set; }
-
-  public required GameEntity AssignedTo { get; set; }
-
-  public required DateTime StartedAt { get; set; }
-
   public bool IsReadyToComplete
   {
     get
     {
-      bool isAssignedAlive = AssignedTo.GetComponent<IAliveComponent>().IsAlive;
-      IRelationshipComponent relationWithTarget = TargetEntity.GetComponent<IRelationshipComponent>();
+      bool isAssignedAlive = GetGameEntity().GetComponent<AliveComponent>().IsAlive;
+      IRelationshipComponent relationWithTarget = TargetEntity.GetComponent<RelationshipComponent>();
 
       bool completedTargetDialogue = relationWithTarget.CompletedDialogs.Any(c => c.Id == TargetDialogue.Id);
 
@@ -31,8 +18,31 @@ public record class AssignedReachEntityTaskComponent : IAssignedReachEntityTaskC
     }
   }
 
+  public required IUniqueNameComponent AssignedTo { get; set; }
+
+  public required DateTime StartedAt { get; set; }
+
+  [SetsRequiredMembers]
+  public AssignedReachEntityTaskComponent(ReachEntityTaskComponent t, IUniqueNameComponent assignedTo, DateTime startedAt)
+  {
+    Id = t.Id;
+    Title = t.Title;
+    Description = t.Description;
+    AssignedTo = assignedTo;
+    StartedAt = startedAt;
+
+    TargetDialogue = t.TargetDialogue;
+
+    TargetEntity = t.TargetEntity;
+  }
+
   public void Complete()
   {
     throw new NotImplementedException();
+  }
+
+  public static GameEntity GetGameEntity()
+  {
+    return EntityTests.PlayerActor;
   }
 }

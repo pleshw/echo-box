@@ -108,9 +108,20 @@ public interface ICraftItemComponent : IComponent, ICanHide, IHasPrice, IItemFra
   List<IUniqueNameComponent> InputItems { get; set; }
 }
 
+public interface IHasAssignedEntity : IComponent
+{
+  IUniqueNameComponent AssignedTo { get; set; }
+}
+
+[JsonConverter(typeof(JsonQuestConverter))]
 public interface IQuestComponent : IComponent, IIdComponent, ITitleComponent, IDescriptionComponent
 {
   public List<ITaskComponent> Tasks { get; set; }
+}
+
+public interface IAssignedQuestComponent : IComponent, IIdComponent, ITitleComponent, IDescriptionComponent, IHasAssignedEntity
+{
+  public List<IAssignedTaskComponent> Tasks { get; set; }
 }
 
 public interface IHasStartComponent : IComponent
@@ -118,9 +129,10 @@ public interface IHasStartComponent : IComponent
   DateTime StartedAt { get; set; }
 }
 
-public interface IAssignedTaskComponent : IComponent, IHasStartComponent, ITaskComponent, IIdComponent, ITitleComponent, IDescriptionComponent, ICompletableComponent
+[JsonConverter(typeof(JsonAssignedTaskConverter))]
+public interface IAssignedTaskComponent : IComponent, IHasAssignedEntity, IHasStartComponent, ITaskComponent, IIdComponent, ITitleComponent, IDescriptionComponent, ICompletableComponent
 {
-  GameEntity AssignedTo { get; set; }
+
 }
 
 [JsonConverter(typeof(JsonTaskConverter))]
@@ -140,7 +152,7 @@ public interface IAssignedCollectTaskComponent : IComponent, ICollectTaskCompone
 
 public interface IEscortTaskComponent : IComponent, ITaskComponent, ITargetAreaComponent
 {
-  GameEntity Companion { get; set; }
+  IUniqueNameComponent Companion { get; set; }
 }
 
 public interface IAssignedEscortTaskComponent : IComponent, IEscortTaskComponent, IAssignedTaskComponent

@@ -1,22 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Game;
 
-public record class AssignedCollectTaskComponent : IAssignedCollectTaskComponent
+public record class AssignedCollectTaskComponent : CollectTaskComponent, IAssignedCollectTaskComponent
 {
-  public TaskType TaskType { get; } = TaskType.COLLECT;
-
-  public required Guid Id { get; set; }
-
-  public required string Title { get; set; }
-
-  public required string Description { get; set; }
-
-  public required IItemComponent TargetItem { get; set; }
-
-  public required int Amount { get; set; }
-
-  public required GameEntity AssignedTo { get; set; }
-  public required DateTime StartedAt { get; set; }
-
   public bool IsReadyToComplete
   {
     get
@@ -26,6 +13,24 @@ public record class AssignedCollectTaskComponent : IAssignedCollectTaskComponent
   }
 
   public required int AmountCollected { get; set; }
+
+  public required IUniqueNameComponent AssignedTo { get; set; }
+
+  public required DateTime StartedAt { get; set; }
+
+  [SetsRequiredMembers]
+  public AssignedCollectTaskComponent(CollectTaskComponent t, IUniqueNameComponent assignedTo, DateTime startedAt)
+  {
+    Id = t.Id;
+    Title = t.Title;
+    Description = t.Description;
+    AssignedTo = assignedTo;
+    StartedAt = startedAt;
+
+    TargetItem = t.TargetItem;
+
+    AmountCollected = 0;
+  }
 
   public void Complete()
   {

@@ -59,12 +59,14 @@ public static class QuestTests
     Size = (Vector2.One * 30) with { X = 3 },
   };
 
+  public static readonly List<ITaskComponent> AllTasks = [SerializableCollectTask, SerializableEscortTask, SerializableFindTask, SerializableHuntTask, SerializableReachEntityTask, SerializableReachPositionTask];
+
   public static readonly QuestComponent SerializableQuestAllTasks = new()
   {
     Id = new Guid("ff525de8-5ea8-46e5-9518-963c74a09faf"),
     Title = "Preparing",
     Description = "Learn all step types of quest",
-    Tasks = [SerializableCollectTask, SerializableEscortTask, SerializableFindTask, SerializableHuntTask, SerializableReachEntityTask, SerializableReachPositionTask]
+    Tasks = AllTasks
   };
 
   public static readonly QuestComponent SerializableQuestCollectSomethings = new()
@@ -82,26 +84,62 @@ public static class QuestTests
           TargetItem = ItemTests.SerializableAccessoryItem,
           Amount = 3,
         }
-  ]
+    ]
+  };
+
+  public static readonly AssignedQuestComponent SerializableAssignedQuestAllTasks = new()
+  {
+    Id = new Guid("fd0503c7-fa8c-43aa-8e3a-e876c01648e0"),
+    AssignedTo = EntityTests.PlayerActor,
+    Title = "A Quest assigned to the player Actor",
+    Description = "Learning all step types of quest",
+    Tasks = [
+      new AssignedCollectTaskComponent(SerializableCollectTask, EntityTests.PlayerActor, DateTime.Now),
+      new AssignedEscortTaskComponent(SerializableEscortTask, EntityTests.PlayerActor, DateTime.Now),
+      new AssignedFindTaskComponent(SerializableFindTask, EntityTests.PlayerActor, DateTime.Now),
+      new AssignedHuntTaskComponent(SerializableHuntTask, EntityTests.PlayerActor, DateTime.Now),
+      new AssignedReachEntityTaskComponent(SerializableReachEntityTask, EntityTests.PlayerActor, DateTime.Now),
+      new AssignedReachPositionTaskComponent(SerializableReachPositionTask, EntityTests.PlayerActor, DateTime.Now),
+    ]
   };
 
   public static readonly List<QuestComponent> AllQuests = [SerializableQuestAllTasks, SerializableQuestCollectSomethings];
+  public static readonly List<AssignedQuestComponent> AllAssignedQuests = [SerializableAssignedQuestAllTasks];
 
   public static void TestRemakeAllQuests()
   {
-    FileController.CreateProjectFile(
-          new ProjectFileInfo<QuestComponent>()
+    AllQuests.ForEach(q => FileController.CreateProjectFile(
+          new ProjectFileInfo<IQuestComponent>()
           {
             FolderPath = "quest/test/",
-            FileName = SerializableQuestAllTasks.Id.ToString() + ".json",
-            FileData = SerializableQuestAllTasks
+            FileName = q.Id.ToString() + ".json",
+            FileData = q
           }
-    );
+    ));
+
+    AllAssignedQuests.ForEach(q => FileController.CreateProjectFile(
+          new ProjectFileInfo<IAssignedQuestComponent>()
+          {
+            FolderPath = "quest/test/",
+            FileName = q.Id.ToString() + ".json",
+            FileData = q
+          }
+    ));
   }
 
 
   public static QuestComponent GetQuestById(Guid questId)
   {
     return AllQuests.Where(q => q.Id == questId).FirstOrDefault() ?? throw new Exception($"Invalid deserialization. Quest {questId} does not exist.");
+  }
+
+  public static T GetQuestById<T>(Guid questId) where T : QuestComponent
+  {
+    return AllQuests.OfType<T>().Where(q => q.Id == questId).FirstOrDefault() ?? throw new Exception($"Invalid deserialization. Quest {questId} does not exist.");
+  }
+
+  public static T GetAssignedQuestById<T>(Guid questId) where T : AssignedQuestComponent
+  {
+    return AllAssignedQuests.OfType<T>().Where(q => q.Id == questId).FirstOrDefault() ?? throw new Exception($"Invalid deserialization. Quest {questId} does not exist.");
   }
 }

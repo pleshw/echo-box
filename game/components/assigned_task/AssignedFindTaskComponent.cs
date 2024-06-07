@@ -1,22 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Game;
 
-public record class AssignedFindTaskComponent : IAssignedFindTaskComponent
+public record class AssignedFindTaskComponent : FindTaskComponent, IAssignedFindTaskComponent
 {
-  public TaskType TaskType { get; } = TaskType.FIND;
-
-  public required IItemComponent TargetItem { get; set; }
-
-  public required Guid Id { get; set; }
-
-  public required string Title { get; set; }
-
-  public required string Description { get; set; }
-
-  public required GameEntity AssignedTo { get; set; }
-
-  public required DateTime StartedAt { get; set; }
-
-
   public required int AmountCollected { get; set; }
 
   public bool IsReadyToComplete
@@ -25,6 +12,24 @@ public record class AssignedFindTaskComponent : IAssignedFindTaskComponent
     {
       return AmountCollected > 0;
     }
+  }
+
+  public required IUniqueNameComponent AssignedTo { get; set; }
+
+  public required DateTime StartedAt { get; set; }
+
+  [SetsRequiredMembers]
+  public AssignedFindTaskComponent(FindTaskComponent t, IUniqueNameComponent assignedTo, DateTime startedAt)
+  {
+    Id = t.Id;
+    Title = t.Title;
+    Description = t.Description;
+    AssignedTo = assignedTo;
+    StartedAt = startedAt;
+
+    TargetItem = t.TargetItem;
+
+    AmountCollected = 0;
   }
 
   public void Complete()

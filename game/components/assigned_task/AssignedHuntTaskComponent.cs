@@ -1,24 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Game;
 
-public record class AssignedHuntTaskComponent : IAssignedHuntTaskComponent
+public record class AssignedHuntTaskComponent : HuntTaskComponent, IAssignedHuntTaskComponent
 {
-  public TaskType TaskType { get; } = TaskType.HUNT;
-
-  public required GameEntity TargetEntity { get; set; }
-
-  public required Guid Id { get; set; }
-
-  public required string Title { get; set; }
-
-  public required string Description { get; set; }
-
-  public required int Amount { get; set; }
-
   public required int AmountKilled { get; set; }
-
-  public required GameEntity AssignedTo { get; set; }
-
-  public required DateTime StartedAt { get; set; }
 
   public bool IsReadyToComplete
   {
@@ -26,6 +12,25 @@ public record class AssignedHuntTaskComponent : IAssignedHuntTaskComponent
     {
       return AmountKilled >= Amount;
     }
+  }
+
+  public required IUniqueNameComponent AssignedTo { get; set; }
+
+  public required DateTime StartedAt { get; set; }
+
+  [SetsRequiredMembers]
+  public AssignedHuntTaskComponent(HuntTaskComponent t, IUniqueNameComponent assignedTo, DateTime startedAt)
+  {
+    Id = t.Id;
+    Title = t.Title;
+    Description = t.Description;
+    AssignedTo = assignedTo;
+    StartedAt = startedAt;
+
+    Amount = t.Amount;
+    TargetEntity = t.TargetEntity;
+
+    AmountKilled = 0;
   }
 
   public void Complete()

@@ -1,14 +1,8 @@
 namespace Game;
 
-public record class CollectTaskComponent : ICollectTaskComponent
+public record class CollectTaskComponent : TaskComponent, ICollectTaskComponent
 {
-  public TaskType TaskType { get; } = TaskType.COLLECT;
-
-  public required Guid Id { get; set; }
-
-  public required string Title { get; set; }
-
-  public required string Description { get; set; }
+  public override TaskType TaskType { get; } = TaskType.COLLECT;
 
   public required IItemComponent TargetItem { get; set; }
 

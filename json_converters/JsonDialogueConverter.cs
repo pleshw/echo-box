@@ -19,7 +19,7 @@ public class JsonDialogueConverter : JsonConverter<IDialogueComponent>
     }
 
     Guid dialogueId = jsonDialogueId.GetGuid();
-    return (QuestPortraitDialogueComponent)DialogueTests.GetDialogueById(dialogueId);
+    return DialogueTests.GetDialogueById(dialogueId);
   }
 
   public override void Write(Utf8JsonWriter writer, IDialogueComponent value, JsonSerializerOptions options)
