@@ -21,27 +21,7 @@ public class JsonQuestDialogueConverter : JsonConverter<QuestDialogueComponent>
 
     Guid dialogueId = jsonDialogueId.GetGuid();
 
-    // Determine the concrete type from the JSON data
-    if (root.TryGetProperty("quest", out JsonElement jsonQuest))
-    {
-      jsonQuest.TryGetProperty("id", out JsonElement jsonQuestId);
-      Guid questId = jsonQuestId.GetGuid();
-
-      QuestComponent dialogueQuest = QuestTests.GetQuestById(questId);
-
-      DialogueComponent componentDialogue = JsonSerializer.Deserialize(doc.RootElement.GetRawText(), typeof(DialogueComponent), options) as DialogueComponent ?? throw new JsonException($"Invalid Conversion for quest dialogue: {dialogueId}");
-      return new QuestDialogueComponent
-      {
-        Id = componentDialogue.Id,
-        Options = componentDialogue.Options,
-        Title = componentDialogue.Title,
-        Content = componentDialogue.Content,
-        AlreadyCompleted = componentDialogue.AlreadyCompleted,
-        IsReadyToComplete = componentDialogue.IsReadyToComplete,
-        Quest = dialogueQuest,
-        IsHidden = false
-      };
-    }
+    return (QuestDialogueComponent)DialogueTests.GetDialogueById(dialogueId);
 
     throw new JsonException($"'quest' property not found on \n{root.GetRawText()}");
   }
@@ -49,6 +29,7 @@ public class JsonQuestDialogueConverter : JsonConverter<QuestDialogueComponent>
   public override void Write(Utf8JsonWriter writer, QuestDialogueComponent value, JsonSerializerOptions options)
   {
     writer.WriteStartObject();
+    writer.WriteString("type", value.GetType().AssemblyQualifiedName);
 
     var propertiesNotIgnored = value.GetType()
         .GetProperties(BindingFlags.Public | BindingFlags.Instance)

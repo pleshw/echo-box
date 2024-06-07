@@ -41,6 +41,8 @@ public interface ICanHide : IComponent
 public interface IDisplayImageComponent : IComponent
 {
   string DisplayImage { get; set; }
+
+  void LoadImage();
 }
 
 public interface ITitleComponent : IComponent
@@ -94,11 +96,11 @@ public interface IHasRequiredLevel : IComponent
   int RequiredLevel { get; set; }
 }
 
-public interface IShopItemComponent : IComponent, ICanHide, IHasPrice, IItemFrameComponent, IHasAmountComponent
+[JsonConverter(typeof(JsonShopItemConverter))]
+public interface IShopItemComponent : IComponent, ICanHide, IHasPrice, IItemFrameComponent, IHasAmountComponent, IUniqueNameComponent
 {
 
 }
-
 
 [JsonConverter(typeof(JsonCraftItemConverter))]
 public interface ICraftItemComponent : IComponent, ICanHide, IHasPrice, IItemFrameComponent, IUniqueNameComponent
@@ -225,6 +227,13 @@ public interface IDialogueBriefingComponent : IComponent, ICanHide, IIdComponent
 public interface IDialogueComponent : IComponent, IDialogueBriefingComponent, ITextContentComponent, IMultipleCompletableComponent, ICancelComponent
 {
   List<IDialogueBriefingComponent> Options { get; set; }
+}
+
+public interface IPortraitDialogueComponent : IComponent, IDialogueComponent
+{
+  IDisplayImageComponent ListenerPortrait { get; set; }
+
+  IDisplayImageComponent SpeakerPortrait { get; set; }
 }
 
 public interface IMenuDialogueComponent : IComponent, IDialogueComponent

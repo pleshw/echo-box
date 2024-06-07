@@ -15,4 +15,9 @@ public record class ItemComponent : IItemComponent
   public required string DisplayImage { get; set; }
 
   public required int RequiredLevel { get; set; }
+
+  public void LoadImage()
+  {
+    throw new NotImplementedException();
+  }
 }

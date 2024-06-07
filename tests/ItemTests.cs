@@ -108,19 +108,57 @@ public static class ItemTests
   {
     InputItems = [SerializableCraftedItemComponentAccessory, SerializableCraftedItemComponentArmor, SerializableCraftedItemComponentConsumable],
     IsHidden = false,
-    Price = 100.0f,
+    Price = 0.0f,
     UniqueName = SerializableCraftedAccessoryItem.UniqueName + "Craft",
     Item = SerializableCraftedAccessoryItem,
     FrameImage = SerializableCraftedAccessoryItem,
     RequiredLevel = SerializableCraftedAccessoryItem.RequiredLevel,
   };
 
+  public static readonly ShopItemComponent SerializableShopItemSlot1 = new()
+  {
+    UniqueName = SerializableCraftedAccessoryItem.UniqueName + "ShopItem",
+    IsHidden = false,
+    Price = 150.0f,
+    Item = SerializableCraftedAccessoryItem,
+    FrameImage = SerializableCraftedAccessoryItem,
+    Amount = 10,
+    RequiredLevel = SerializableCraftedAccessoryItem.RequiredLevel,
+  };
+
+  public static readonly ShopItemComponent SerializableShopItemSlot2 = new()
+  {
+    UniqueName = SerializableCraftedAccessoryItem.UniqueName + "ShopItem",
+    IsHidden = false,
+    Price = 130.0f,
+    Item = SerializableCraftedAccessoryItem,
+    FrameImage = SerializableCraftedAccessoryItem,
+    Amount = 10,
+    RequiredLevel = SerializableCraftedAccessoryItem.RequiredLevel,
+  };
+
+  public static readonly ShopItemComponent SerializableShopItemSlot3 = new()
+  {
+    UniqueName = SerializableCraftedAccessoryItem.UniqueName + "ShopItem",
+    IsHidden = false,
+    Price = 100.0f,
+    Item = SerializableCraftedAccessoryItem,
+    FrameImage = SerializableCraftedAccessoryItem,
+    Amount = 10,
+    RequiredLevel = SerializableCraftedAccessoryItem.RequiredLevel,
+  };
+
   public static readonly List<ItemComponent> AllTestItems = [SerializableConsumableItem, SerializableArmorItem, SerializableWeaponItem, SerializableAccessoryItem, SerializableAllUsesItem];
 
-  public static readonly List<IItemFrameComponent> AllTestItemFrames = [SerializableCraftItemSlot];
+  public static readonly List<IItemFrameComponent> AllTestItemFrames = [SerializableCraftItemSlot, SerializableShopItemSlot1, SerializableShopItemSlot2, SerializableShopItemSlot3];
 
   public static ICraftItemComponent GetCraftItemByUniqueName(string uniqueName)
   {
     return AllTestItemFrames.OfType<ICraftItemComponent>().Where(d => d.UniqueName == uniqueName).FirstOrDefault() ?? throw new Exception($"Item not found. Unique Name: {uniqueName}");
+  }
+
+  public static IShopItemComponent GetShopItemByUniqueName(string uniqueName)
+  {
+    return AllTestItemFrames.OfType<IShopItemComponent>().Where(d => d.UniqueName == uniqueName).FirstOrDefault() ?? throw new Exception($"Item not found. Unique Name: {uniqueName}");
   }
 }

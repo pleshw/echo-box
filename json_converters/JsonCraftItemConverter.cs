@@ -26,6 +26,7 @@ public class JsonCraftItemConverter : JsonConverter<ICraftItemComponent>
   public override void Write(Utf8JsonWriter writer, ICraftItemComponent value, JsonSerializerOptions options)
   {
     writer.WriteStartObject();
+    writer.WriteString("type", value.GetType().AssemblyQualifiedName);
 
     var propertiesNotIgnored = value.GetType()
         .GetProperties(BindingFlags.Public | BindingFlags.Instance)

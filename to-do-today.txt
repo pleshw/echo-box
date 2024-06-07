@@ -1,4 +1,0 @@
-Prepare a visual dialogue component that have portrait images for listener and speaker
-Add visual dialogue component to dialogue json converter 
-Add visual dialogue quest and menu components
-Add those to the converter

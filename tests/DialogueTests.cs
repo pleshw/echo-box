@@ -38,7 +38,26 @@ public static class DialogueTests
     IsHidden = false,
   };
 
-  public static readonly MenuDialogueComponent DialogueComponentWithMenu = new()
+  public static readonly PortraitDialogueComponent DialogueComponentWithPortraits = new()
+  {
+    Id = new Guid("e9932be0-7cd4-49c8-8a12-b747ff4b876f"),
+    Title = "Test Dialogue With Continuation",
+    Content = "This is a test Dialogue with continuation lines.",
+    Options = [DialogueComponentWithoutContinuation, DialogueComponentWithQuest],
+    AlreadyCompleted = false,
+    IsReadyToComplete = true,
+    IsHidden = false,
+    ListenerPortrait = new DisplayImageComponent
+    {
+      DisplayImage = "test/image/filepath"
+    },
+    SpeakerPortrait = new DisplayImageComponent
+    {
+      DisplayImage = "test/image/filepath"
+    },
+  };
+
+  public static readonly MenuDialogueComponent DialogueComponentWithCraftMenu = new()
   {
     Id = new Guid("5ba44ffa-f02b-4bf3-a122-8a08ad9b8a8a"),
     Title = "Test Dialogue With Craft Menu and Continuation",
@@ -55,8 +74,69 @@ public static class DialogueTests
     },
   };
 
+  public static readonly MenuDialogueComponent DialogueComponentWithShopMenu = new()
+  {
+    Id = new Guid("aac06171-a2b2-4af2-96fa-2ff880779c55"),
+    Title = "Test Dialogue With Shop Menu and Continuation",
+    Content = "This is a test Dialogue with a shop menu and some continuation lines.",
+    Options = [DialogueComponentWithoutContinuation, DialogueComponentWithQuest],
+    AlreadyCompleted = false,
+    IsReadyToComplete = true,
+    IsHidden = false,
+    MenuComponent = new MenuShopComponent
+    {
+      DisplayName = "What are you buying?",
+      ItemList = [ItemTests.SerializableShopItemSlot1, ItemTests.SerializableShopItemSlot2, ItemTests.SerializableShopItemSlot3],
+      UniqueName = "CraftMenuDialogueComponentWithMenu"
+    },
+  };
 
-  public static readonly List<IDialogueComponent> AllTestDialogues = [DialogueComponentWithMenu, DialogueComponentWithoutContinuation, DialogueComponentWithQuest, DialogueComponentWithContinuation];
+  public static readonly MenuPortraitDialogueComponent DialogueComponentWithShopMenuAndPortrait = new()
+  {
+    Id = new Guid("49d83ba6-690c-474f-b677-642866686728"),
+    Title = "Test Dialogue With Shop Menu and Continuation",
+    Content = "This is a test Dialogue with a shop menu and some continuation lines.",
+    Options = [DialogueComponentWithoutContinuation, DialogueComponentWithQuest],
+    AlreadyCompleted = false,
+    IsReadyToComplete = true,
+    IsHidden = false,
+    MenuComponent = new MenuShopComponent
+    {
+      DisplayName = "What are you buying?",
+      ItemList = [ItemTests.SerializableShopItemSlot1, ItemTests.SerializableShopItemSlot2, ItemTests.SerializableShopItemSlot3],
+      UniqueName = "CraftMenuDialogueComponentWithMenu"
+    },
+    ListenerPortrait = new DisplayImageComponent
+    {
+      DisplayImage = "test/image/filepath"
+    },
+    SpeakerPortrait = new DisplayImageComponent
+    {
+      DisplayImage = "test/image/filepath"
+    },
+  };
+
+  public static readonly QuestPortraitDialogueComponent DialogueComponentWithQuestAndPortrait = new()
+  {
+    Id = new Guid("ee5f2945-bdf1-4792-8767-23217346f49d"),
+    Title = "Test Dialogue With Shop Menu and Continuation",
+    Content = "This is a test Dialogue with a shop menu and some continuation lines.",
+    Options = [DialogueComponentWithoutContinuation, DialogueComponentWithQuest],
+    AlreadyCompleted = false,
+    IsReadyToComplete = true,
+    IsHidden = false,
+    Quest = QuestTests.SerializableQuestAllTasks,
+    ListenerPortrait = new DisplayImageComponent
+    {
+      DisplayImage = "test/image/filepath"
+    },
+    SpeakerPortrait = new DisplayImageComponent
+    {
+      DisplayImage = "test/image/filepath"
+    },
+  };
+
+  public static readonly List<IDialogueComponent> AllTestDialogues = [DialogueComponentWithQuestAndPortrait, DialogueComponentWithShopMenuAndPortrait, DialogueComponentWithPortraits, DialogueComponentWithShopMenu, DialogueComponentWithCraftMenu, DialogueComponentWithoutContinuation, DialogueComponentWithQuest, DialogueComponentWithContinuation];
 
   public static void TestMakeCompleteDialogue()
   {
@@ -84,8 +164,25 @@ public static class DialogueTests
     FileController.CreateProjectFile(new ProjectFileInfo<IDialogueComponent>()
     {
       FolderPath = "dialogue/test/",
-      FileName = DialogueComponentWithMenu.Id.ToString() + ".json",
-      FileData = DialogueComponentWithMenu
+      FileName = DialogueComponentWithCraftMenu.Id.ToString() + ".json",
+      FileData = DialogueComponentWithCraftMenu
+    });
+
+    FileController.CreateProjectFile(new ProjectFileInfo<IDialogueComponent>()
+    {
+      FolderPath = "dialogue/test/",
+      FileName = DialogueComponentWithPortraits.Id.ToString() + ".json",
+      FileData = DialogueComponentWithPortraits
+    });
+  }
+
+  public static void TestRemakeDialogueComponentWithPortraits()
+  {
+    FileController.CreateProjectFile(new ProjectFileInfo<IDialogueComponent>()
+    {
+      FolderPath = "dialogue/test/",
+      FileName = DialogueComponentWithPortraits.Id.ToString() + ".json",
+      FileData = DialogueComponentWithPortraits
     });
   }
 

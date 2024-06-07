@@ -27,6 +27,7 @@ public class JsonVector2Converter : JsonConverter<Vector2>
   public override void Write(Utf8JsonWriter writer, Vector2 value, JsonSerializerOptions options)
   {
     writer.WriteStartObject();
+    writer.WriteString("type", value.GetType().AssemblyQualifiedName);
 
     writer.WriteNumber("x", value.X);
     writer.WriteNumber("y", value.Y);

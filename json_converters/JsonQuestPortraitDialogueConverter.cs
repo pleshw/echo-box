@@ -7,9 +7,9 @@ using Tests;
 
 namespace JSONConverters;
 
-public class JsonDialogueBriefingConverter : JsonConverter<IDialogueBriefingComponent>
+public class JsonQuestPortraitDialogueConverter : JsonConverter<QuestPortraitDialogueComponent>
 {
-  public override IDialogueBriefingComponent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+  public override QuestPortraitDialogueComponent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
   {
     using JsonDocument doc = JsonDocument.ParseValue(ref reader);
     JsonElement root = doc.RootElement;
@@ -20,18 +20,16 @@ public class JsonDialogueBriefingConverter : JsonConverter<IDialogueBriefingComp
     }
 
     Guid dialogueId = jsonDialogueId.GetGuid();
-    return DialogueTests.GetDialogueById(dialogueId);
+
+    return (QuestPortraitDialogueComponent)DialogueTests.GetDialogueById(dialogueId);
   }
 
-  /// Write DialogueBriefingComponent exposed properties
-  public override void Write(Utf8JsonWriter writer, IDialogueBriefingComponent value, JsonSerializerOptions options)
+  public override void Write(Utf8JsonWriter writer, QuestPortraitDialogueComponent value, JsonSerializerOptions options)
   {
     writer.WriteStartObject();
     writer.WriteString("type", value.GetType().AssemblyQualifiedName);
 
-    IDialogueBriefingComponent valueAsBriefing = value;
-
-    var propertiesNotIgnored = typeof(DialogueBriefingComponent)
+    var propertiesNotIgnored = value.GetType()
         .GetProperties(BindingFlags.Public | BindingFlags.Instance)
         .Where(prop => !Attribute.IsDefined(prop, typeof(JsonIgnoreAttribute)));
 
@@ -46,7 +44,7 @@ public class JsonDialogueBriefingConverter : JsonConverter<IDialogueBriefingComp
       }
 
       writer.WritePropertyName(propertyName);
-      JsonSerializer.Serialize(writer, prop.GetValue(valueAsBriefing), prop.PropertyType, options);
+      JsonSerializer.Serialize(writer, prop.GetValue(value), prop.PropertyType, options);
     }
 
     writer.WriteEndObject();

@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Game;
+using Tests;
 
 
 namespace JSONConverters;
@@ -18,8 +19,7 @@ public class JsonDialogueConverter : JsonConverter<IDialogueComponent>
     }
 
     Guid dialogueId = jsonDialogueId.GetGuid();
-
-    return JsonSerializer.Deserialize(root.GetRawText(), typeof(IDialogueComponent), options) as IDialogueComponent ?? throw new JsonException($"Invalid Conversion for dialogue {dialogueId}.");
+    return (QuestPortraitDialogueComponent)DialogueTests.GetDialogueById(dialogueId);
   }
 
   public override void Write(Utf8JsonWriter writer, IDialogueComponent value, JsonSerializerOptions options)
@@ -27,10 +27,19 @@ public class JsonDialogueConverter : JsonConverter<IDialogueComponent>
     /// O switch tem que ir da classe principal para a base
     switch (value)
     {
+      case MenuPortraitDialogueComponent a:
+        JsonSerializer.Serialize(writer, a, options);
+        break;
+      case QuestPortraitDialogueComponent a:
+        JsonSerializer.Serialize(writer, a, options);
+        break;
       case MenuDialogueComponent a:
         JsonSerializer.Serialize(writer, a, options);
         break;
       case QuestDialogueComponent a:
+        JsonSerializer.Serialize(writer, a, options);
+        break;
+      case PortraitDialogueComponent a:
         JsonSerializer.Serialize(writer, a, options);
         break;
       case DialogueComponent a:

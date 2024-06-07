@@ -30,6 +30,7 @@ public class JsonDisplayImageConverter : JsonConverter<IDisplayImageComponent>
   public override void Write(Utf8JsonWriter writer, IDisplayImageComponent value, JsonSerializerOptions options)
   {
     writer.WriteStartObject();
+    writer.WriteString("type", value.GetType().AssemblyQualifiedName);
 
     // Get properties defined in the interface
     var properties = typeof(IDisplayImageComponent).GetProperties(BindingFlags.Public | BindingFlags.Instance);

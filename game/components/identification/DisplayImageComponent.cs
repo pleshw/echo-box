@@ -7,4 +7,9 @@ namespace Game;
 public class DisplayImageComponent : IDisplayImageComponent
 {
   public required string DisplayImage { get; set; }
+
+  public void LoadImage()
+  {
+    throw new NotImplementedException();
+  }
 }

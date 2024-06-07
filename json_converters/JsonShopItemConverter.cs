@@ -7,31 +7,28 @@ using Tests;
 
 namespace JSONConverters;
 
-public class JsonDialogueBriefingConverter : JsonConverter<IDialogueBriefingComponent>
+public class JsonShopItemConverter : JsonConverter<IShopItemComponent>
 {
-  public override IDialogueBriefingComponent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+  public override IShopItemComponent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
   {
     using JsonDocument doc = JsonDocument.ParseValue(ref reader);
     JsonElement root = doc.RootElement;
 
-    if (!root.TryGetProperty("id", out JsonElement jsonDialogueId))
+    if (!root.TryGetProperty("uniqueName", out JsonElement jsonUniqueName))
     {
-      throw new JsonException("Invalid dialogue. Dialogue does not contain a valid Id.");
+      throw new JsonException("Invalid item uniqueName. Item does not have a UniqueName property.");
     }
 
-    Guid dialogueId = jsonDialogueId.GetGuid();
-    return DialogueTests.GetDialogueById(dialogueId);
+    string uniqueName = jsonUniqueName.GetString() ?? throw new JsonException("Invalid item uniqueName. Item does not have a UniqueName property.");
+    return ItemTests.GetShopItemByUniqueName(uniqueName);
   }
 
-  /// Write DialogueBriefingComponent exposed properties
-  public override void Write(Utf8JsonWriter writer, IDialogueBriefingComponent value, JsonSerializerOptions options)
+  public override void Write(Utf8JsonWriter writer, IShopItemComponent value, JsonSerializerOptions options)
   {
     writer.WriteStartObject();
     writer.WriteString("type", value.GetType().AssemblyQualifiedName);
 
-    IDialogueBriefingComponent valueAsBriefing = value;
-
-    var propertiesNotIgnored = typeof(DialogueBriefingComponent)
+    var propertiesNotIgnored = value.GetType()
         .GetProperties(BindingFlags.Public | BindingFlags.Instance)
         .Where(prop => !Attribute.IsDefined(prop, typeof(JsonIgnoreAttribute)));
 
@@ -46,7 +43,7 @@ public class JsonDialogueBriefingConverter : JsonConverter<IDialogueBriefingComp
       }
 
       writer.WritePropertyName(propertyName);
-      JsonSerializer.Serialize(writer, prop.GetValue(valueAsBriefing), prop.PropertyType, options);
+      JsonSerializer.Serialize(writer, prop.GetValue(value), prop.PropertyType, options);
     }
 
     writer.WriteEndObject();
