@@ -37,13 +37,14 @@ public class NonPlayableEntity : GameEntity
     });
   }
 
+  [JsonConstructor]
   public NonPlayableEntity(string uniqueName, List<IComponent> components) : base(uniqueName, components)
   {
 
   }
 
   [JsonIgnore]
-  public override List<Type> RequiredComponents => [typeof(IPositionComponent), typeof(IDisplayNameComponent), typeof(IInventoryComponent)];
+  public override List<Type> RequiredComponents => [typeof(PositionComponent), typeof(DisplayNameComponent), typeof(InventoryComponent)];
 
   public override IComponent Clone()
   {
