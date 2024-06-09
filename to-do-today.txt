@@ -1,4 +1,6 @@
-Run the GameController to get the lists of all the entities, quests, dialogues etc 
+Create a class with the list of Stage Entities, Quests and Dialogues
+When deserialize dialogue instantiate everything done problem solved
+Run the GameController to get the lists of all the entities, quests, dialogues etc in the stage
 
 Test Relationship serialization
 Create a ILevelComponent Relationship and test serialization

@@ -5,7 +5,7 @@ using Game;
 
 namespace JSONConverters;
 
-public class JsonAssignedTaskConverter : JsonConverter<IAssignedTaskComponent>
+public class JsonBaseAssignedTaskConverter : JsonConverter<IAssignedTaskComponent>
 {
   public override IAssignedTaskComponent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
   {

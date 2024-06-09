@@ -13,8 +13,6 @@ public record class CraftItemComponent : ICraftItemComponent
 
   public required IDisplayImageComponent FrameImage { get; set; }
 
-  public required int RequiredLevel { get; set; }
-
   public required string UniqueName { get; set; }
 
   public void Hide()

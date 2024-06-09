@@ -16,7 +16,7 @@ public static class FileController
   {
     WriteIndented = true,
     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-    Converters = { new JsonComponentConverter(), new JsonVector2Converter(), new JsonDialogueConverter() }
+    Converters = { new JsonBaseComponentConverter(), new JsonVector2Converter(), new JsonDialogueConverter() }
   };
 
   public static string ApplicationBase => AppContext.BaseDirectory;

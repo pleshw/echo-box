@@ -26,5 +26,7 @@ public enum ItemTypes
   CONSUMABLE = 1 << 1,
   ARMOR = 1 << 2,
   WEAPON = 1 << 3,
-  ACCESSORY = 1 << 4
+  ACCESSORY = 1 << 4,
+  MISC = 1 << 5,
+  QUEST = 1 << 6
 }

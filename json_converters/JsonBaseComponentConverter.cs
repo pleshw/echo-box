@@ -6,7 +6,7 @@ using Game;
 
 namespace JSONConverters;
 
-public class JsonComponentConverter : JsonConverter<IComponent>
+public class JsonBaseComponentConverter : JsonConverter<IComponent>
 {
   public override IComponent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
   {
@@ -16,9 +16,9 @@ public class JsonComponentConverter : JsonConverter<IComponent>
       throw new JsonException("Missing type discriminator");
     }
 
-    string typeName = typeElement.GetString() ?? throw new JsonException($"Unknown type: {typeElement.GetString()}"); ;
+    string typeName = typeElement.GetString() ?? throw new JsonException($"Unknown type: {typeElement.GetString()}");
     Type type = Type.GetType(typeName) ?? throw new JsonException($"Unknown type: {typeName}");
-    return JsonSerializer.Deserialize(doc.RootElement.GetRawText(), type, options) as IComponent ?? throw new JsonException($"Invalid Conversion for: {typeName}"); ;
+    return JsonSerializer.Deserialize(doc.RootElement.GetRawText(), type, options) as IComponent ?? throw new JsonException($"Invalid Conversion for: {typeName}");
   }
 
   public override void Write(Utf8JsonWriter writer, IComponent value, JsonSerializerOptions options)

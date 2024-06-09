@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using JSONConverters;
 
 namespace Game;
 
@@ -12,7 +13,7 @@ public abstract class GameEntity : IUniqueNameComponent
   [JsonIgnore]
   private readonly Dictionary<Type, IComponent> _components = [];
 
-  [JsonIgnore]
+  [JsonInclude]
   public List<IComponent> Components
   {
     get
@@ -26,6 +27,7 @@ public abstract class GameEntity : IUniqueNameComponent
     UniqueName = uniqueName;
   }
 
+  [JsonConstructor]
   public GameEntity(string uniqueName, List<IComponent> components)
   {
     UniqueName = uniqueName;

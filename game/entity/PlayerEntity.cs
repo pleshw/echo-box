@@ -1,5 +1,6 @@
 using System.Numerics;
 using System.Text.Json.Serialization;
+using JSONConverters;
 
 namespace Game;
 
@@ -7,24 +8,24 @@ public class PlayerEntity : GameEntity
 {
   public PlayerEntity(string uniqueName) : base(uniqueName)
   {
-    AddComponent(new DisplayNameComponent
+    AddComponent<IDisplayNameComponent>(new DisplayNameComponent
     {
       DisplayName = "Alice"
     });
 
-    AddComponent(new PositionComponent
+    AddComponent<IPositionComponent>(new PositionComponent
     {
       Position = Vector2.Zero
     });
 
-    AddComponent(new InventoryComponent
+    AddComponent<IInventoryComponent>(new InventoryComponent
     {
       Owner = this,
       Items = [],
-      MaxSize = 10
+      Capacity = 10
     });
 
-    AddComponent(new EntityAttributesComponent
+    AddComponent<IEntityAttributesComponent>(new EntityAttributesComponent
     {
       Agility = new() { Level = 3 },
       Dexterity = new() { Level = 3 },
@@ -47,6 +48,7 @@ public class PlayerEntity : GameEntity
     });
   }
 
+  [JsonConstructor]
   public PlayerEntity(string uniqueName, List<IComponent> components) : base(uniqueName, components)
   {
 
@@ -54,11 +56,11 @@ public class PlayerEntity : GameEntity
 
   [JsonIgnore]
   public override List<Type> RequiredComponents => [
-    typeof(IPositionComponent),
-    typeof(IDisplayNameComponent),
-    typeof(IAliveComponent),
-    typeof(IEntityAttributesComponent),
-    typeof(IInventoryComponent)
+    typeof(PositionComponent),
+    typeof(DisplayNameComponent),
+    typeof(AliveComponent),
+    typeof(EntityAttributesComponent),
+    typeof(InventoryComponent)
   ];
 
   public override IComponent Clone()

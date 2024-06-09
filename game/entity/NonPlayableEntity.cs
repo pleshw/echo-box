@@ -5,11 +5,11 @@ namespace Game;
 
 public class NonPlayableEntity : GameEntity
 {
-  public NonPlayableEntity(string uniqueName) : base(uniqueName)
+  public NonPlayableEntity(string uniqueName, string displayName) : base(uniqueName)
   {
     AddComponent(new DisplayNameComponent
     {
-      DisplayName = "Alice"
+      DisplayName = displayName
     });
 
     AddComponent(new PositionComponent
@@ -21,7 +21,7 @@ public class NonPlayableEntity : GameEntity
     {
       Owner = this,
       Items = [],
-      MaxSize = 10
+      Capacity = 10
     });
 
     AddComponent(new AliveComponent

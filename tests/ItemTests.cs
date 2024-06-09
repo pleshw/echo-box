@@ -112,7 +112,6 @@ public static class ItemTests
     UniqueName = SerializableCraftedAccessoryItem.UniqueName + "Craft",
     Item = SerializableCraftedAccessoryItem,
     FrameImage = SerializableCraftedAccessoryItem,
-    RequiredLevel = SerializableCraftedAccessoryItem.RequiredLevel,
   };
 
   public static readonly ShopItemComponent SerializableShopItemSlot1 = new()
@@ -123,7 +122,6 @@ public static class ItemTests
     Item = SerializableCraftedAccessoryItem,
     FrameImage = SerializableCraftedAccessoryItem,
     Amount = 10,
-    RequiredLevel = SerializableCraftedAccessoryItem.RequiredLevel,
   };
 
   public static readonly ShopItemComponent SerializableShopItemSlot2 = new()
@@ -134,7 +132,6 @@ public static class ItemTests
     Item = SerializableCraftedAccessoryItem,
     FrameImage = SerializableCraftedAccessoryItem,
     Amount = 10,
-    RequiredLevel = SerializableCraftedAccessoryItem.RequiredLevel,
   };
 
   public static readonly ShopItemComponent SerializableShopItemSlot3 = new()
@@ -145,7 +142,6 @@ public static class ItemTests
     Item = SerializableCraftedAccessoryItem,
     FrameImage = SerializableCraftedAccessoryItem,
     Amount = 10,
-    RequiredLevel = SerializableCraftedAccessoryItem.RequiredLevel,
   };
 
   public static readonly List<ItemComponent> AllTestItems = [SerializableConsumableItem, SerializableArmorItem, SerializableWeaponItem, SerializableAccessoryItem, SerializableAllUsesItem];

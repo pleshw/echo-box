@@ -5,7 +5,7 @@ using JSONConverters;
 namespace Game;
 
 
-[JsonConverter(typeof(JsonComponentConverter))]
+[JsonConverter(typeof(JsonBaseComponentConverter))]
 public interface IComponent
 {
 }
@@ -129,7 +129,7 @@ public interface IHasStartComponent : IComponent
   DateTime StartedAt { get; set; }
 }
 
-[JsonConverter(typeof(JsonAssignedTaskConverter))]
+[JsonConverter(typeof(JsonBaseAssignedTaskConverter))]
 public interface IAssignedTaskComponent : IComponent, IHasAssignedEntity, IHasStartComponent, ITaskComponent, IIdComponent, ITitleComponent, IDescriptionComponent, ICompletableComponent
 {
 
@@ -148,6 +148,11 @@ public interface ICollectTaskComponent : IComponent, ITaskComponent, IHasAmountC
 
 public interface IAssignedCollectTaskComponent : IComponent, ICollectTaskComponent, IAssignedTaskComponent, IAmountCollectedComponent
 {
+}
+
+public interface IStageComponent : IComponent, IUniqueNameComponent
+{
+  List<IUniqueNameComponent> EntityList { get; set; }
 }
 
 public interface IEscortTaskComponent : IComponent, ITaskComponent, ITargetAreaComponent
@@ -286,19 +291,19 @@ public interface IHasAmountComponent : IComponent
   int Amount { get; set; }
 }
 
-public interface IMaxSizeComponent : IComponent
+public interface IHasCapacityComponent : IComponent
 {
-  int MaxSize { get; set; }
+  int Capacity { get; set; }
 }
 
 
-public interface IItemFrameComponent : IComponent, IHasRequiredLevel
+public interface IItemFrameComponent : IComponent
 {
   IItemComponent Item { get; set; }
   IDisplayImageComponent FrameImage { get; set; }
 }
 
-public interface IItemSlotComponent : IComponent, IItemFrameComponent, IHasAmountComponent, IMaxSizeComponent, IHasRequiredLevel
+public interface IItemSlotComponent : IComponent, IItemFrameComponent, IHasAmountComponent, IHasCapacityComponent
 {
 }
 
@@ -306,7 +311,8 @@ public interface IEquipSlotComponent : IComponent, IUniqueNameComponent, IDescri
 {
 }
 
-public interface IInventoryComponent : IComponent, IMaxSizeComponent
+[JsonConverter(typeof(JsonBaseInventoryConverter))]
+public interface IInventoryComponent : IComponent, IHasCapacityComponent
 {
   IUniqueNameComponent Owner { get; set; }
 

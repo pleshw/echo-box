@@ -11,8 +11,6 @@ public record class ShopItemComponent : IShopItemComponent
 
   public required IDisplayImageComponent FrameImage { get; set; }
 
-  public required int RequiredLevel { get; set; }
-
   public required int Amount { get; set; }
 
   public required string UniqueName { get; set; }
