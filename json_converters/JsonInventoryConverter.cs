@@ -33,7 +33,7 @@ public class JsonInventoryConverter : JsonConverter<InventoryComponent>
                                                       .Cast<IItemSlotComponent>()
                                                       .ToList();
 
-    GameEntity inventoryOwner = EntityTests.GetEntityByUniqueName(uniqueName.UniqueName);
+    BaseEntity inventoryOwner = EntityTests.GetEntityByUniqueName(uniqueName.UniqueName);
 
     return new InventoryComponent
     {

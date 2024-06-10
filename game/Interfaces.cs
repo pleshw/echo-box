@@ -176,7 +176,7 @@ public interface IAssignedFindTaskComponent : IComponent, IFindTaskComponent, IA
 
 public interface IHuntTaskComponent : IComponent, ITaskComponent, IHasAmountComponent
 {
-  GameEntity TargetEntity { get; set; }
+  BaseEntity TargetEntity { get; set; }
 }
 
 public interface IAssignedHuntTaskComponent : IComponent, IHuntTaskComponent, IAssignedTaskComponent, IAmountKilledComponent
@@ -185,7 +185,7 @@ public interface IAssignedHuntTaskComponent : IComponent, IHuntTaskComponent, IA
 
 public interface IReachEntityTaskComponent : IComponent, ITaskComponent
 {
-  GameEntity TargetEntity { get; set; }
+  BaseEntity TargetEntity { get; set; }
 
   IDialogueComponent TargetDialogue { get; set; }
 }
@@ -374,6 +374,7 @@ public interface IAttributeListComponent : IComponent
 
 
 /// A name that can be compared. If the element is used in an item, its unique name should be 'orange', so it can be compared to other items with the same name.
+[JsonConverter(typeof(JsonBaseUniqueNameConverter))]
 public interface IUniqueNameComponent : IComponent
 {
   public string UniqueName { get; }

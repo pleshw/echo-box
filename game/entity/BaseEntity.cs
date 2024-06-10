@@ -3,7 +3,7 @@ using JSONConverters;
 
 namespace Game;
 
-public abstract class GameEntity : IUniqueNameComponent
+public abstract class BaseEntity : IUniqueNameComponent
 {
   public string UniqueName { get; set; }
 
@@ -22,13 +22,13 @@ public abstract class GameEntity : IUniqueNameComponent
     }
   }
 
-  public GameEntity(string uniqueName)
+  public BaseEntity(string uniqueName)
   {
     UniqueName = uniqueName;
   }
 
   [JsonConstructor]
-  public GameEntity(string uniqueName, List<IComponent> components)
+  public BaseEntity(string uniqueName, List<IComponent> components)
   {
     UniqueName = uniqueName;
 

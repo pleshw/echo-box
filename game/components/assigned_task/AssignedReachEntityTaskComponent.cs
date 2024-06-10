@@ -41,7 +41,7 @@ public record class AssignedReachEntityTaskComponent : ReachEntityTaskComponent,
     throw new NotImplementedException();
   }
 
-  public static GameEntity GetGameEntity()
+  public static BaseEntity GetGameEntity()
   {
     return EntityTests.PlayerActor;
   }

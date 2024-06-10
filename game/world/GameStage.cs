@@ -2,9 +2,6 @@ using System.Text.Json.Serialization;
 
 namespace Game;
 
-public abstract class GameStage : IStageComponent
+public abstract class GameStage : StageComponent
 {
-  public abstract string UniqueName { get; set; }
-
-  public abstract List<IUniqueNameComponent> EntityList { get; set; }
 }

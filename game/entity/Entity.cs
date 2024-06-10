@@ -3,9 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace Game;
 
-public class NonPlayableEntity : BaseEntity
+public class Entity : BaseEntity
 {
-  public NonPlayableEntity(string uniqueName, string displayName) : base(uniqueName)
+  public Entity(string uniqueName, string displayName) : base(uniqueName)
   {
     AddComponent(new DisplayNameComponent
     {
@@ -38,13 +38,18 @@ public class NonPlayableEntity : BaseEntity
   }
 
   [JsonConstructor]
-  public NonPlayableEntity(string uniqueName, List<IComponent> components) : base(uniqueName, components)
+  public Entity(string uniqueName, List<IComponent> components) : base(uniqueName, components)
   {
 
   }
 
   [JsonIgnore]
-  public override List<Type> RequiredComponents => [typeof(PositionComponent), typeof(DisplayNameComponent), typeof(InventoryComponent)];
+  public override List<Type> RequiredComponents => [
+    typeof(PositionComponent),
+    typeof(DisplayNameComponent),
+    typeof(AliveComponent),
+    typeof(InventoryComponent)
+  ];
 
   public override IComponent Clone()
   {

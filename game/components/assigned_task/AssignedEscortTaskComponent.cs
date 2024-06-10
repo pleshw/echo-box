@@ -37,7 +37,7 @@ public record class AssignedEscortTaskComponent : EscortTaskComponent, IAssigned
     throw new NotImplementedException();
   }
 
-  public static GameEntity GetGameEntity()
+  public static BaseEntity GetGameEntity()
   {
     return EntityTests.PlayerActor;
   }

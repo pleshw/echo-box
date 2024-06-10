@@ -11,12 +11,12 @@ public static class EntityTests
 
     public static readonly NonPlayableEntity TargetActor = new("TargetActor", "Target Test");
 
-    public static readonly List<GameEntity> AllEntities = [PlayerActor, CompanionActor, TargetActor];
+    public static readonly List<BaseEntity> AllEntities = [PlayerActor, CompanionActor, TargetActor];
 
     public static void TestRemakeAllEntities()
     {
         AllEntities.ForEach(q => FileController.CreateProjectFile(
-            new ProjectFileInfo<GameEntity>()
+            new ProjectFileInfo<BaseEntity>()
             {
                 FolderPath = "entity/test/",
                 FileName = q.UniqueName + ".json",
@@ -25,8 +25,21 @@ public static class EntityTests
         ));
     }
 
-    public static GameEntity GetEntityByUniqueName(string uniqueName)
+    public static BaseEntity GetEntityByUniqueName(string uniqueName)
     {
         return AllEntities.Where(q => q.UniqueName == uniqueName).FirstOrDefault() ?? throw new Exception($"Invalid deserialization. Entity {uniqueName} does not exist.");
+    }
+
+    public static List<BaseEntity> GetEntitiesByUniqueName(List<IUniqueNameComponent> uniqueNames)
+    {
+        return GetEntitiesByUniqueName(uniqueNames.Select(u => u.UniqueName).ToList());
+    }
+
+    public static List<BaseEntity> GetEntitiesByUniqueName(List<string> uniqueNames)
+    {
+        return uniqueNames.Select(uniqueName =>
+                  AllEntities.FirstOrDefault(q => q.UniqueName == uniqueName)
+                  ?? throw new Exception($"Invalid deserialization. Entity {uniqueName} does not exist.")
+              ).ToList();
     }
 }

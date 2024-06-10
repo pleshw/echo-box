@@ -4,7 +4,7 @@ using JSONConverters;
 
 namespace Game;
 
-public class PlayerEntity : GameEntity
+public class PlayerEntity : BaseEntity
 {
   public PlayerEntity(string uniqueName) : base(uniqueName)
   {

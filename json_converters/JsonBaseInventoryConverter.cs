@@ -14,8 +14,8 @@ public class JsonBaseInventoryConverter : JsonConverter<IInventoryComponent>
     using JsonDocument doc = JsonDocument.ParseValue(ref reader);
     JsonElement root = doc.RootElement;
 
-    string uniqueName = root.TryGetProperty("owner", out JsonElement jsonUniqueName)
-        ? jsonUniqueName.GetString() ?? throw new JsonException("Owner not set for inventory.")
+    UniqueNameComponent uniqueName = root.TryGetProperty("owner", out JsonElement jsonUniqueName)
+        ? JsonSerializer.Deserialize<UniqueNameComponent>(jsonUniqueName, options) ?? throw new JsonException("Owner not set for inventory.")
         : throw new JsonException("Owner not set for inventory.");
 
     // Assuming you need to extract more properties, for example "capacity" and "items"
@@ -33,7 +33,7 @@ public class JsonBaseInventoryConverter : JsonConverter<IInventoryComponent>
                                                       .Cast<IItemSlotComponent>()
                                                       .ToList();
 
-    GameEntity inventoryOwner = EntityTests.GetEntityByUniqueName(uniqueName);
+    BaseEntity inventoryOwner = EntityTests.GetEntityByUniqueName(uniqueName.UniqueName);
 
     return new InventoryComponent
     {
