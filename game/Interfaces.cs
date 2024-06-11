@@ -153,6 +153,35 @@ public interface IAssignedCollectTaskComponent : IComponent, ICollectTaskCompone
 public interface IStageComponent : IComponent, IUniqueNameComponent
 {
   List<IUniqueNameComponent> EntityList { get; set; }
+  IGridMapComponent GridMap { get; set; }
+}
+
+[JsonConverter(typeof(JsonBaseGridMapConverter))]
+public interface IGridMapComponent : IComponent, ICloneable
+{
+  List<IGridCellComponent> GridCells { get; set; }
+
+  int Width { get; set; }
+
+  int Height { get; set; }
+}
+
+
+[JsonConverter(typeof(JsonBaseGridCellConverter))]
+public interface IGridCellComponent : IComponent, IPositionComponent, ISizeComponent, IIndexComponent, ICloneable
+{
+
+}
+
+public interface IGridDisplayCellComponent : IComponent, IGridCellComponent
+{
+  IGridCellImageComponent GridCellImage { get; set; }
+}
+
+public interface IGridCellImageComponent : IComponent
+{
+  IDisplayImageComponent StageSprite { get; set; }
+  IDisplayImageComponent MinimapSprite { get; set; }
 }
 
 public interface IEscortTaskComponent : IComponent, ITaskComponent, ITargetAreaComponent
@@ -325,10 +354,21 @@ public interface ILevelComponent : IComponent
   int Level { get; set; }
 }
 
+public interface IIndexComponent : IComponent
+{
+  int Index { get; set; }
+}
+
+
 // Defines properties for entities with a position
 public interface IPositionComponent : IComponent
 {
   Vector2 Position { get; set; }
+}
+
+public interface ISizeComponent : IComponent
+{
+  Vector2 Size { get; set; }
 }
 
 public interface ITargetPositionComponent : IComponent
@@ -336,9 +376,8 @@ public interface ITargetPositionComponent : IComponent
   Vector2 TargetPosition { get; set; }
 }
 
-public interface ITargetAreaComponent : IComponent, ITargetPositionComponent
+public interface ITargetAreaComponent : IComponent, ISizeComponent, ITargetPositionComponent
 {
-  Vector2 Size { get; set; }
 }
 
 public interface IIdentifiableTargetComponent : IComponent

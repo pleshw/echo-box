@@ -8,15 +8,28 @@ public static class StageTests
   public static readonly StageComponent SimpleStage = new()
   {
     UniqueName = "TestStage",
-    EntityList = [.. EntityTests.AllEntities]
+    EntityList = [.. EntityTests.AllEntities],
+    GridMap = new GridMapComponent()
+    {
+      GridCells = Enumerable.Range(0, 100)
+                          .Select(i => new GridCellComponent
+                          {
+                            Position = new(i % 10, i / 10),
+                            Size = new(3, 3),
+                            Index = i
+                          } as IGridCellComponent)
+                          .ToList(),
+      Width = 10,
+      Height = 10
+    },
   };
 
-  public static readonly List<IStageComponent> AllStages = [SimpleStage];
+  public static readonly List<StageComponent> AllStages = [SimpleStage];
 
   public static void TestRemakeAllStages()
   {
     AllStages.ForEach(q => FileController.CreateProjectFile(
-        new ProjectFileInfo<IStageComponent>()
+        new ProjectFileInfo<StageComponent>()
         {
           FolderPath = "stage/test/",
           FileName = q.UniqueName + ".json",
@@ -40,6 +53,8 @@ public static class StageTests
     return uniqueNames.Select(uniqueName =>
               AllStages.FirstOrDefault(q => q.UniqueName == uniqueName)
               ?? throw new Exception($"Invalid deserialization. Entity {uniqueName} does not exist.")
-          ).ToList();
+          )
+          .Cast<IStageComponent>()
+          .ToList();
   }
 }
