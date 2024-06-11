@@ -12,6 +12,7 @@ public class GridCellComponent : IGridCellComponent
   public required Vector2 Size { get; set; }
 
   public required int Index { get; set; }
+  public required GridCellStatus Status { get; set; }
 
   public object Clone()
   {
@@ -19,7 +20,8 @@ public class GridCellComponent : IGridCellComponent
     {
       Position = Position,
       Size = Size,
-      Index = Index
+      Index = Index,
+      Status = Status
     };
   }
 }

@@ -43,7 +43,6 @@ public class PlayerEntity : BaseEntity
     AddComponent(new RelationshipComponent
     {
       CompletedDialogs = [],
-      NotSeenDialogs = [],
       Level = 0,
     });
   }
@@ -60,7 +59,8 @@ public class PlayerEntity : BaseEntity
     typeof(DisplayNameComponent),
     typeof(AliveComponent),
     typeof(EntityAttributesComponent),
-    typeof(InventoryComponent)
+    typeof(InventoryComponent),
+    typeof(RelationshipComponent)
   ];
 
   public override IComponent Clone()

@@ -30,3 +30,15 @@ public enum ItemTypes
   MISC = 1 << 5,
   QUEST = 1 << 6
 }
+
+[Flags]
+public enum GridCellStatus
+{
+  NONE = 0,
+  FREE = 1 << 1,
+  BLOCKED = 1 << 2,
+  OCCUPIED = 1 << 3,
+  VISITED = 1 << 4,
+  HIDDEN = 1 << 5,
+  HIGHLIGHTED = 1 << 6
+}

@@ -28,17 +28,20 @@ public class JsonGridCellConverter : JsonConverter<GridCellComponent>
             ? JsonSerializer.Deserialize<Vector2>(_jsonSize.GetRawText(), options)
             : throw new JsonException("Stage does not have a GridMap property.");
 
-
-    // Assuming you need to extract more properties, for example "capacity" and "items"
     int index = root.TryGetProperty("index", out JsonElement _jsonIndex)
         ? _jsonIndex.GetInt32()
         : throw new JsonException("GridMap does not have a index property set.");
+
+    int status = root.TryGetProperty("status", out JsonElement _jsonStatus)
+        ? _jsonStatus.GetInt32()
+        : throw new JsonException("GridMap does not have a status property set.");
 
     return new GridCellComponent
     {
       Position = position,
       Size = size,
-      Index = index
+      Index = index,
+      Status = (GridCellStatus)status
     };
   }
 

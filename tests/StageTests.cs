@@ -16,7 +16,8 @@ public static class StageTests
                           {
                             Position = new(i % 10, i / 10),
                             Size = new(3, 3),
-                            Index = i
+                            Index = i,
+                            Status = (GridCellStatus)((i % 7) << 1)
                           } as IGridCellComponent)
                           .ToList(),
       Width = 10,

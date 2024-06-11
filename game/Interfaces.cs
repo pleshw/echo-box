@@ -170,7 +170,7 @@ public interface IGridMapComponent : IComponent, ICloneable
 [JsonConverter(typeof(JsonBaseGridCellConverter))]
 public interface IGridCellComponent : IComponent, IPositionComponent, ISizeComponent, IIndexComponent, ICloneable
 {
-
+  GridCellStatus Status { get; set; }
 }
 
 public interface IGridDisplayCellComponent : IComponent, IGridCellComponent
@@ -295,7 +295,6 @@ public interface IQuestDialogueComponent : IComponent, IDialogueComponent
 public interface IRelationshipComponent : IComponent, ILevelComponent
 {
   List<IDialogueComponent> CompletedDialogs { get; set; }
-  List<IDialogueComponent> NotSeenDialogs { get; set; }
 }
 
 public interface ICompletableComponent : IComponent

@@ -32,7 +32,6 @@ public class NonPlayableEntity : BaseEntity
     AddComponent(new RelationshipComponent
     {
       CompletedDialogs = [],
-      NotSeenDialogs = [],
       Level = 0,
     });
   }
@@ -44,7 +43,12 @@ public class NonPlayableEntity : BaseEntity
   }
 
   [JsonIgnore]
-  public override List<Type> RequiredComponents => [typeof(PositionComponent), typeof(DisplayNameComponent), typeof(InventoryComponent)];
+  public override List<Type> RequiredComponents => [
+    typeof(PositionComponent),
+    typeof(RelationshipComponent),
+    typeof(DisplayNameComponent),
+    typeof(InventoryComponent)
+  ];
 
   public override IComponent Clone()
   {
