@@ -52,6 +52,14 @@ public class GridMapComponent : IGridMapComponent
     return GridCells[CoordToIndex(x, y)] = cellValue;
   }
 
+  public IGridCellComponent Cell(int x, int y, GridCellStatus statusValue)
+  {
+    IGridCellComponent result = GridCells[CoordToIndex(x, y)];
+    result.Status = statusValue;
+    return result;
+  }
+
+
   public IGridCellComponent Cell(int x, int y)
   {
     return GridCells[CoordToIndex(x, y)];

@@ -16,8 +16,8 @@ public static class StageBuilderTests
                           Status = GridCellStatus.HIGHLIGHTED
                         } as IGridCellComponent)
                         .ToList(),
-    Width = 3,
-    Height = 3
+    Width = 2,
+    Height = 2
   };
 
   public static readonly StageBuilderComponent TestStageBuilder = new()
@@ -44,7 +44,7 @@ public static class StageBuilderTests
 
   public static void TestRemakeAllStages()
   {
-    TestStageBuilder.ReplaceCells(new PositionComponent
+    TestStageBuilder.ReplaceArea(new PositionComponent
     {
       Position = new(0, 0)
     }, TestGridMapShape);
