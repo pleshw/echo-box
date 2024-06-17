@@ -30,13 +30,20 @@ public class StageBuilderComponent : StageComponent
     }
   }
 
-  public void ChangeStatus(ITargetAreaComponent targetArea, GridCellStatus status)
+  public void ReplaceArea(int x, int y, GridCellStatus status)
   {
-
-  }
-
-  public void ChangeStatus(int x, int y, GridCellStatus status)
-  {
-
+    ReplaceArea(new TargetAreaComponent()
+    {
+      TargetPosition = new()
+      {
+        X = x,
+        Y = y
+      },
+      Size = new()
+      {
+        X = 1,
+        Y = 1
+      }
+    }, status);
   }
 }
