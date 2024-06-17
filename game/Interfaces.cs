@@ -157,7 +157,7 @@ public interface IStageComponent : IComponent, IUniqueNameComponent
 }
 
 [JsonConverter(typeof(JsonBaseGridMapConverter))]
-public interface IGridMapComponent : IComponent, ICloneable
+public interface IGridMapComponent : IComponent, ICloneable, ICopyable
 {
   List<IGridCellComponent> GridCells { get; set; }
 
@@ -166,9 +166,14 @@ public interface IGridMapComponent : IComponent, ICloneable
   int Height { get; set; }
 }
 
+public interface ICopyable : IComponent
+{
+  void Copy(ICopyable copyable);
+}
+
 
 [JsonConverter(typeof(JsonBaseGridCellConverter))]
-public interface IGridCellComponent : IComponent, IPositionComponent, ISizeComponent, IIndexComponent, ICloneable
+public interface IGridCellComponent : IComponent, IPositionComponent, ISizeComponent, IIndexComponent, ICloneable, ICopyable
 {
   GridCellStatus Status { get; set; }
 }

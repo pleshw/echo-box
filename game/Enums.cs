@@ -22,7 +22,7 @@ public enum MenuType
 [Flags]
 public enum ItemTypes
 {
-  NONE = 0,
+  NONE = 1 << 0,
   CONSUMABLE = 1 << 1,
   ARMOR = 1 << 2,
   WEAPON = 1 << 3,
@@ -34,7 +34,7 @@ public enum ItemTypes
 [Flags]
 public enum GridCellStatus
 {
-  NONE = 0,
+  NONE = 1 << 0,
   FREE = 1 << 1,
   BLOCKED = 1 << 2,
   OCCUPIED = 1 << 3,

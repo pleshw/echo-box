@@ -32,7 +32,6 @@ public class Entity : BaseEntity
     AddComponent(new RelationshipComponent
     {
       CompletedDialogs = [],
-      NotSeenDialogs = [],
       Level = 0,
     });
   }

@@ -11,6 +11,7 @@ public static class Program
     DialogueTests.TestRemakeAllDialogues();
     QuestTests.TestRemakeAllQuests();
     StageTests.TestRemakeAllStages();
+    StageBuilderTests.TestRemakeAllStages();
     EntityTests.TestRemakeAllEntities();
 
     StageComponent? stageComponent = FileController.GetFileDeserialized<StageComponent>("C:/Users/Usuário/Desktop/echo-box/data/stage/test/TestStage.json");

@@ -1,7 +1,10 @@
+using System.Numerics;
 using System.Text.Json.Serialization;
 using JSONConverters;
 
 namespace Game;
+
+public delegate void ChangeCellAction(IGridCellComponent cell, int x, int y, int index, int count);
 
 [JsonConverter(typeof(JsonGridMapConverter))]
 public class GridMapComponent : IGridMapComponent
@@ -11,6 +14,85 @@ public class GridMapComponent : IGridMapComponent
   public required int Width { get; set; }
 
   public required int Height { get; set; }
+
+
+  public void ForEach(int startIndex, int endIndex, ChangeCellAction action)
+  {
+    if (startIndex < 0 || startIndex >= GridCells.Count)
+    {
+      throw new ArgumentOutOfRangeException(nameof(startIndex));
+    }
+
+    if (endIndex < 0 || endIndex > GridCells.Count)
+    {
+      throw new ArgumentOutOfRangeException(nameof(endIndex));
+    }
+
+    int count = 0;
+    for (int i = startIndex; i < GridCells.Count && i < endIndex; i++)
+    {
+      Vector2 cellPosition = IndexToCoord(GridCells[i].Index).Position;
+      action(GridCells[i], (int)cellPosition.X, (int)cellPosition.Y, GridCells[i].Index, count);
+      ++count;
+    }
+  }
+
+  public void ForEach(IPositionComponent startPosition, IPositionComponent endPosition, ChangeCellAction action)
+  {
+    ForEach(CoordToIndex(startPosition), CoordToIndex(endPosition), action);
+  }
+
+  public void ForEach(ChangeCellAction action)
+  {
+    ForEach(0, GridCells.Count, action);
+  }
+
+  public IGridCellComponent Cell(int x, int y, IGridCellComponent cellValue)
+  {
+    return GridCells[CoordToIndex(x, y)] = cellValue;
+  }
+
+  public IGridCellComponent Cell(int x, int y)
+  {
+    return GridCells[CoordToIndex(x, y)];
+  }
+
+  public IGridCellComponent Cell(float x, float y)
+  {
+    return GridCells[CoordToIndex(x, y)];
+  }
+
+  public IGridCellComponent Cell(IPositionComponent positionComponent)
+  {
+    return GridCells[CoordToIndex(positionComponent)];
+  }
+
+  public int CoordToIndex(float x, float y)
+  {
+    return (int)((y * Width) + x);
+  }
+
+  public int CoordToIndex(int x, int y)
+  {
+    return (y * Width) + x;
+  }
+
+  public int CoordToIndex(IPositionComponent positionComponent)
+  {
+    return CoordToIndex(positionComponent.Position.X, positionComponent.Position.Y);
+  }
+
+  public IPositionComponent IndexToCoord(int index)
+  {
+    return new PositionComponent
+    {
+      Position = new()
+      {
+        X = index % Width,
+        Y = index / Width
+      }
+    };
+  }
 
   public object Clone()
   {
@@ -27,5 +109,19 @@ public class GridMapComponent : IGridMapComponent
       Width = Width,
       Height = Height
     };
+  }
+
+  public void Copy(ICopyable copyable)
+  {
+    IGridMapComponent gridToCopy = (IGridMapComponent)copyable ?? throw new Exception($"Cannot copy from {copyable?.GetType()}.");
+
+    Width = gridToCopy.Width;
+    Height = gridToCopy.Height;
+
+    GridCells.Clear();
+    foreach (var cell in gridToCopy.GridCells)
+    {
+      GridCells.Add((IGridCellComponent)cell.Clone());
+    }
   }
 }
