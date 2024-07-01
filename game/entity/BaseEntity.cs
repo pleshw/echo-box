@@ -39,7 +39,7 @@ public abstract class BaseEntity : IUniqueNameComponent
 
     if (!HasRequiredComponents)
     {
-      throw new Exception($"Entity {uniqueName} does not have the required components.");
+      Console.WriteLine($"Entity {uniqueName} does not have the required components.");
     }
   }
 

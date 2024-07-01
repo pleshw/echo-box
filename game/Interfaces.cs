@@ -86,6 +86,20 @@ public interface IItemComponent : IComponent, IDisplayNameComponent, IUniqueName
   ItemTypes ItemType { get; set; }
 }
 
+public interface IDroppedItemComponent : IComponent, IItemComponent, IHasAmountComponent
+{
+
+}
+
+public interface ICanGatherComponent : IComponent, IHasAmountComponent
+{
+  IItemComponent Resource { get; set; }
+
+  int EffortToCollect { get; set; }
+
+  int CurrentProgress { get; set; }
+}
+
 public interface IHasPrice : IComponent
 {
   float Price { get; set; }

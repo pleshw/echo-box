@@ -1,7 +1,3 @@
-End Stage Component 
-  Replace an area
-  Change an area status
-  
 
 Create a class with the list of Stage Entities, Quests and Dialogues
 When deserialize dialogue instantiate everything done problem solved
@@ -11,7 +7,6 @@ Test Relationship serialization
 Create a ILevelComponent Relationship and test serialization
 Test ILevelComponent Relationship serialization
 
-Validate Entity Serialization
 Create new Controller classes to make real Quests and dialogues(Each one have to be its own story and have effect in the world)
   Create a controller class for in game Quests
   Create a controller class for player game Entity
