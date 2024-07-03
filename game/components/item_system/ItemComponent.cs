@@ -2,8 +2,6 @@ namespace Game;
 
 public record class ItemComponent : IItemComponent
 {
-  public required Guid Id;
-
   public ItemTypes ItemType { get; set; }
 
   public required string DisplayName { get; set; }

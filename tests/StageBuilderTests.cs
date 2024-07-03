@@ -5,6 +5,16 @@ namespace Tests;
 
 public static class StageBuilderTests
 {
+  public static readonly ItemComponent SerializableWeaponItem = new()
+  {
+    ItemType = ItemTypes.WEAPON,
+    DisplayName = "Test Weapon",
+    UniqueName = "TestWeapon",
+    RequiredLevel = 0,
+    Description = "A Weapon for testing purposes",
+    DisplayImage = "test/image/filepath",
+  };
+
   public static readonly GridMapComponent TestGridMapShape = new()
   {
     GridCells = Enumerable.Range(0, 4)
@@ -24,6 +34,16 @@ public static class StageBuilderTests
   {
     UniqueName = "TestStageBuilder",
     EntityList = [.. EntityTests.AllEntities],
+    GatherList = [
+      new GatherComponent{
+        Resource = SerializableWeaponItem,
+        TimeToRenew = 100,
+        CurrentTimer = 0,
+        Amount = 10,
+        TotalProgress = 10,
+        CurrentProgress = 0,
+      }
+    ],
     GridMap = new GridMapComponent()
     {
       GridCells = Enumerable.Range(0, 100)

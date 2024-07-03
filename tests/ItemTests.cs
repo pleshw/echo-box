@@ -6,7 +6,6 @@ public static class ItemTests
 {
   public static readonly ItemComponent SerializableConsumableItem = new()
   {
-    Id = Guid.NewGuid(),
     ItemType = ItemTypes.CONSUMABLE,
     DisplayName = "Test Consumable",
     UniqueName = "TestConsumable",
@@ -18,7 +17,6 @@ public static class ItemTests
 
   public static readonly ItemComponent SerializableArmorItem = new()
   {
-    Id = Guid.NewGuid(),
     ItemType = ItemTypes.ARMOR,
     DisplayName = "Test Armor",
     UniqueName = "TestArmor",
@@ -29,7 +27,6 @@ public static class ItemTests
 
   public static readonly ItemComponent SerializableWeaponItem = new()
   {
-    Id = Guid.NewGuid(),
     ItemType = ItemTypes.WEAPON,
     DisplayName = "Test Weapon",
     UniqueName = "TestWeapon",
@@ -40,7 +37,6 @@ public static class ItemTests
 
   public static readonly ItemComponent SerializableAccessoryItem = new()
   {
-    Id = Guid.NewGuid(),
     ItemType = ItemTypes.ACCESSORY,
     DisplayName = "Test Accessory",
     UniqueName = "TestAccessory",
@@ -51,7 +47,6 @@ public static class ItemTests
 
   public static readonly ItemComponent SerializableCraftedItemComponentAccessory = new()
   {
-    Id = Guid.NewGuid(),
     ItemType = ItemTypes.ACCESSORY,
     DisplayName = "Test Accessory Input",
     UniqueName = "TestAccessoryInput",
@@ -62,7 +57,6 @@ public static class ItemTests
 
   public static readonly ItemComponent SerializableCraftedItemComponentArmor = new()
   {
-    Id = Guid.NewGuid(),
     ItemType = ItemTypes.ARMOR,
     DisplayName = "Test Armor Input",
     UniqueName = "TestArmorInput",
@@ -73,7 +67,6 @@ public static class ItemTests
 
   public static readonly ItemComponent SerializableCraftedItemComponentConsumable = new()
   {
-    Id = Guid.NewGuid(),
     ItemType = ItemTypes.CONSUMABLE,
     DisplayName = "Test Consumable Input",
     UniqueName = "TestConsumableInput",
@@ -84,7 +77,6 @@ public static class ItemTests
 
   public static readonly ItemComponent SerializableCraftedAccessoryItem = new()
   {
-    Id = Guid.NewGuid(),
     ItemType = ItemTypes.ACCESSORY,
     DisplayName = "Test Crafted Accessory",
     UniqueName = "TestCraftedAccessory",
@@ -95,7 +87,6 @@ public static class ItemTests
 
   public static readonly ItemComponent SerializableAllUsesItem = new()
   {
-    Id = Guid.NewGuid(),
     ItemType = ItemTypes.ACCESSORY | ItemTypes.ARMOR | ItemTypes.WEAPON | ItemTypes.CONSUMABLE,
     DisplayName = "Test All Uses",
     UniqueName = "TestAllUses",

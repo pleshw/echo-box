@@ -34,11 +34,22 @@ public class JsonStageConverter : JsonConverter<StageComponent>
             ? JsonSerializer.Deserialize<GridMapComponent>(_jsonGridMap.GetRawText(), options) ?? throw new JsonException("Invalid item in gridMap object.")
             : throw new JsonException("Stage does not have a GridMap property.");
 
+    JsonElement jsonGatherList = root.TryGetProperty("gatherList", out JsonElement _jsonGatherList)
+        ? _jsonGatherList
+        : throw new JsonException("Invalid item items. Item does not have an Items property.");
+
+    List<IGatherComponent> gatherList = jsonGatherList.EnumerateArray()
+                                                         .Select(item => JsonSerializer.Deserialize<IGatherComponent>(item.GetRawText(), options)
+                                                              ?? throw new JsonException("Invalid item in items array."))
+                                                         .Cast<IGatherComponent>()
+                                                         .ToList();
+
     return new StageComponent
     {
       UniqueName = uniqueName,
       EntityList = entityList,
-      GridMap = cellList
+      GridMap = cellList,
+      GatherList = gatherList
     };
   }
 

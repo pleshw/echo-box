@@ -80,7 +80,7 @@ public interface IAmountKilledComponent : IComponent
   int AmountKilled { get; set; }
 }
 
-[JsonConverter(typeof(JsonItemConverter))]
+[JsonConverter(typeof(JsonBaseItemConverter))]
 public interface IItemComponent : IComponent, IDisplayNameComponent, IUniqueNameComponent, IDescriptionComponent, IDisplayImageComponent, IHasRequiredLevel
 {
   ItemTypes ItemType { get; set; }
@@ -91,13 +91,23 @@ public interface IDroppedItemComponent : IComponent, IItemComponent, IHasAmountC
 
 }
 
-public interface ICanGatherComponent : IComponent, IHasAmountComponent
+public interface IProgressComponent : IComponent
 {
-  IItemComponent Resource { get; set; }
-
-  int EffortToCollect { get; set; }
+  int TotalProgress { get; set; }
 
   int CurrentProgress { get; set; }
+}
+
+public interface IRenewableComponent : IComponent
+{
+  int TimeToRenew { get; set; }
+  int CurrentTimer { get; set; }
+}
+
+[JsonConverter(typeof(JsonBaseGatherConverter))]
+public interface IGatherComponent : IComponent, IRenewableComponent, IHasAmountComponent, IProgressComponent
+{
+  IItemComponent Resource { get; set; }
 }
 
 public interface IHasPrice : IComponent

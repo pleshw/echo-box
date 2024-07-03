@@ -3,12 +3,11 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Game;
 
-
 namespace JSONConverters;
 
-public class JsonItemConverter : JsonConverter<IItemComponent>
+public class JsonBaseGatherConverter : JsonConverter<IGatherComponent>
 {
-  public override IItemComponent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+  public override IGatherComponent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
   {
     using JsonDocument doc = JsonDocument.ParseValue(ref reader);
     if (!doc.RootElement.TryGetProperty("type", out JsonElement typeElement))
@@ -18,10 +17,10 @@ public class JsonItemConverter : JsonConverter<IItemComponent>
 
     string typeName = typeElement.GetString() ?? throw new JsonException($"Unknown type: {typeElement.GetString()}"); ;
     Type type = Type.GetType(typeName) ?? throw new JsonException($"Unknown type: {typeName}");
-    return JsonSerializer.Deserialize(doc.RootElement.GetRawText(), type, options) as IItemComponent ?? throw new JsonException($"Invalid Conversion for: {typeName}"); ;
+    return JsonSerializer.Deserialize(doc.RootElement.GetRawText(), type, options) as IGatherComponent ?? throw new JsonException($"Invalid Conversion for: {typeName}"); ;
   }
 
-  public override void Write(Utf8JsonWriter writer, IItemComponent value, JsonSerializerOptions options)
+  public override void Write(Utf8JsonWriter writer, IGatherComponent value, JsonSerializerOptions options)
   {
     writer.WriteStartObject();
     writer.WriteString("type", value.GetType().AssemblyQualifiedName);
