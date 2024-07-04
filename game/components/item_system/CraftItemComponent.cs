@@ -15,6 +15,8 @@ public record class CraftItemComponent : ICraftItemComponent
 
   public required string UniqueName { get; set; }
 
+  public required Dictionary<MasteryTypes, int> LevelByRequiredMastery { get; set; }
+
   public void Hide()
   {
     throw new NotImplementedException();

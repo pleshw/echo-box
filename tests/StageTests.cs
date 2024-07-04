@@ -1,3 +1,4 @@
+using System.Numerics;
 using Game;
 
 namespace Tests;
@@ -5,11 +6,11 @@ namespace Tests;
 
 public static class StageTests
 {
-  public static readonly ItemComponent SerializableWeaponItem = new()
+  public static readonly ItemComponent TestOreItem = new()
   {
-    ItemType = ItemTypes.WEAPON,
-    DisplayName = "Test Weapon",
-    UniqueName = "TestWeapon",
+    ItemType = ItemTypes.ORE,
+    DisplayName = "Test Ore",
+    UniqueName = "Test Ore",
     RequiredLevel = 0,
     Description = "A Weapon for testing purposes",
     DisplayImage = "test/image/filepath",
@@ -20,13 +21,20 @@ public static class StageTests
     UniqueName = "TestStage",
     EntityList = [.. EntityTests.AllEntities],
     GatherList = [
-      new GatherComponent{
-        Resource = SerializableWeaponItem,
+      new GatherComponent
+      {
+        RequiredLevel = 0,
+        Resource = TestOreItem,
         TimeToRenew = 100,
-        CurrentTimer = 0,
+        CompletedAt = DateTime.Now,
         Amount = 10,
         TotalProgress = 10,
         CurrentProgress = 0,
+        Position = Vector2.Zero,
+        LevelByRequiredMastery = new()
+        {
+          {MasteryTypes.GATHERING, 10}
+        }
       }
     ],
     GridMap = new GridMapComponent()

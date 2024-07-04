@@ -20,6 +20,19 @@ public enum MenuType
 
 
 [Flags]
+public enum MasteryTypes
+{
+  NONE = 1 << 0,
+  BATTLING = 1 << 1,
+  CRAFTING = 1 << 2,
+  MINING = 1 << 3,
+  GATHERING = 1 << 4,
+  LOGGING = 1 << 5,
+  REFINING = 1 << 6,
+  FISHING = 1 << 7,
+}
+
+[Flags]
 public enum ItemTypes
 {
   NONE = 1 << 0,
@@ -28,7 +41,8 @@ public enum ItemTypes
   WEAPON = 1 << 3,
   ACCESSORY = 1 << 4,
   MISC = 1 << 5,
-  QUEST = 1 << 6
+  QUEST = 1 << 6,
+  ORE = 1 << 7,
 }
 
 [Flags]

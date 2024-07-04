@@ -81,7 +81,7 @@ public interface IAmountKilledComponent : IComponent
 }
 
 [JsonConverter(typeof(JsonBaseItemConverter))]
-public interface IItemComponent : IComponent, IDisplayNameComponent, IUniqueNameComponent, IDescriptionComponent, IDisplayImageComponent, IHasRequiredLevel
+public interface IItemComponent : IComponent, IDisplayNameComponent, IUniqueNameComponent, IDescriptionComponent, IDisplayImageComponent, IHasRequiredLevelComponent
 {
   ItemTypes ItemType { get; set; }
 }
@@ -101,11 +101,12 @@ public interface IProgressComponent : IComponent
 public interface IRenewableComponent : IComponent
 {
   int TimeToRenew { get; set; }
-  int CurrentTimer { get; set; }
+
+  DateTime? CompletedAt { get; set; }
 }
 
 [JsonConverter(typeof(JsonBaseGatherConverter))]
-public interface IGatherComponent : IComponent, IRenewableComponent, IHasAmountComponent, IProgressComponent
+public interface IGatherComponent : IComponent, IRenewableComponent, IHasAmountComponent, IProgressComponent, IPositionComponent, IHasRequiredLevelComponent, IHasRequiredMasteryComponent
 {
   IItemComponent Resource { get; set; }
 }
@@ -115,7 +116,12 @@ public interface IHasPrice : IComponent
   float Price { get; set; }
 }
 
-public interface IHasRequiredLevel : IComponent
+public interface IHasRequiredMasteryComponent : IComponent
+{
+  Dictionary<MasteryTypes, int> LevelByRequiredMastery { get; set; }
+}
+
+public interface IHasRequiredLevelComponent : IComponent
 {
   int RequiredLevel { get; set; }
 }
@@ -127,7 +133,7 @@ public interface IShopItemComponent : IComponent, ICanHide, IHasPrice, IItemFram
 }
 
 [JsonConverter(typeof(JsonCraftItemConverter))]
-public interface ICraftItemComponent : IComponent, ICanHide, IHasPrice, IItemFrameComponent, IUniqueNameComponent
+public interface ICraftItemComponent : IComponent, ICanHide, IHasPrice, IItemFrameComponent, IUniqueNameComponent, IHasRequiredMasteryComponent
 {
   List<IUniqueNameComponent> InputItems { get; set; }
 }

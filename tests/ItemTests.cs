@@ -103,6 +103,10 @@ public static class ItemTests
     UniqueName = SerializableCraftedAccessoryItem.UniqueName + "Craft",
     Item = SerializableCraftedAccessoryItem,
     FrameImage = SerializableCraftedAccessoryItem,
+    LevelByRequiredMastery = new()
+    {
+      {MasteryTypes.CRAFTING, 10}
+    }
   };
 
   public static readonly ShopItemComponent SerializableShopItemSlot1 = new()
