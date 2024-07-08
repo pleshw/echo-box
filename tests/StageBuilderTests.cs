@@ -72,7 +72,7 @@ public static class StageBuilderTests
 
   public static void TestRemakeAllStages()
   {
-    TestStageBuilder.ReplaceArea(new PositionComponent
+    TestStageBuilder.ReplaceArea(new HasPositionComponent
     {
       Position = new(0, 0)
     }, TestGridMapShape);

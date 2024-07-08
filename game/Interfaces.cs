@@ -62,12 +62,12 @@ public interface ITextContentComponent : IComponent
 
 public interface IEquipComponent : IComponent, IItemComponent
 {
-  public void Equip(IEquipSlotComponent slot);
+  void Equip(IEquipSlotComponent slot);
 }
 
 public interface IConsumableComponent : IComponent, IHasAmountComponent
 {
-  public void Consume();
+  void Consume();
 }
 
 public interface IAmountCollectedComponent : IComponent
@@ -106,7 +106,7 @@ public interface IRenewableComponent : IComponent
 }
 
 [JsonConverter(typeof(JsonBaseGatherConverter))]
-public interface IGatherComponent : IComponent, IRenewableComponent, IHasAmountComponent, IProgressComponent, IPositionComponent, IHasRequiredLevelComponent, IHasRequiredMasteryComponent
+public interface IGatherComponent : IComponent, IRenewableComponent, IHasAmountComponent, IProgressComponent, IHasPositionComponent, IHasRequiredLevelComponent, IHasRequiredMasteryComponent
 {
   IItemComponent Resource { get; set; }
 }
@@ -146,12 +146,12 @@ public interface IHasAssignedEntity : IComponent
 [JsonConverter(typeof(JsonQuestConverter))]
 public interface IQuestComponent : IComponent, IIdComponent, ITitleComponent, IDescriptionComponent
 {
-  public List<ITaskComponent> Tasks { get; set; }
+  List<ITaskComponent> Tasks { get; set; }
 }
 
 public interface IAssignedQuestComponent : IComponent, IIdComponent, ITitleComponent, IDescriptionComponent, IHasAssignedEntity
 {
-  public List<IAssignedTaskComponent> Tasks { get; set; }
+  List<IAssignedTaskComponent> Tasks { get; set; }
 }
 
 public interface IHasStartComponent : IComponent
@@ -203,7 +203,7 @@ public interface ICopyable : IComponent
 
 
 [JsonConverter(typeof(JsonBaseGridCellConverter))]
-public interface IGridCellComponent : IComponent, IPositionComponent, ISizeComponent, IIndexComponent, ICloneable, ICopyable
+public interface IGridCellComponent : IComponent, IHasPositionComponent, ISizeComponent, IIndexComponent, ICloneable, ICopyable
 {
   GridCellStatus Status { get; set; }
 }
@@ -219,7 +219,7 @@ public interface IGridCellImageComponent : IComponent
   IDisplayImageComponent MinimapSprite { get; set; }
 }
 
-public interface IEscortTaskComponent : IComponent, ITaskComponent, ITargetAreaComponent
+public interface IEscortTaskComponent : IComponent, ITaskComponent, IHasTargetAreaComponent
 {
   IUniqueNameComponent Companion { get; set; }
 }
@@ -259,7 +259,7 @@ public interface IAssignedReachEntityTaskComponent : IComponent, IReachEntityTas
 
 }
 
-public interface IReachPositionTaskComponent : IComponent, ITaskComponent, ITargetAreaComponent
+public interface IReachPositionTaskComponent : IComponent, ITaskComponent, IHasTargetAreaComponent
 {
 
 }
@@ -346,7 +346,7 @@ public interface IMultipleCompletableComponent : IComponent, ICompletableCompone
 
 public interface ICancelComponent : IComponent
 {
-  public void Cancel();
+  void Cancel();
 }
 
 public interface IHasAmountComponent : IComponent
@@ -354,9 +354,9 @@ public interface IHasAmountComponent : IComponent
   int Amount { get; set; }
 }
 
-public interface IHasCapacityComponent : IComponent
+public interface IHasMaxStackSizeComponent : IComponent
 {
-  int Capacity { get; set; }
+  int MaxStackSize { get; set; }
 }
 
 
@@ -366,7 +366,7 @@ public interface IItemFrameComponent : IComponent
   IDisplayImageComponent FrameImage { get; set; }
 }
 
-public interface IItemSlotComponent : IComponent, IItemFrameComponent, IHasAmountComponent, IHasCapacityComponent
+public interface IItemSlotComponent : IComponent, IItemFrameComponent, IHasAmountComponent, IHasMaxStackSizeComponent
 {
 }
 
@@ -375,7 +375,7 @@ public interface IEquipSlotComponent : IComponent, IUniqueNameComponent, IDescri
 }
 
 [JsonConverter(typeof(JsonBaseInventoryConverter))]
-public interface IInventoryComponent : IComponent, IHasCapacityComponent
+public interface IInventoryComponent : IComponent, IHasMaxStackSizeComponent
 {
   IUniqueNameComponent Owner { get; set; }
 
@@ -395,7 +395,7 @@ public interface IIndexComponent : IComponent
 
 
 // Defines properties for entities with a position
-public interface IPositionComponent : IComponent
+public interface IHasPositionComponent : IComponent
 {
   Vector2 Position { get; set; }
 }
@@ -405,12 +405,12 @@ public interface ISizeComponent : IComponent
   Vector2 Size { get; set; }
 }
 
-public interface ITargetPositionComponent : IComponent
+public interface IHasTargetPositionComponent : IComponent
 {
   Vector2 TargetPosition { get; set; }
 }
 
-public interface ITargetAreaComponent : IComponent, ISizeComponent, ITargetPositionComponent
+public interface IHasTargetAreaComponent : IComponent, ISizeComponent, IHasTargetPositionComponent
 {
 }
 
@@ -436,7 +436,7 @@ public interface IAttributeComponent : IHasAbbreviation, IUniqueNameComponent, I
 
 public interface IHasAbbreviation : IComponent
 {
-  public string Abbreviation { get; set; }
+  string Abbreviation { get; set; }
 }
 
 // Defines properties for entities with attributes
@@ -450,10 +450,19 @@ public interface IAttributeListComponent : IComponent
 [JsonConverter(typeof(JsonBaseUniqueNameConverter))]
 public interface IUniqueNameComponent : IComponent
 {
-  public string UniqueName { get; }
+  string UniqueName { get; }
+}
+
+public interface IEntityBehaviourComponent : IComponent, IHasPositionComponent, IHasTargetPositionComponent
+{
+  BehaviourType BehaviourType { get; set; }
+
+  IUniqueNameComponent CurrentStage { get; set; }
+
+  void RunEntityBehaviour();
 }
 
 public interface IIdComponent : IComponent
 {
-  public Guid Id { get; }
+  Guid Id { get; }
 }

@@ -37,7 +37,7 @@ public class GridMapComponent : IGridMapComponent
     }
   }
 
-  public void ForEach(IPositionComponent startPosition, IPositionComponent endPosition, ChangeCellAction action)
+  public void ForEach(IHasPositionComponent startPosition, IHasPositionComponent endPosition, ChangeCellAction action)
   {
     ForEach(CoordToIndex(startPosition), CoordToIndex(endPosition), action);
   }
@@ -70,7 +70,7 @@ public class GridMapComponent : IGridMapComponent
     return GridCells[CoordToIndex(x, y)];
   }
 
-  public IGridCellComponent Cell(IPositionComponent positionComponent)
+  public IGridCellComponent Cell(IHasPositionComponent positionComponent)
   {
     return GridCells[CoordToIndex(positionComponent)];
   }
@@ -85,14 +85,14 @@ public class GridMapComponent : IGridMapComponent
     return (y * Width) + x;
   }
 
-  public int CoordToIndex(IPositionComponent positionComponent)
+  public int CoordToIndex(IHasPositionComponent positionComponent)
   {
     return CoordToIndex(positionComponent.Position.X, positionComponent.Position.Y);
   }
 
-  public IPositionComponent IndexToCoord(int index)
+  public IHasPositionComponent IndexToCoord(int index)
   {
-    return new PositionComponent
+    return new HasPositionComponent
     {
       Position = new()
       {

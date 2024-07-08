@@ -95,6 +95,14 @@ public static class ItemTests
     DisplayImage = "test/image/filepath",
   };
 
+  public static readonly ItemSlotComponent SerializableAllUsesItemItemSlot = new()
+  {
+    Item = SerializableAllUsesItem,
+    Amount = 10,
+    MaxStackSize = 40,
+    FrameImage = SerializableAllUsesItem,
+  };
+
   public static readonly CraftItemComponent SerializableCraftItemSlot = new()
   {
     InputItems = [SerializableCraftedItemComponentAccessory, SerializableCraftedItemComponentArmor, SerializableCraftedItemComponentConsumable],

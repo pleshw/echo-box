@@ -5,7 +5,7 @@ namespace Game;
 
 public class StageBuilderComponent : StageComponent
 {
-  public void ReplaceArea(ITargetAreaComponent targetArea, GridCellStatus cellStatus)
+  public void ReplaceArea(IHasTargetAreaComponent targetArea, GridCellStatus cellStatus)
   {
     var offsetPosition = targetArea.TargetPosition;
     var areaSize = targetArea.Size;
@@ -18,7 +18,7 @@ public class StageBuilderComponent : StageComponent
     }
   }
 
-  public void ReplaceArea(IPositionComponent positionComponent, GridMapComponent gridMapShape)
+  public void ReplaceArea(IHasPositionComponent positionComponent, GridMapComponent gridMapShape)
   {
     var offsetPosition = positionComponent.Position;
     for (int i = 0; i < gridMapShape.Width; ++i)
@@ -32,7 +32,7 @@ public class StageBuilderComponent : StageComponent
 
   public void ReplaceArea(int x, int y, GridCellStatus status)
   {
-    ReplaceArea(new TargetAreaComponent()
+    ReplaceArea(new HasTargetAreaComponent()
     {
       TargetPosition = new()
       {

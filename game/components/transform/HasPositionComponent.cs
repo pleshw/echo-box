@@ -2,7 +2,7 @@ using System.Numerics;
 
 namespace Game;
 
-public class PositionComponent : IPositionComponent
+public class HasPositionComponent : IHasPositionComponent
 {
   public required Vector2 Position { get; set; }
 }

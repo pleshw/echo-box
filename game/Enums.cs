@@ -18,6 +18,21 @@ public enum MenuType
   PICK_ITEM
 }
 
+public enum BehaviourType
+{
+  NONE,
+  IDLE,
+  MOVING,
+  ATTACKING,
+  CASTING,
+  GATHERING,
+  MINING,
+  LOGGING,
+  REFINING,
+  CRAFTING,
+  FISHING
+}
+
 
 [Flags]
 public enum MasteryTypes

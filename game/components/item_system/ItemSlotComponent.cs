@@ -10,5 +10,5 @@ public class ItemSlotComponent : IItemSlotComponent
 
   public required int Amount { get; set; }
 
-  public required int Capacity { get; set; }
+  public required int MaxStackSize { get; set; }
 }

@@ -12,7 +12,7 @@ public class Entity : BaseEntity
       DisplayName = displayName
     });
 
-    AddComponent(new PositionComponent
+    AddComponent(new HasPositionComponent
     {
       Position = Vector2.Zero
     });
@@ -21,7 +21,7 @@ public class Entity : BaseEntity
     {
       Owner = this,
       Items = [],
-      Capacity = 10
+      MaxStackSize = 10
     });
 
     AddComponent(new AliveComponent
@@ -41,14 +41,6 @@ public class Entity : BaseEntity
   {
 
   }
-
-  [JsonIgnore]
-  public override List<Type> RequiredComponents => [
-    typeof(PositionComponent),
-    typeof(DisplayNameComponent),
-    typeof(AliveComponent),
-    typeof(InventoryComponent)
-  ];
 
   public override IComponent Clone()
   {

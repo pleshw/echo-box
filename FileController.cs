@@ -46,13 +46,17 @@ public static class FileController
     }
   }
 
-  public static void CreateProjectFile<T>(ProjectFileInfo<T> fileData) => CreateFile(fileData.FolderPath, fileData.FileName, JsonSerializer.Serialize(fileData.FileData, JsonSerializerOptions));
-
   public static void CreateProjectFile<T>(List<ProjectFileInfo<T>> fileDataList) => fileDataList.ForEach(f => CreateFile(f.FolderPath, f.FileName, JsonSerializer.Serialize(f.FileData, JsonSerializerOptions)));
 
-  public static void CreateProjectFile(string fileName, string fileData) => CreateFile(ProjectDataFolder, fileName, fileData);
+  public static void CreateProjectFile<T>(ProjectFileInfo<T> fileData) => CreateFile(fileData.FolderPath, fileData.FileName, JsonSerializer.Serialize(fileData.FileData, JsonSerializerOptions));
 
   public static void CreateProjectFile<T>(string fileName, T fileData) => CreateProjectFile(fileName, JsonSerializer.Serialize(fileData, JsonSerializerOptions));
+
+  public static void CreateProjectFile(string fileName, string fileData) => CreateProjectFile(ProjectDataFolder, fileName, fileData);
+
+  public static void CreateProjectFile<T>(string folderPath, string fileName, T fileData) => CreateProjectFile(folderPath, fileName, JsonSerializer.Serialize(fileData, JsonSerializerOptions));
+
+  public static void CreateProjectFile(string folderPath, string fileName, string fileData) => CreateFile(folderPath, fileName, fileData);
 
   public static T? GetProjectFileDeserialized<T>(string fileName) where T : class => GetFileDeserialized<T>(Path.Join(ProjectDataFolder, fileName));
 

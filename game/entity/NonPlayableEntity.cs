@@ -11,15 +11,6 @@ public class NonPlayableEntity : BaseEntity
 
   }
 
-  [JsonIgnore]
-  public override List<Type> RequiredComponents => [
-    typeof(PositionComponent),
-    typeof(RelationshipComponent),
-    typeof(DialogueComponent),
-    typeof(DisplayNameComponent),
-    typeof(InventoryComponent)
-  ];
-
   public override IComponent Clone()
   {
     throw new NotImplementedException();

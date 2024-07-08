@@ -10,5 +10,5 @@ public class InventoryComponent : IInventoryComponent
 
   public required List<IItemSlotComponent> Items { get; set; }
 
-  public required int Capacity { get; set; }
+  public required int MaxStackSize { get; set; }
 }

@@ -39,7 +39,7 @@ public class JsonBaseInventoryConverter : JsonConverter<IInventoryComponent>
     {
       Owner = inventoryOwner,
       Items = itemList,
-      Capacity = capacity,
+      MaxStackSize = capacity,
     };
   }
 
