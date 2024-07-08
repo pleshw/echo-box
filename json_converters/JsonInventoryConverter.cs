@@ -18,10 +18,10 @@ public class JsonInventoryConverter : JsonConverter<InventoryComponent>
         ? JsonSerializer.Deserialize<UniqueNameComponent>(jsonUniqueName, options) ?? throw new JsonException("Owner not set for inventory.")
         : throw new JsonException("Owner not set for inventory.");
 
-    // Assuming you need to extract more properties, for example "capacity" and "items"
-    int capacity = root.TryGetProperty("capacity", out JsonElement jsonCapacity)
-        ? jsonCapacity.GetInt32()
-        : throw new JsonException("Invalid inventory capacity. Inventory does not have a Capacity property.");
+    // Assuming you need to extract more properties, for example "MaxStackSize" and "items"
+    int maxStackSize = root.TryGetProperty("maxStackSize", out JsonElement jsonMaxStackSize)
+        ? jsonMaxStackSize.GetInt32()
+        : throw new JsonException("Invalid inventory MaxStackSize. Inventory does not have a MaxStackSize property.");
 
     JsonElement itemsElement = root.TryGetProperty("items", out JsonElement jsonItems)
         ? jsonItems
@@ -39,7 +39,7 @@ public class JsonInventoryConverter : JsonConverter<InventoryComponent>
     {
       Owner = inventoryOwner,
       Items = itemList,
-      MaxStackSize = capacity,
+      MaxStackSize = maxStackSize,
     };
   }
 

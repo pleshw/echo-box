@@ -19,8 +19,10 @@ public static class StageBuilderTests
   public static readonly GridMapComponent TestGridMapShape = new()
   {
     GridCells = Enumerable.Range(0, 4)
-                        .Select(i => new GridCellComponent
+                        .Select(i => new GridCellImageComponent
                         {
+                          CellStageSprite = new DisplayImageComponent { DisplayImage = "test/image/filepath/CellStageSprite" },
+                          CellMinimapSprite = new DisplayImageComponent { DisplayImage = "test/image/filepath/CellMinimapSprite" },
                           Position = new(i % 2, i / 2),
                           Size = new(3, 3),
                           Index = i,
@@ -55,8 +57,10 @@ public static class StageBuilderTests
     GridMap = new GridMapComponent()
     {
       GridCells = Enumerable.Range(0, 100)
-                          .Select(i => new GridCellComponent
+                          .Select(i => new GridCellImageComponent
                           {
+                            CellStageSprite = new DisplayImageComponent { DisplayImage = "test/image/filepath/OriginalCellStageSprite" },
+                            CellMinimapSprite = new DisplayImageComponent { DisplayImage = "test/image/filepath/OriginalCellMinimapSprite" },
                             Position = new(i % 10, i / 10),
                             Size = new(3, 3),
                             Index = i,

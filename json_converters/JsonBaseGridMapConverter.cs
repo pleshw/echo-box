@@ -29,9 +29,8 @@ public class JsonBaseGridMapConverter : JsonConverter<IGridMapComponent>
         : throw new JsonException("GridMap does not have an GridCells property set.");
 
     List<IGridCellComponent> gridCells = itemsElement.EnumerateArray()
-                                                      .Select(item => JsonSerializer.Deserialize<GridCellComponent>(item.GetRawText(), options)
+                                                      .Select(item => JsonSerializer.Deserialize<IGridCellComponent>(item.GetRawText(), options)
                                                            ?? throw new JsonException("Invalid cell in gridCells."))
-                                                      .Cast<IGridCellComponent>()
                                                       .ToList();
 
     return new GridMapComponent

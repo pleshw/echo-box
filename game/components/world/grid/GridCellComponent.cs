@@ -4,7 +4,6 @@ using JSONConverters;
 
 namespace Game;
 
-[JsonConverter(typeof(JsonGridCellConverter))]
 public class GridCellComponent : IGridCellComponent
 {
   public required Vector2 Position { get; set; }

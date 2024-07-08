@@ -11,10 +11,10 @@ public static class Program
     // DialogueTests.TestRemakeAllDialogues();
     // QuestTests.TestRemakeAllQuests();
     // StageTests.TestRemakeAllStages();
-    // StageBuilderTests.TestRemakeAllStages();
+    StageBuilderTests.TestRemakeAllStages();
     // EntityTests.TestRemakeAllEntities();
 
-    // StageComponent? stageComponent = FileController.GetFileDeserialized<StageBuilderComponent>("C:/Users/Usuário/Desktop/echo-box/data/stage/test/TestStageBuilder.json");
+    StageComponent? stageComponent = FileController.GetFileDeserialized<StageBuilderComponent>("C:/Users/Usuário/Desktop/echo-box/data/stage/test/TestStageBuilder.json");
 
     EntityTests.TestRemakeBehaviourEntity();
     BehaviourEntity? behaveNPCComponent = FileController.GetFileDeserialized<BehaviourEntity>("C:/Users/Usuário/Desktop/echo-box/data/entity/test/BehaviourNPCActor.json");

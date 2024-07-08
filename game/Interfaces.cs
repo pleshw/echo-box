@@ -213,10 +213,10 @@ public interface IGridDisplayCellComponent : IComponent, IGridCellComponent
   IGridCellImageComponent GridCellImage { get; set; }
 }
 
-public interface IGridCellImageComponent : IComponent
+public interface IGridCellImageComponent : IComponent, IGridCellComponent
 {
-  IDisplayImageComponent StageSprite { get; set; }
-  IDisplayImageComponent MinimapSprite { get; set; }
+  IDisplayImageComponent CellStageSprite { get; set; }
+  IDisplayImageComponent CellMinimapSprite { get; set; }
 }
 
 public interface IEscortTaskComponent : IComponent, ITaskComponent, IHasTargetAreaComponent

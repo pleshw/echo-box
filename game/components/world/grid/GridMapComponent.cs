@@ -6,7 +6,6 @@ namespace Game;
 
 public delegate void ChangeCellAction(IGridCellComponent cell, int x, int y, int index, int count);
 
-[JsonConverter(typeof(JsonGridMapConverter))]
 public class GridMapComponent : IGridMapComponent
 {
   public required List<IGridCellComponent> GridCells { get; set; }
