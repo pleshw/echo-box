@@ -8,31 +8,31 @@ public class PlayerEntity : BaseEntity
 {
   public PlayerEntity(string uniqueName) : base(uniqueName)
   {
-    AddComponent<IDisplayNameComponent>(new DisplayNameComponent
+    AddComponent(new DisplayNameComponent
     {
       DisplayName = "Alice"
     });
 
-    AddComponent<IHasPositionComponent>(new HasPositionComponent
+    AddComponent(new HasPositionComponent
     {
       Position = Vector2.Zero
     });
 
-    AddComponent<IInventoryComponent>(new InventoryComponent
+    AddComponent(new InventoryComponent
     {
       Owner = this,
       Items = [],
       MaxStackSize = 10
     });
 
-    AddComponent<IEntityAttributesComponent>(new EntityAttributesComponent
+    AddComponent(new EntityAttributesComponent
     {
-      Agility = new() { Level = 3 },
-      Dexterity = new() { Level = 3 },
-      Intelligence = new() { Level = 3 },
-      Luck = new() { Level = 3 },
-      Strength = new() { Level = 3 },
-      Vitality = new() { Level = 3 }
+      Agility = new() { Level = 1 },
+      Dexterity = new() { Level = 1 },
+      Intelligence = new() { Level = 1 },
+      Luck = new() { Level = 1 },
+      Strength = new() { Level = 1 },
+      Vitality = new() { Level = 1 }
     });
 
     AddComponent(new AliveComponent

@@ -1,7 +1,7 @@
 using System.Numerics;
 using Game;
 
-namespace Tests;
+namespace Game;
 
 
 public static class EntityTests

@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using Tests;
+using Game;
 
 namespace Game;
 

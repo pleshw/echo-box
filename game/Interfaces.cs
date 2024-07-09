@@ -466,3 +466,19 @@ public interface IIdComponent : IComponent
 {
   Guid Id { get; }
 }
+
+public interface IBuildComponent<T> : IComponent
+{
+  T Build();
+}
+
+
+public interface ICanSaveFileComponent : IComponent
+{
+  void SaveFile();
+}
+
+public interface ICanLoadFileComponent<T> : IComponent
+{
+  T LoadFile();
+}

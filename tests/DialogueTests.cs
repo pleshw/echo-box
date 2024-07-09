@@ -1,6 +1,6 @@
 using Game;
 
-namespace Tests;
+namespace Game;
 
 public static class DialogueTests
 {

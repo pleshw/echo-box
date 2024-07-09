@@ -1,7 +1,7 @@
 using System.Text.Json;
 using JSONConverters;
 
-namespace Tests;
+namespace Game;
 
 public record class ProjectFileInfo<T>
 {
