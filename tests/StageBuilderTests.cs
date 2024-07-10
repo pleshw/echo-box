@@ -36,7 +36,6 @@ public static class StageBuilderTests
   public static readonly StageBuilderComponent TestStageBuilder = new()
   {
     UniqueName = "TestStageBuilder",
-    EntityList = [.. EntityTests.AllEntities],
     GatherList = [
       new GatherComponent
       {

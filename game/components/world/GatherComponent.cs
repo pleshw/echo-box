@@ -4,7 +4,7 @@ using JSONConverters;
 
 namespace Game;
 
-public class GatherComponent : IGatherComponent
+public class GatherComponent : IGatherComponent, ICloneable, ICopyable
 {
   public required IItemComponent Resource { get; set; }
 
@@ -23,4 +23,35 @@ public class GatherComponent : IGatherComponent
   public required int RequiredLevel { get; set; }
 
   public required Dictionary<MasteryTypes, int> LevelByRequiredMastery { get; set; }
+
+  public object Clone()
+  {
+    return new GatherComponent
+    {
+      RequiredLevel = RequiredLevel,
+      Resource = Resource,
+      TimeToRenew = TimeToRenew,
+      CompletedAt = CompletedAt,
+      Amount = Amount,
+      TotalProgress = TotalProgress,
+      CurrentProgress = CurrentProgress,
+      Position = Position,
+      LevelByRequiredMastery = LevelByRequiredMastery
+    };
+  }
+
+  public void Copy(ICopyable copyable)
+  {
+    GatherComponent resourceToCopy = (GatherComponent)copyable ?? throw new Exception($"Cannot copy from {copyable?.GetType()}.");
+
+    RequiredLevel = resourceToCopy.RequiredLevel;
+    Resource = resourceToCopy.Resource;
+    TimeToRenew = resourceToCopy.TimeToRenew;
+    CompletedAt = resourceToCopy.CompletedAt;
+    Amount = resourceToCopy.Amount;
+    TotalProgress = resourceToCopy.TotalProgress;
+    CurrentProgress = resourceToCopy.CurrentProgress;
+    Position = resourceToCopy.Position;
+    LevelByRequiredMastery = resourceToCopy.LevelByRequiredMastery;
+  }
 }

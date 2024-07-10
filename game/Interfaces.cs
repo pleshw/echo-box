@@ -182,7 +182,6 @@ public interface IAssignedCollectTaskComponent : IComponent, ICollectTaskCompone
 
 public interface IStageComponent : IComponent, IUniqueNameComponent
 {
-  List<IUniqueNameComponent> EntityList { get; set; }
   IGridMapComponent GridMap { get; set; }
 }
 
@@ -354,6 +353,20 @@ public interface IHasAmountComponent : IComponent
   int Amount { get; set; }
 }
 
+public interface IHasMaxAmountComponent : IComponent
+{
+  int MaxAmount { get; set; }
+}
+
+public interface IHasMinAmountComponent : IComponent
+{
+  int MinAmount { get; set; }
+}
+
+public interface IHasRangeAmountComponent : IComponent, IHasMinAmountComponent, IHasMaxAmountComponent
+{
+}
+
 public interface IHasMaxStackSizeComponent : IComponent
 {
   int MaxStackSize { get; set; }
@@ -459,7 +472,19 @@ public interface IEntityBehaviourComponent : IComponent, IHasPositionComponent, 
 
   IUniqueNameComponent CurrentStage { get; set; }
 
-  void RunEntityBehaviour();
+  void RunEntityBehaviour(BaseEntity entity);
+}
+
+
+public interface IEntityRoutineComponent : IComponent
+{
+  Dictionary<int, IEntityBehaviourComponent> EntityBehaviourByGameTime { get; set; }
+}
+
+public interface IEntityScheduleComponent : IComponent
+{
+  IEntityRoutineComponent DefaultRoutine { get; set; }
+  Dictionary<int, IEntityRoutineComponent> EntityRoutineByGameDay { get; set; }
 }
 
 public interface IIdComponent : IComponent

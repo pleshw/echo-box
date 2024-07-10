@@ -10,7 +10,6 @@ public static class Program
   {
 
     var playerBuilder = new PlayerActorBuild();
-    playerBuilder.SaveFile();
     var cc = playerBuilder.LoadFile();
     // DialogueTests.TestRemakeAllDialogues();
     // QuestTests.TestRemakeAllQuests();

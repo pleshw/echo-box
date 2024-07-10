@@ -1,23 +1,20 @@
 using System.Numerics;
+using System.Text.Json.Serialization;
 
 namespace Game;
 
-public class BehaviourEntity : NonPlayableEntity, IEntityBehaviourComponent
+public class BehaviourEntity : BaseEntity
 {
-  public required BehaviourType BehaviourType { get; set; }
+  public IEntityScheduleComponent Schedule;
 
-  public required IUniqueNameComponent CurrentStage { get; set; }
-
-  public required Vector2 Position { get; set; }
-
-  public required Vector2 TargetPosition { get; set; }
-
-  public BehaviourEntity(string uniqueName, List<IComponent> components) : base(uniqueName, components)
+  [JsonConstructor]
+  public BehaviourEntity(string uniqueName, IEntityScheduleComponent scheduleComponent, List<IComponent> components) : base(uniqueName, components)
   {
+    Schedule = scheduleComponent;
   }
 
-  public virtual void RunEntityBehaviour()
+  public override IComponent Clone()
   {
-
+    throw new NotImplementedException();
   }
 }
