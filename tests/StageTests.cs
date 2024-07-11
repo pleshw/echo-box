@@ -19,10 +19,10 @@ public static class StageTests
   public static readonly StageComponent SimpleStage = new()
   {
     UniqueName = "TestStage",
-    EntityList = [.. EntityTests.AllEntities],
     GatherList = [
       new GatherComponent
       {
+        UniqueName = "TestOre",
         RequiredLevel = 0,
         Resource = TestOreItem,
         TimeToRenew = 100,

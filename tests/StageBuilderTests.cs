@@ -39,6 +39,7 @@ public static class StageBuilderTests
     GatherList = [
       new GatherComponent
       {
+        UniqueName = "TestOre",
         RequiredLevel = 0,
         Resource = TestOreItem,
         TimeToRenew = 100,

@@ -4,13 +4,24 @@ using Game;
 
 namespace Build;
 
-public class OreListBuild
+public class OreListSingleton
 {
+  private static OreListSingleton? _oreListBuild;
+
+  public static OreListSingleton Instance
+  {
+    get
+    {
+      return _oreListBuild ??= new();
+    }
+  }
+
   public List<GatherComponent> OreList = [
   //// STONE
    new GatherComponent
       {
         RequiredLevel = 0,
+        UniqueName = "StoneOre",
         Resource =   new ItemComponent()
         {
           ItemType = ItemTypes.ORE,
@@ -36,6 +47,7 @@ public class OreListBuild
    new GatherComponent
       {
         RequiredLevel = 0,
+        UniqueName = "CoalOre",
         Resource =   new ItemComponent()
         {
           ItemType = ItemTypes.ORE,
@@ -61,6 +73,7 @@ public class OreListBuild
    new GatherComponent
       {
         RequiredLevel = 0,
+        UniqueName = "CooperOre",
         Resource =   new ItemComponent()
         {
           ItemType = ItemTypes.ORE,
@@ -86,6 +99,7 @@ public class OreListBuild
    new GatherComponent
       {
         RequiredLevel = 0,
+        UniqueName = "IronOre",
         Resource =   new ItemComponent()
         {
           ItemType = ItemTypes.ORE,
@@ -112,6 +126,7 @@ public class OreListBuild
    new GatherComponent
       {
         RequiredLevel = 0,
+        UniqueName = "GoldOre",
         Resource =   new ItemComponent()
         {
           ItemType = ItemTypes.ORE,
@@ -137,6 +152,7 @@ public class OreListBuild
    new GatherComponent
       {
         RequiredLevel = 0,
+        UniqueName = "PlatinumOre",
         Resource =   new ItemComponent()
         {
           ItemType = ItemTypes.ORE,
@@ -158,4 +174,22 @@ public class OreListBuild
         }
       },
  ];
+
+  public static IGatherComponent GetOreByUniqueName(string uniqueName)
+  {
+    return Instance.OreList.Where(q => q.UniqueName == uniqueName).FirstOrDefault() ?? throw new Exception($"Invalid deserialization. Entity {uniqueName} does not exist.");
+  }
+
+  public static List<IGatherComponent> GetOresByUniqueName(List<IUniqueNameComponent> uniqueNames)
+  {
+    return GetOresCloneByUniqueName(uniqueNames.Select(u => u.UniqueName).ToList());
+  }
+
+  public static List<IGatherComponent> GetOresCloneByUniqueName(List<string> uniqueNames)
+  {
+    return uniqueNames.Select(uniqueName => Instance.OreList.FirstOrDefault(q => q.UniqueName == uniqueName) ?? throw new Exception($"Invalid deserialization. Entity {uniqueName} does not exist."))
+          .Select(o => o.Clone())
+          .Cast<IGatherComponent>()
+          .ToList();
+  }
 }

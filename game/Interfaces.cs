@@ -106,7 +106,7 @@ public interface IRenewableComponent : IComponent
 }
 
 [JsonConverter(typeof(JsonBaseGatherConverter))]
-public interface IGatherComponent : IComponent, IRenewableComponent, IHasAmountComponent, IProgressComponent, IHasPositionComponent, IHasRequiredLevelComponent, IHasRequiredMasteryComponent
+public interface IGatherComponent : IComponent, IUniqueNameComponent, IRenewableComponent, IHasAmountComponent, IProgressComponent, IHasPositionComponent, IHasRequiredLevelComponent, IHasRequiredMasteryComponent
 {
   IItemComponent Resource { get; set; }
 }

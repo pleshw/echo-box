@@ -1,4 +1,5 @@
 using System.Numerics;
+using Build;
 using Game;
 
 namespace Game;
@@ -19,10 +20,10 @@ public static class EntityTests
     public static readonly StageBuilderComponent TestStageBuilder = new()
     {
         UniqueName = "TestStageBuilder",
-        EntityList = [BehaviourNPCActor],
         GatherList = [
         new GatherComponent
       {
+        UniqueName = "TestOre",
         RequiredLevel = 0,
         Resource = TestOreItem,
         TimeToRenew = 100,
@@ -153,7 +154,34 @@ public static class EntityTests
         }
     ]);
 
-    public static readonly BehaviourEntity BehaviourNPCActor = new("BehaviourNPCActor", [
+    public static readonly StageComponent AliceHouseOutside = new AliceHouseOutsideBuild().LoadFile();
+
+    private static readonly IEntityRoutineComponent DefaultRoutine = new EntityRoutineComponent
+    {
+        EntityBehaviourByGameTime = new()
+    {
+      { 0, new EntityBehaviourComponent
+          {
+            BehaviourType = BehaviourType.IDLE,
+            CurrentStage = AliceHouseOutside,
+            Position = new(),
+            TargetPosition = new(20,20)
+          }
+      }
+    }
+    };
+
+    public static readonly BehaviourEntity BehaviourNPCActor = new("BehaviourNPCActor",
+    new EntityScheduleComponent
+    {
+        DefaultRoutine = DefaultRoutine,
+
+        EntityRoutineByGameDay = new()
+        {
+            {1, DefaultRoutine},
+        },
+    },
+    [
         new DisplayNameComponent
         {
             DisplayName = "Behaviour NPC Actor"
@@ -201,13 +229,7 @@ public static class EntityTests
             CompletedDialogs = [],
             Level = 0,
         }
-    ])
-    {
-        CurrentStage = TestStageBuilder,
-        BehaviourType = BehaviourType.MOVING,
-        Position = new(),
-        TargetPosition = new(2, 2)
-    };
+    ]);
 
 
     public static readonly NonPlayableEntity TargetActor = new("TargetActor", [

@@ -20,7 +20,6 @@ public enum MenuType
 
 public enum BehaviourType
 {
-  NONE,
   IDLE,
   MOVING,
   ATTACKING,
@@ -30,7 +29,8 @@ public enum BehaviourType
   LOGGING,
   REFINING,
   CRAFTING,
-  FISHING
+  FISHING,
+  TALKING
 }
 
 

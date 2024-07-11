@@ -3,22 +3,20 @@ using Game;
 
 namespace Build;
 
-public class AliceHouseBuild : StageBuild<StageComponent>
+public class AliceHouseOutsideBuild : StageBuild<StageComponent>
 {
   private StageComponent? _stage;
 
-  public List<IGatherComponent> GatherList = [
-
-  ];
+  public List<IGatherComponent> GatherList = [];
 
   public override StageComponent Stage
   {
     get
     {
-      _stage ??= new()
+      return _stage ??= new()
       {
         UniqueName = "AliceHouse",
-        GatherList = [],
+        GatherList = GatherList,
         GridMap = new GridMapComponent()
         {
           GridCells = Enumerable.Range(0, 100)
@@ -35,8 +33,7 @@ public class AliceHouseBuild : StageBuild<StageComponent>
           Width = 10,
           Height = 10
         },
-      }; ;
-      return _stage!;
+      };
     }
   }
 }

@@ -11,6 +11,11 @@ public static class Program
 
     var playerBuilder = new PlayerActorBuild();
     var cc = playerBuilder.LoadFile();
+
+
+    var aliceOutsideHouseBuilder = new AliceHouseOutsideBuild();
+    var dd = aliceOutsideHouseBuilder.LoadFile();
+
     // DialogueTests.TestRemakeAllDialogues();
     // QuestTests.TestRemakeAllQuests();
     // StageTests.TestRemakeAllStages();

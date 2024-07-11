@@ -24,6 +24,8 @@ public class GatherComponent : IGatherComponent, ICloneable, ICopyable
 
   public required Dictionary<MasteryTypes, int> LevelByRequiredMastery { get; set; }
 
+  public required string UniqueName { get; set; }
+
   public object Clone()
   {
     return new GatherComponent
@@ -36,7 +38,8 @@ public class GatherComponent : IGatherComponent, ICloneable, ICopyable
       TotalProgress = TotalProgress,
       CurrentProgress = CurrentProgress,
       Position = Position,
-      LevelByRequiredMastery = LevelByRequiredMastery
+      LevelByRequiredMastery = LevelByRequiredMastery,
+      UniqueName = UniqueName
     };
   }
 
@@ -53,5 +56,6 @@ public class GatherComponent : IGatherComponent, ICloneable, ICopyable
     CurrentProgress = resourceToCopy.CurrentProgress;
     Position = resourceToCopy.Position;
     LevelByRequiredMastery = resourceToCopy.LevelByRequiredMastery;
+    UniqueName = resourceToCopy.UniqueName;
   }
 }

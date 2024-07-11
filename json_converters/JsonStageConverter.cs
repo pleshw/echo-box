@@ -18,18 +18,6 @@ public class JsonStageConverter : JsonConverter<StageComponent>
         ? jsonUniqueName.GetString() ?? throw new JsonException("uniqueName not set for inventory.")
         : throw new JsonException("Owner not set for inventory.");
 
-    JsonElement jsonEntityList = root.TryGetProperty("entityList", out JsonElement _jsonEntityList)
-        ? _jsonEntityList
-        : throw new JsonException("Invalid item items. Item does not have an Items property.");
-
-    List<IUniqueNameComponent> uniqueNameEntityList = jsonEntityList.EnumerateArray()
-                                                      .Select(item => JsonSerializer.Deserialize<IUniqueNameComponent>(item.GetRawText(), options)
-                                                           ?? throw new JsonException("Invalid item in items array."))
-                                                      .Cast<IUniqueNameComponent>()
-                                                      .ToList();
-
-    List<IUniqueNameComponent> entityList = EntityTests.GetEntitiesByUniqueName(uniqueNameEntityList).Cast<IUniqueNameComponent>().ToList();
-
     IGridMapComponent cellList = root.TryGetProperty("gridMap", out JsonElement _jsonGridMap)
             ? JsonSerializer.Deserialize<GridMapComponent>(_jsonGridMap.GetRawText(), options) ?? throw new JsonException("Invalid item in gridMap object.")
             : throw new JsonException("Stage does not have a GridMap property.");
@@ -47,7 +35,6 @@ public class JsonStageConverter : JsonConverter<StageComponent>
     return new StageComponent
     {
       UniqueName = uniqueName,
-      EntityList = entityList,
       GridMap = cellList,
       GatherList = gatherList
     };
