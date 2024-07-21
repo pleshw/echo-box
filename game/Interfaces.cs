@@ -212,6 +212,11 @@ public interface IGridDisplayCellComponent : IComponent, IGridCellComponent
   IGridCellImageComponent GridCellImage { get; set; }
 }
 
+public interface IGridCellTileSetComponent : IComponent, IGridCellComponent
+{
+  Vector2 TileSetPosition { get; set; }
+}
+
 public interface IGridCellImageComponent : IComponent, IGridCellComponent
 {
   IDisplayImageComponent CellStageSprite { get; set; }
@@ -324,6 +329,15 @@ public interface IMenuDialogueComponent : IComponent, IDialogueComponent
 public interface IQuestDialogueComponent : IComponent, IDialogueComponent
 {
   IIdComponent Quest { get; set; }
+}
+
+public interface IQuestListComponent : IComponent
+{
+  List<IIdComponent> OnGoingQuests { get; set; }
+
+  List<IIdComponent> CancelledQuests { get; set; }
+
+  List<IIdComponent> CompletedQuests { get; set; }
 }
 
 public interface IRelationshipComponent : IComponent, ILevelComponent

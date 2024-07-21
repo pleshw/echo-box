@@ -1,6 +1,3 @@
-
-
-
 namespace Game;
 
 public class RelationshipComponent : IRelationshipComponent

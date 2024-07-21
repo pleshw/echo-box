@@ -18,7 +18,12 @@ where T : BaseEntity
 
   public T LoadFile()
   {
-    T? result = FileController.GetFileDeserialized<T>($"C:/Users/Usuário/Desktop/echo-box/data/entity/{Actor.UniqueName}/actor.json");
+    return LoadFile(Actor.UniqueName);
+  }
+
+  public T LoadFile(string actorUniqueName)
+  {
+    T? result = FileController.GetFileDeserialized<T>($"C:/Users/Usuário/Desktop/echo-box/data/entity/{actorUniqueName}/actor.json");
 
     if (result != null)
     {

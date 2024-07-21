@@ -45,6 +45,13 @@ public class PlayerEntity : BaseEntity
       CompletedDialogs = [],
       Level = 0,
     });
+
+    AddComponent(new QuestListComponent
+    {
+      OnGoingQuests = [],
+      CancelledQuests = [],
+      CompletedQuests = []
+    });
   }
 
   [JsonConstructor]

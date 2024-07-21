@@ -15,7 +15,7 @@ public class AliceHouseOutsideBuild : StageBuild<StageComponent>
     {
       return _stage ??= new()
       {
-        UniqueName = "AliceHouse",
+        UniqueName = "AliceHouseOutside",
         GatherList = GatherList,
         GridMap = new GridMapComponent()
         {
