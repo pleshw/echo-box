@@ -154,7 +154,6 @@ public static class EntityTests
         }
     ]);
 
-    public static readonly StageComponent AliceHouseOutside = new AliceHouseOutsideBuild().LoadFile();
 
     private static readonly IEntityRoutineComponent DefaultRoutine = new EntityRoutineComponent
     {
@@ -163,7 +162,7 @@ public static class EntityTests
       { 0, new EntityBehaviourComponent
           {
             BehaviourType = BehaviourType.IDLE,
-            CurrentStage = AliceHouseOutside,
+            CurrentStage = null,
             Position = new(),
             TargetPosition = new(20,20)
           }

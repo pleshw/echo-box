@@ -437,6 +437,21 @@ public interface IHasTargetPositionComponent : IComponent
   Vector2 TargetPosition { get; set; }
 }
 
+public interface IHasSpeedComponent : IComponent
+{
+  int Speed { get; set; }
+}
+
+public interface IHasFacingDirectionComponent : IComponent
+{
+  Vector2 FacingDirection { get; set; }
+}
+
+public interface ITrackPositionComponent : IComponent
+{
+  Vector2 LastPosition { get; set; }
+}
+
 public interface IHasTargetAreaComponent : IComponent, ISizeComponent, IHasTargetPositionComponent
 {
 }
@@ -489,6 +504,37 @@ public interface IEntityBehaviourComponent : IComponent, IHasPositionComponent, 
   void RunEntityBehaviour(BaseEntity entity);
 }
 
+public interface IActionComponent : IComponent, IUniqueNameComponent
+{
+  void Execute();
+}
+
+public interface IActionDictionaryComponent : IComponent
+{
+  Dictionary<string, IActionComponent> ActionByUniqueName { get; set; }
+}
+
+public interface IMovementComponent : IComponent, IHasTargetPositionComponent, IHasSpeedComponent, IHasFacingDirectionComponent, ITrackPositionComponent
+{
+  int SpeedModifier { get; set; }
+}
+
+public interface IAnimatedBodyComponent : IComponent
+{
+  Dictionary<string, IBodyPartComponent> PartsByComponent { get; set; }
+}
+
+public interface IBodyPartComponent : IComponent, IAnimatedPartComponent, IUniqueNameComponent
+{
+
+}
+
+public interface IAnimatedPartComponent : IComponent
+{
+  BehaviourType DefaultAnimation { get; set; }
+
+  List<BehaviourType> AvailableAnimations { get; set; }
+}
 
 public interface IEntityRoutineComponent : IComponent
 {

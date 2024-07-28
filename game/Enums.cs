@@ -33,7 +33,6 @@ public enum BehaviourType
   TALKING
 }
 
-
 [Flags]
 public enum MasteryTypes
 {

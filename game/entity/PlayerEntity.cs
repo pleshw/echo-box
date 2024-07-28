@@ -52,6 +52,118 @@ public class PlayerEntity : BaseEntity
       CancelledQuests = [],
       CompletedQuests = []
     });
+
+    AddComponent(new ActionDictionaryComponent
+    {
+      ActionByUniqueName = []
+    });
+
+    AddComponent(new AnimatedBodyComponent
+    {
+      PartsByComponent = new()
+      {
+        {
+          "Hat", new BodyPartComponent
+          {
+            UniqueName = "Hat",
+            AvailableAnimations = [BehaviourType.IDLE, BehaviourType.MOVING],
+            DefaultAnimation = BehaviourType.IDLE,
+          }
+        },
+        {
+          "Body", new BodyPartComponent
+          {
+            UniqueName = "Body",
+            AvailableAnimations =
+            [
+              BehaviourType.IDLE,
+              BehaviourType.MOVING,
+              BehaviourType.ATTACKING,
+              BehaviourType.CASTING,
+              BehaviourType.GATHERING,
+              BehaviourType.MINING,
+              BehaviourType.LOGGING,
+              BehaviourType.REFINING,
+              BehaviourType.CRAFTING,
+              BehaviourType.FISHING,
+              BehaviourType.TALKING
+            ],
+            DefaultAnimation = BehaviourType.IDLE,
+          }
+        },
+        {
+          "Shirt", new BodyPartComponent
+          {
+            UniqueName = "Shirt",
+            AvailableAnimations =
+            [
+              BehaviourType.IDLE,
+              BehaviourType.MOVING,
+              BehaviourType.ATTACKING,
+              BehaviourType.CASTING,
+              BehaviourType.GATHERING,
+              BehaviourType.MINING,
+              BehaviourType.LOGGING,
+              BehaviourType.REFINING,
+              BehaviourType.CRAFTING,
+              BehaviourType.FISHING,
+              BehaviourType.TALKING
+            ],
+            DefaultAnimation = BehaviourType.IDLE,
+          }
+        },
+        {
+          "Pants", new BodyPartComponent
+          {
+            UniqueName = "Pants",
+            AvailableAnimations =
+            [
+              BehaviourType.IDLE,
+              BehaviourType.MOVING,
+              BehaviourType.ATTACKING,
+              BehaviourType.GATHERING,
+              BehaviourType.MINING,
+              BehaviourType.LOGGING,
+              BehaviourType.REFINING,
+              BehaviourType.CRAFTING,
+              BehaviourType.FISHING
+            ],
+            DefaultAnimation = BehaviourType.IDLE,
+          }
+        },
+        {
+          "Boots", new BodyPartComponent
+          {
+            UniqueName = "Boots",
+            AvailableAnimations =
+            [
+              BehaviourType.IDLE,
+              BehaviourType.MOVING,
+              BehaviourType.ATTACKING,
+              BehaviourType.CASTING,
+              BehaviourType.GATHERING,
+              BehaviourType.MINING,
+              BehaviourType.LOGGING,
+              BehaviourType.FISHING
+            ],
+            DefaultAnimation = BehaviourType.IDLE,
+          }
+        },
+      }
+    });
+
+    AddComponent(new MovementComponent
+    {
+      Speed = 1,
+      TargetPosition = new(),
+      FacingDirection = new(),
+      LastPosition = new(),
+      SpeedModifier = 1
+    });
+
+    AddComponent(new AttackControllerComponent
+    {
+    });
   }
 
   [JsonConstructor]
