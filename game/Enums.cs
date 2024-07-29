@@ -18,6 +18,38 @@ public enum MenuType
   PICK_ITEM
 }
 
+public enum AttackOutcome
+{
+  NOT_ENOUGH_RANGE,
+  MISS,
+  HIT,
+  NOT_EFFECTIVE,
+  CRITICAL
+}
+
+public enum ElementalProperty
+{
+  NEUTRAL,
+  FIRE,
+  EARTH,
+  WIND,
+  WATER
+}
+
+public enum DamageType
+{
+  PHYSICAL,
+
+  MAGICAL
+}
+
+public enum AttackRangeType
+{
+  MELEE,
+
+  RANGED
+}
+
 public enum BehaviourType
 {
   IDLE,

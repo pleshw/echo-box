@@ -161,8 +161,9 @@ public class PlayerEntity : BaseEntity
       SpeedModifier = 1
     });
 
-    AddComponent(new AttackControllerComponent
+    AddComponent(new AttackComponent
     {
+      Attacker = this
     });
   }
 

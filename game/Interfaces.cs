@@ -456,6 +456,11 @@ public interface IHasTargetAreaComponent : IComponent, ISizeComponent, IHasTarge
 {
 }
 
+public interface IHasTargetEntityComponent : IComponent
+{
+  IUniqueNameComponent TargetUniqueName { get; set; }
+}
+
 public interface IIdentifiableTargetComponent : IComponent
 {
   IUniqueNameComponent Target { get; set; }
@@ -499,7 +504,7 @@ public interface IEntityBehaviourComponent : IComponent, IHasPositionComponent, 
 {
   BehaviourType BehaviourType { get; set; }
 
-  IUniqueNameComponent CurrentStage { get; set; }
+  IUniqueNameComponent? CurrentStage { get; set; }
 
   void RunEntityBehaviour(BaseEntity entity);
 }
@@ -517,6 +522,34 @@ public interface IActionDictionaryComponent : IComponent
 public interface IMovementComponent : IComponent, IHasTargetPositionComponent, IHasSpeedComponent, IHasFacingDirectionComponent, ITrackPositionComponent
 {
   int SpeedModifier { get; set; }
+}
+
+public interface IAttackComponent : IComponent, IAttackCommandComponent
+{
+  IUniqueNameComponent Attacker { get; set; }
+}
+
+public interface IAttackCommandComponent : IComponent
+{
+  void Execute(IAttackParametersComponent attackParameters);
+}
+
+public interface ICommandComponent : IComponent
+{
+  void Execute();
+}
+
+public interface IAttackParametersComponent : IComponent
+{
+  int WeaponDamage { get; set; }
+
+  AttackRangeType RangeType { get; set; }
+
+  DamageType DamageType { get; set; }
+
+  ElementalProperty ElementalProperty { get; set; }
+
+  IUniqueNameComponent? Target { get; set; }
 }
 
 public interface IAnimatedBodyComponent : IComponent

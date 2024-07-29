@@ -162,7 +162,6 @@ public static class EntityTests
       { 0, new EntityBehaviourComponent
           {
             BehaviourType = BehaviourType.IDLE,
-            CurrentStage = null,
             Position = new(),
             TargetPosition = new(20,20)
           }
